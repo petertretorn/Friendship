@@ -1,0 +1,19 @@
+<div>
+
+	<h2>Welcome</h2>
+
+	<div class="well">{{ vm.message }}</div>
+
+	<table class="table table-striped">
+		<tbody>
+			<tr ng-repeat="profile in vm.profiles">
+				<td>{{ profile.name }}</td>
+				<td>{{ profile.age }}</td>
+				<td>{{ profile.sex }}</td>
+			</tr>
+		</tbody>
+	</table>
+	<div>
+		<a ng-href="#/register" class="btn btn-info">Register</a>
+	</div>
+</div>

@@ -1,0 +1,32 @@
+
+
+<p>{{ vm.message }}</p>
+
+<div class="row">
+	<div class="col-md-6">
+		<form name="registerForm" novalidate ng-submit="vm.register()">
+			<div class="form-group">
+				<label name="first">Enter first name</label>
+				<input type="text" class="form-control" ng-model="vm.newProfile.firstName"></input>
+			</div>
+			<div class="form-group">
+				<label name="first">Enter last name</label>
+				<input type="text" class="form-control" ng-model="vm.newProfile.lastName"></input>
+			</div>
+			<div class="form-group">
+				<label name="first">Enter age</label>
+				<input type="text" class="form-control" ng-model="vm.newProfile.age"></input>
+			</div>
+
+			<div class="form-group">
+				<label name="sex">Select your sex</label>
+				<select class="form-control" ng-model="vm.newProfile.sex" ng-options="sex for sex in vm.sex"><select>
+			</div>
+			<div class="form-group">
+				<label name="first">Enter city</label>
+				<input type="text" class="form-control" ng-model="vm.newProfile.city"></input>
+			</div>
+			<button type="submit" class="btn btn-success">Register</button>
+		</form>
+	</div>
+</div>
