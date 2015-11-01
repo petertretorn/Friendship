@@ -8,7 +8,18 @@
 	function dataService($http) {
 		
 		function registerProfile(profile) {
+
 			console.log('profile registered: ' + profile.firstName);
+
+			$http.post('http://localhost:3000/register', profile).then(onSuccess, onFailure);
+
+			function onSuccess(data) {
+				console.log('succesfully registered new user: ' + profile.firstName);
+			}
+
+			function onFailure(err) {
+				console.log('err!!: ' + err);
+			}
 		}
 
 		function getProfiles() {
