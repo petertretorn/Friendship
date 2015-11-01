@@ -11,14 +11,14 @@
 
 		//vm.newProfile.birthDate = new Date(1980, 1, 1);
 
-		vm.sex = ['male', 'female', 'trans'];
+		vm.genders = ['male', 'female', 'trans'];
 
 		
 
 		vm.years = createYearArray();
 
 		vm.YearSelected = function() {
-			vm.newProfile.birthDate = new Date(vm.newProfile.birthYear, 0, 1);
+			vm.newProfile.birthDate = new Date(vm.newProfile.yearOfBirth, 0, 1);
 		}
 
 		vm.register = function() {

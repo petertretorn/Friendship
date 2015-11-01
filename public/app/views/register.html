@@ -6,8 +6,6 @@
 	<div class="col-md-6">
 		<form name="registerForm" novalidate ng-submit="vm.register()">
 
-
-
 			<div class="form-group">
 				<label name="first">Enter first name</label>
 				<input type="text" class="form-control" ng-model="vm.newProfile.firstName"></input>
@@ -16,11 +14,13 @@
 				<label name="first">Enter last name</label>
 				<input type="text" class="form-control" ng-model="vm.newProfile.lastName"></input>
 			</div>
-			
-
+			<div class="form-group">
+				<label name="first">Enter your user name</label>
+				<input type="text" class="form-control" ng-model="vm.newProfile.username"></input>
+			</div>
 			<div class="form-group">
 				<label name="sex">Select your sex</label>
-				<select class="form-control" ng-model="vm.newProfile.sex" ng-options="sex for sex in vm.sex"><select>
+				<select class="form-control" ng-model="vm.newProfile.gender" ng-options="gender for gender in vm.genders"><select>
 			</div>
 			<div class="form-group">
 				<label name="first">Enter city</label>
@@ -29,7 +29,7 @@
 
 			<div class="form-group">
 				<label>Year of birth</label>
-				<select ng-model="vm.newProfile.birthYear" ng-change="vm.YearSelected()" ng-options="year for year in vm.years"></select>
+				<select ng-model="vm.newProfile.yearOfBirth" ng-change="vm.YearSelected()" ng-options="year for year in vm.years"></select>
 			</div>
 
 			<div class="input-group">
