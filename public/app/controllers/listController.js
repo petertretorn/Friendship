@@ -2,8 +2,24 @@
 
 	module.controller('ListController', ListController);
 
-	function ListController() {
+
+	ListController.$inject = ['dataService'];
+	function ListController(dataService) {
 		var vm = this;
+
+		init();
+
+		function init() {
+			dataService.getProfiles().then(onSuccess, onFailure);
+
+			function onSuccess(data) {
+				var profiles = data
+			}
+
+			function onFailure(error) {
+				console.log('boo.. error fetching profiles');
+			}
+		}
 
 		vm.profiles = [
 		{

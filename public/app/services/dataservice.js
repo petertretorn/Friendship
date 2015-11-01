@@ -16,15 +16,20 @@
 			function onSuccess(data) {
 				console.log('succesfully registered new user: ' + profile.firstName);
 			}
+		}
 
-			function onFailure(err) {
-				console.log('err!!: ' + err);
+		function getUsers() {
+			$http.get('http://localhost:3000/profiles').then(onSuccess, onFailure);
+
+			function onSuccess(response) {
+				console.log('succesfully fetched users...');
+				return response.date;
 			}
 		}
 
-		function getProfiles() {
-
-		}
+		function onFailure(err) {
+				console.log('err!!: ' + err);
+			}
 
 		return {
 			registerProfile: registerProfile,
