@@ -18,12 +18,12 @@
 			}
 		}
 
-		function getUsers() {
-			$http.get('http://localhost:3000/profiles').then(onSuccess, onFailure);
+		function getProfiles() {
+			return $http.get('http://localhost:3000/profiles').then(onSuccess);
 
 			function onSuccess(response) {
 				console.log('succesfully fetched users...');
-				return response.date;
+				return response.data;
 			}
 		}
 
