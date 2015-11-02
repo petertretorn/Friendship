@@ -16,6 +16,9 @@
 		  	controller: 'RegisterController',
 		  	controllerAs: 'vm'
 		  })
+		  .when('/detail', {
+		  	templateUrl: '/app/views/detail.html'
+		  })
 		  .otherwise({
 		  	redirectTo: '/'
 		  });

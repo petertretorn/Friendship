@@ -17,6 +17,7 @@ var userSchema = new mongoose.Schema({
 	},
 	gender: String,
 	city: String,
+	description: String,
 	yearOfBirth: Number,
 	birthDate: Date
 });

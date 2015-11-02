@@ -2,9 +2,8 @@
 
 	module.controller('ListController', ListController);
 
-
-	ListController.$inject = ['dataService'];
-	function ListController(dataService) {
+	ListController.$inject = ['$location', 'dataService'];
+	function ListController($location, dataService) {
 		var vm = this;
 
 		vm.profiles = [];
@@ -24,6 +23,11 @@
 			}
 		}
 
+		vm.showDetails = function(_id) {
+			console.log('id : %s', _id);
+			$location.href = '#/detail/';
+		}
 		vm.message = 'List of Profiles';
 	}
+
 })(angular.module('app'));

@@ -9,11 +9,7 @@
 
 		vm.newProfile = {};
 
-		//vm.newProfile.birthDate = new Date(1980, 1, 1);
-
 		vm.genders = ['male', 'female', 'trans'];
-
-		
 
 		vm.years = createYearArray();
 
@@ -28,7 +24,6 @@
 		}
 
 		vm.message = 'Registration';
-
 
 		vm.status = {
 			opened: false
@@ -52,6 +47,5 @@
 
 	  		return years;
 	  	}
-
 	}
 })(angular.module('app'));

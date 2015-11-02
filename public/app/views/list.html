@@ -4,16 +4,17 @@
 
 	<div class="well">{{ vm.message }}</div>
 
-	<table class="table table-striped">
-		<tbody>
-			<tr ng-repeat="profile in vm.profiles">
-				<td>{{ profile.firstName }}</td>
-				<td>{{ profile.lastName }}</td>
-				<td>{{ profile.username }}</td>
-			</tr>
-		</tbody>
-	</table>
-	<div>
+
+
+	<div ng-repeat="pf in vm.profiles">
+			<a ng-href="#/detail" class="profile">
+				<div>
+					<h4>{{ pf.username }}</h4>
+				</div>
+			</a>
+	</div>
+	
+	<div class="clear-left">
 		<a ng-href="#/register" class="btn btn-info">Register</a>
 	</div>
 </div>
