@@ -27,13 +27,23 @@
 			}
 		}
 
+		function getProfileById(id) {
+			return $http.get('http://localhost:3000/profiles/' + id).then(onSuccess);
+
+			function onSuccess(response) {
+				console.log('succesfully fetched single profile...');
+				return response.data;
+			}	
+		}
+
 		function onFailure(err) {
 				console.log('err!!: ' + err);
 			}
 
 		return {
 			registerProfile: registerProfile,
-			getProfiles: getProfiles
+			getProfiles: getProfiles,
+			getProfileById: getProfileById
 		};
 	}
 

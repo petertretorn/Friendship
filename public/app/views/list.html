@@ -5,11 +5,24 @@
 	<div class="well">{{ vm.message }}</div>
 
 
+	<div class="btn-group">
+		<button class="btn btn-info" ng-click="vm.listview = true">List</button>
+		<button class="btn btn-info" ng-click="vm.listview = false">Tiles</button>
+	</div>
 
-	<div ng-repeat="pf in vm.profiles">
-			<a ng-href="#/detail" class="profile">
+	<div ng-show="!!vm.listview" class="list-group">
+		<ul>
+			<li ng-repeat="pf in vm.profiles" class="list-group-item">{{pf.username}} - {{ pf.gender }} - {{ pf.yearOfBirth }} - {{pf.city}}</li>
+		</ul>
+	</div>
+
+	<div ng-repeat="pf in vm.profiles" ng-show="!vm.listview">
+
+			<a ng-href="#/detail/{{pf._id}}" class="profile" ng-show="!vm.listview">
 				<div>
 					<h4>{{ pf.username }}</h4>
+					<p>{{pf.gender}} born {{pf.yearOfBirth }}</p>
+					<span>Lives in {{pf.city}}</span>
 				</div>
 			</a>
 	</div>

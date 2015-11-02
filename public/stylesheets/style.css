@@ -1,5 +1,5 @@
 body {
-  padding: 50px;
+  padding: 5px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -20,6 +20,7 @@ a {
 .profile:hover {
 	cursor: pointer;
 	background-color: rgba(155, 155, 255, 0.5);
+	text-decoration: none;
 }
 
 .clear-left {
