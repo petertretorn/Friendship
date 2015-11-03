@@ -1,0 +1,18 @@
+<div>
+
+	<div class="page-header">
+		<h2><span class="fa fa-sign-in"></span>Login </h2>
+	</div>
+
+<form name="loginform" novalidate ng-submit="vm.signup()">
+	<div class="form-group">
+		<label>User name</label>
+		<input type="text" class="form-control" ng-model="vm.signupModel.username"></input>
+	</div>
+	<div class="form-group">
+		<label>Password</label>
+		<input type="text" class="form-control" ng-model="vm.signupModel.password"></input>
+	</div>
+	<button type="submit" class="btn btn-warning">Sign up</button>
+</form>
+</div>
