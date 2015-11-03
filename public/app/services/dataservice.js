@@ -19,7 +19,7 @@
 		}
 
 		function getProfiles() {
-			return $http.get('http://localhost:3000/profiles').then(onSuccess);
+			return $http.get('http://localhost:3000/api/profiles').then(onSuccess);
 
 			function onSuccess(response) {
 				console.log('succesfully fetched users...');
@@ -28,7 +28,7 @@
 		}
 
 		function getProfileById(id) {
-			return $http.get('http://localhost:3000/profiles/' + id).then(onSuccess);
+			return $http.get('http://localhost:3000/api/profiles/' + id).then(onSuccess);
 
 			function onSuccess(response) {
 				console.log('succesfully fetched single profile...');

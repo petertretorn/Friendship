@@ -21,6 +21,16 @@
 		  	controller: 'DetailController',
 		  	controllerAs: 'vm',
 		  })
+		  .when('/login', {
+		  	templateUrl: '/app/views/login.html',
+		  	controller: 'LoginController',
+		  	controllerAs: 'vm',
+		  })
+		  .when('/signup', {
+		  	templateUrl: '/app/views/signup.html',
+		  	controller: 'SignupController',
+		  	controllerAs: 'vm',
+		  })
 		  .otherwise({
 		  	redirectTo: '/'
 		  });

@@ -6,6 +6,7 @@
 	function ListController($location, dataService) {
 		var vm = this;
 
+		console.log('ListController!!');
 		vm.profiles = [];
 
 		init();
@@ -23,9 +24,12 @@
 			}
 		}
 
-		vm.showDetails = function(_id) {
-			console.log('id : %s', _id);
-			$location.href = '#/detail/';
+		vm.detailsView = function(profile) {
+			$location.path('/detail/' + profile._id);
+		}		
+
+		vm.redirectToLogin = function() {
+			$location.path('/login');
 		}
 		vm.message = 'List of Profiles';
 	}

@@ -3,15 +3,17 @@
 <head>
 	<title>Friendship</title>
 	<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/lib/bootswatch/yeti/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/lib/bootswatch/slate/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css"/>
     <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
 	<div class="container">
 
-		<div ng-view=""></div>
+		<div ng-view="">Loading...</div>
 
 	</div>
+
 
 
 	<!--external libraries -->
@@ -23,7 +25,10 @@
 	<script type="text/javascript" src="/app/app.js"></script>
 	<script type="text/javascript" src="/app/controllers/listController.js"></script>
 	<script type="text/javascript" src="/app/controllers/registerController.js"></script>
-	<script type="text/javascript" src="/app/controllers/detailController.js"></script>
+	<script type="text/javascript" src="/app/controllers/EditController.js"></script>
+	<script type="text/javascript" src="/app/controllers/LoginController.js"></script>
+	<script type="text/javascript" src="/app/controllers/SignupController.js"></script>
 	<script type="text/javascript" src="/app/services/dataservice.js"></script>
+	<script type="text/javascript" src="/app/services/authService.js"></script>
 </body>
 </html>

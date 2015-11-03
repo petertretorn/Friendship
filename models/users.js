@@ -1,25 +1,28 @@
 var mongoose = require('mongoose');
+var crypto = require('crypto');
 
-mongoose.connect('mongodb://localhost/friendship');
-
-var userSchema = new mongoose.Schema({
-	id: Number,
-	firstName: String,
-	lastName: String,
-	username: {
-		type: String,
-		// Set a unique 'username' index
-		unique: true,
-		// Validate 'username' value existance
-		required: 'Username is required',
-		// Trim the 'username' field
-		trim: true
-	},
-	gender: String,
-	city: String,
-	description: String,
-	yearOfBirth: Number,
-	birthDate: Date
+var UserSchema = mongoose.Schema({
+	username: String,
+	password: String
 });
 
-mongoose.model('User', userSchema);
+UserSchema.pre('save', function(next) {
+	if (this.password) {
+		this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
+		this.password = this.hashPassword(this.password);
+	}
+
+	next();
+});
+
+// Create an instance method for hashing a password
+UserSchema.methods.hashPassword = function(password) {
+	return crypto.pbkdf2Sync(password, this.salt, 10000, 64).toString('base64');
+};
+
+// Create an instance method for authenticating user
+UserSchema.methods.authenticate = function(password) {
+	return this.password === this.hashPassword(password);
+};
+
+module.exports = mongoose.model('User', UserSchema);

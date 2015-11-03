@@ -1,5 +1,5 @@
 body {
-  padding: 5px;
+  padding: 25px 5px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -21,6 +21,10 @@ a {
 	cursor: pointer;
 	background-color: rgba(155, 155, 255, 0.5);
 	text-decoration: none;
+}
+
+.profiles-section {
+	padding-top: 20px;
 }
 
 .clear-left {

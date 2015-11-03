@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-require('../models/users.js');
-var mongoose = require('mongoose');
-var User = mongoose.model('User');
+//require('../models/users.js');
+//var mongoose = require('mongoose');
+var Profile = require('../models/profiles.js');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -14,9 +14,7 @@ router.post('/', function(req, res, next) {
 	var name = req.body.firstName || 'no name specified'
 	console.log('user registered: ' + name);
 
-	var newUser = new User(req.body);
-
-	newUser.id = 22;
+	var newUser = new Profile(req.body);
 
 	newUser.save(function(error) {
 		if (error) {

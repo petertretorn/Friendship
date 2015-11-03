@@ -1,6 +1,6 @@
-
-
-<p>{{ vm.message }}</p>
+<div class="page-header">
+	<h2>{{ vm.message }}</h2>
+</div>
 
 <div class="row">
 	<div class="col-md-6">
@@ -19,6 +19,10 @@
 				<input type="text" class="form-control" ng-model="vm.newProfile.username"></input>
 			</div>
 			<div class="form-group">
+				<label name="first">Choose a password</label>
+				<input type="text" class="form-control" ng-model="vm.newProfile.password"></input>
+			</div>
+			<div class="form-group">
 				<label name="sex">Select your sex</label>
 				<select class="form-control" ng-model="vm.newProfile.gender" ng-options="gender for gender in vm.genders"><select>
 			</div>
@@ -31,7 +35,10 @@
 				<label name="first">Describe yourself</label>
 				<textarea type="textbox" class="form-control" ng-model="vm.newProfile.description"></textarea>
 			</div>
-
+			<div class="form-group">
+				<label name="first">What I am looking for</label>
+				<textarea type="textbox" class="form-control" ng-model="vm.newProfile.lookingFor"></textarea>
+			</div>
 			<div class="form-group">
 				<label>Year of birth</label>
 				<select ng-model="vm.newProfile.yearOfBirth" ng-change="vm.YearSelected()" ng-options="year for year in vm.years"></select>

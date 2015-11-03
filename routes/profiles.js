@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
-require('../models/users.js');
-var mongoose = require('mongoose');
-var User = mongoose.model('User');
+
+var Profile = require('../models/profiles.js');
 
 router.get('/:id?', function(req, res, next) {
 
@@ -11,10 +10,16 @@ router.get('/:id?', function(req, res, next) {
 
 	if (id) query._id = id;
 
-	User.find(query, function(error, profiles) {
+	Profile.find(query, function(error, profiles) {
 		if (error) return next(err);
 		res.json(profiles);
 	});
 });
+
+function middleware(req, res, next){
+	console.log('inside middleware!!!');
+
+	next();
+}
 
 module.exports = router;

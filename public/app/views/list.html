@@ -1,8 +1,7 @@
 <div>
-
-	<h2>Welcome</h2>
-
-	<div class="well">{{ vm.message }}</div>
+	<div class="page-header">
+		<h2>Registered Profiles</h2>
+	</div>
 
 
 	<div class="btn-group">
@@ -10,24 +9,38 @@
 		<button class="btn btn-info" ng-click="vm.listview = false">Tiles</button>
 	</div>
 
-	<div ng-show="!!vm.listview" class="list-group">
-		<ul>
-			<li ng-repeat="pf in vm.profiles" class="list-group-item">{{pf.username}} - {{ pf.gender }} - {{ pf.yearOfBirth }} - {{pf.city}}</li>
-		</ul>
+
+	<div class="profiles-section">
+		<div ng-show="!!vm.listview">
+			<table class="table table-striped table-hover">
+
+				<tr ng-repeat="pf in vm.profiles" ng-click="vm.detailsView(pf)">
+					<td>{{pf.username}}</td>
+					<td>{{pf.gender}}</td>
+					<td>{{pf.yearOfBirth}}</td>
+					<td>{{pf.city}}</td>
+				</tr>
+			</table>		
+		</div>
+
+		<div ng-repeat="pf in vm.profiles" ng-show="!vm.listview">
+
+				<a ng-href="#/detail/{{pf._id}}" class="profile" ng-show="!vm.listview">
+					<div>
+						<h4>{{ pf.username }}</h4>
+						<p>{{pf.gender}} born {{pf.yearOfBirth }}</p>
+						<span>Lives in {{pf.city}}</span>
+					</div>
+				</a>
+		</div>
 	</div>
+	<div class="clear-left">
 
-	<div ng-repeat="pf in vm.profiles" ng-show="!vm.listview">
-
-			<a ng-href="#/detail/{{pf._id}}" class="profile" ng-show="!vm.listview">
-				<div>
-					<h4>{{ pf.username }}</h4>
-					<p>{{pf.gender}} born {{pf.yearOfBirth }}</p>
-					<span>Lives in {{pf.city}}</span>
-				</div>
-			</a>
+		<div class="btn-group">
+			<a ng-href="#/login" class="btn btn-info">Login</a>
+			<a ng-href="#/signup" class="btn btn-info">Signup</a>
+			<button class="btn btn-info" ng-click="vm.redirectToLogin()"><span class="fa fa-sign-in"></span> Login</button>
+		</div>
 	</div>
 	
-	<div class="clear-left">
-		<a ng-href="#/register" class="btn btn-info">Register</a>
-	</div>
 </div>
