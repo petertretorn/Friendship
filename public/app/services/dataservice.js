@@ -3,10 +3,12 @@
 
 	module.factory('dataService', dataService);
 
-	dataService.$inject = ['$http'];
+	dataService.$inject = ['$http', 'settings'];
 
-	function dataService($http) {
+	function dataService($http, settings) {
 		
+		var baseUrl = settings.baseUrl;
+
 		function registerProfile(profile) {
 
 			console.log('profile registered: ' + profile.firstName);
@@ -36,14 +38,26 @@
 			}	
 		}
 
+		function getProfileByUsername(username) {
+			return $http.get(baseUrl + 'api/profiles/' + username).then(onSuccess);
+
+			function onSuccess(response) {
+				console.log('succesfully fetched single profile by username...');
+				return response.data;
+			}	
+		}
+
 		function onFailure(err) {
 				console.log('err!!: ' + err);
 			}
 
+
+
 		return {
 			registerProfile: registerProfile,
 			getProfiles: getProfiles,
-			getProfileById: getProfileById
+			getProfileById: getProfileById,
+			getProfileByUsername: getProfileByUsername
 		};
 	}
 

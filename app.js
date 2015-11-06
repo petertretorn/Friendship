@@ -10,7 +10,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var register = require('./routes/register');
 var profiles = require('./routes/profiles');
-var auth = require('./routes/auth');
+var auth = require('./routes/auth').router;
 var app = express();
 
 require('./config/passport')(passport);
@@ -23,7 +23,17 @@ app.set('view engine', 'ejs');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/vnd.api+json as json
+app.use(bodyParser.json({ type: 'application/vnd.api+json' })); 
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true })); 
+
+// set the static files location /public/img will be /img for users
+app.use(express.static(__dirname + '/public'));
+
+//app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -35,7 +45,7 @@ app.use(passport.session());
 
 app.use('/', routes);
 app.use('/register', register);
-app.use('/signup', auth);
+app.use('/auth', auth);
 app.use('/users', users);
 app.use('/api/profiles', profiles);
 

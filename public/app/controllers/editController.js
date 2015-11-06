@@ -1,29 +1,51 @@
 (function(module) {
 
-	module.controller('DetailController', DetailController);
+	module.controller('EditController', EditController);
 
-	DetailController.$inject = ['$routeParams', 'dataService']
-	function DetailController($routeParams, dataService) {
+	EditController.$inject = ['dataService'];
 
-		var id = $routeParams.id,
-			vm = this;
-			vm.profile = {};
+	function EditController(dataService) {
+		var vm = this;
 
-		init();
+		vm.newProfile = {};
 
-		function init() {
-			console.log('id: %s', id);
+		vm.genders = ['male', 'female', 'trans'];
 
-			dataService.getProfileById(id).then(onSuccess, onFailure);
+		vm.years = createYearArray();
 
-			function onSuccess(data) {
-				console.log('successfetching profile : %s', data[0].username);
-				vm.profile = data[0];
-			}
-
-			function onFailure(error) {
-				console.log('boo.. error fetching profile');
-			}
+		vm.YearSelected = function() {
+			vm.newProfile.birthDate = new Date(vm.newProfile.yearOfBirth, 0, 1);
 		}
+
+		vm.register = function() {
+			console.log('submitted: ' + vm.newProfile.firstName, vm.newProfile.sex);
+
+			dataService.registerProfile(vm.newProfile);
+		}
+
+		vm.message = 'Registration';
+
+		vm.status = {
+			opened: false
+		}
+
+		vm.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+	  	vm.format = vm.formats[0];
+	  
+	  	vm.open = function($event) {
+	    	vm.status.opened = true;
+	    	console.log(vm.status.opened);
+	    	console.log('selected data: ' + vm.newProfile.birthDate);
+	  	};
+
+	  	function createYearArray() {
+	  		var years = [];
+
+	  		for (var i = 1910; i <= 2015; i++) {
+	  			years.push(i);
+	  		}
+
+	  		return years;
+	  	}
 	}
 })(angular.module('app'));

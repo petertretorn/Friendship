@@ -6,6 +6,7 @@ var UserSchema = mongoose.Schema({
 	password: String
 });
 
+/*
 UserSchema.pre('save', function(next) {
 	if (this.password) {
 		this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
@@ -14,6 +15,7 @@ UserSchema.pre('save', function(next) {
 
 	next();
 });
+*/
 
 // Create an instance method for hashing a password
 UserSchema.methods.hashPassword = function(password) {

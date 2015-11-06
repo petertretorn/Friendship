@@ -6,7 +6,6 @@ var profileSchema = new mongoose.Schema({
 	id: Number,
 	firstName: String,
 	lastName: String,
-	password: String,
 	username: {
 		type: String,
 		// Set a unique 'username' index
@@ -21,7 +20,7 @@ var profileSchema = new mongoose.Schema({
 	description: String,
 	lookingFor: String,
 	yearOfBirth: Number,
-	birthDate: Date
+	//birthDate: Date
 });
 
 //mongoose.model('User', userSchema);

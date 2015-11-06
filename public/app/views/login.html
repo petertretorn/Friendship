@@ -1,18 +1,24 @@
 <div>
 
-<div class="page-header">
-	<h2><span class="fa fa-sign-in"></span>Login </h2>
-</div>
+	<div class="page-header">
+		<h2><span class="fa fa-sign-in"></span> Login</h2>
+	</div>
 
-<form>
-	<div class="form-group" name="login-form" ng-sumbit="vm.login()">
-		<label>Your user name</label>
-		<input type="text" class="form-control" ng-model="vm.loginModel.username"></input>
+	<div class="row">
+		<div class="col-md-6">
+			<form name="loginform" novalidate ng-submit="vm.login()">
+				<div class="form-group">
+					<label>Your user name</label>
+					<input type="text" class="form-control" ng-model="vm.loginModel.username" required></input>
+				</div>
+				<div class="form-group">
+					<label>Your password</label>
+					<input type="password" class="form-control" ng-model="vm.loginModel.password" required></input>
+				</div>
+				<button type="submit" class="btn btn-info" ng-disabled="loginform.$invalid">Login</button>
+				
+				<a ng-href="#/" class="btn btn-warning">Back</a>
+			</form>
+		</div>
 	</div>
-	<div class="form-group">
-		<label>Your password</label>
-		<input type="text" class="form-control" ng-model="vm.loginModel.password"></input>
-	</div>
-	<button class="btn btn-info btn-lg">Login</button>
-</form>
 </div>
