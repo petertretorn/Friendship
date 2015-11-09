@@ -9,23 +9,55 @@ a {
 
 .profile {
 	float: left;
-	height: 150px;
-	width: 200px;
+	height: 200px;
+	width: 300px;
 	background-color: #efefef;
-	padding: 0px 15px;
+    color: rgb(255, 255, 255);
+    background-color: rgba(155, 155, 255, 0.5);
+	padding: 0px 0px;
+    padding-right: 0;
 	border-radius: 3px;
 	margin: 10px 10px;
 }
 
+.profile .text {
+    padding: 0px 5px;
+}
+
+.profile .text .description {
+    margin-top: 10px;
+}
+
+
+.profile .picture {
+    padding: 0px 0px;
+    margin: 0;
+    border: none;
+
+ }
+
+.profile img {
+    margin: 0;
+    padding: 0;
+    width: 150px;
+    height: 200px;
+}
+
+
+.profile img {
+    border-style: none;   
+}
+
 .profile:hover {
 	cursor: pointer;
-	background-color: rgba(155, 155, 255, 0.5);
+	color: rgb(255, 255, 255);
 	text-decoration: none;
 }
 
 .profiles-section {
 	padding-top: 20px;
 }
+
 
 .clear-left {
 	clear: left;
@@ -34,6 +66,17 @@ a {
 .fa-pencil-square-o:hover {
     cursor: pointer;
 }
+
+.profile-text {
+    font-size: 1.2em;
+    line-height: 1.2em;
+}
+
+.interest {
+    margin-right: 5px;
+    padding: 4px 8px;
+    }
+
 
  /* ANIMATIONS
 ============================================================================= */

@@ -4,14 +4,84 @@
 	<h2>Detailed view of {{vm.profile.username}}</h2>
 </div>
 
-<div>
-	<h3>Description <i ng-click="vm.editField('description')" class="fa fa-pencil-square-o"></i></h3>
-	<p ng-hide="vm.profile.description">No desription yet</p>
-	<p>{{ vm.profile.description }}</p>
-</div>
-<div>
-	<h3>Looking for <i class="fa fa-pencil-square-o"></i></h3>
-	<p ng-hide="vm.profile.lookingfor">No looking for details specified yet</p>
-	<p>{{ vm.profile.lookingfor }}</p>
+<div class="row">
+	<div class="col-md-10">
+		</div>
+			<h3>City <i ng-click="vm.editField('firstName', vm.options.NOT_TEXT_AREA)" class="fa fa-pencil-square-o"></i></h3>
+			<p class="profile-text" ng-hide="vm.profile.firstName">No data specified yet</p>
+			<p class="profile-text">{{ vm.profile.firstName }}</p>
+		<div>
+		</div>
+			<h3>City <i ng-click="vm.editField('lastName', vm.options.NOT_TEXT_AREA)" class="fa fa-pencil-square-o"></i></h3>
+			<p class="profile-text" ng-hide="vm.profile.lastName">No data specified yet</p>
+			<p class="profile-text">{{ vm.profile.lastName }}</p>
+		<div>
+
+		<div>
+			<h3>Birthdate <i ng-click="vm.open($event)" class="fa fa-pencil-square-o"></i></h3>
+			<span type="text" uib-datepicker-popup={{vm.format}} ng-model="vm.profile.birthDate" 
+					is-open="vm.status.opened" min-date="vm.minDate" close-text="Close"/>
+			<p class="profile-text" ng-hide="vm.profile.birthDate">No data specified yet</p>
+			<p class="profile-text">{{ vm.profile.birthDate }}</p>
+			
+			
+		</div>
+		
+
+<!--
+		<div>
+			<h3>Year of birth</h3>
+			<select class="form-control" ng-model="vm.profile.yearOfBirth" ng-change="vm.YearSelected()" ng-options="year for year in vm.years"></select>
+		</div>
+		<div class="input-group">
+			<input type="text" class="form-control" uib-datepicker-popup={{vm.format}} ng-model="vm.profile.birthDate" 
+				is-open="vm.status.opened" min-date="vm.minDate" close-text="Close">
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-default" ng-click="vm.open($event)">
+						<i class="glyphicon glyphicon-calendar">
+						</i>
+					</button>
+				</span>
+		</div>
+-->
+		<div>
+			<h3>Description <i ng-click="vm.editField('description', vm.options.TEXT_AREA)" class="fa fa-pencil-square-o"></i></h3>
+			<p class="profile-text" ng-hide="vm.profile.description">No desription yet</p>
+			<p class="profile-text">{{ vm.profile.description }}</p>
+		</div>
+		<div>
+			<h3>Looking for <i ng-click="vm.editField('lookingfor', vm.options.TEXT_AREA)" class="fa fa-pencil-square-o"></i></h3>
+			<p class="profile-text" ng-hide="vm.profile.lookingfor">No looking for details specified yet</p>
+			<p class="profile-text">{{ vm.profile.lookingfor }}</p>
+		</div>
+			<h3>City <i ng-click="vm.editField('city', vm.options.NOT_TEXT_AREA)" class="fa fa-pencil-square-o"></i></h3>
+			<p class="profile-text" ng-hide="vm.profile.city">No data specified yet</p>
+			<p class="profile-text">{{ vm.profile.city }}</p>
+		<div>
+
+		</div>
+			<h3>Gender <i ng-click="vm.editGender = true" class="fa fa-pencil-square-o"></i></h3>
+			<p class="profile-text" ng-hide="vm.profile.gender || vm.editGender">No data specified yet</p>
+			<p class="profile-text" ng-hide="vm.editGender">{{ vm.profile.gender }}</p>
+		<div>
+		<div ng-show="!!vm.editGender" class="btn-group" uib-dropdown dropdown-append-to-body>
+	      <button id="btn-append-to-body" type="button" class="btn btn-primary" uib-dropdown-toggle>
+	        Choose gender <span class="caret"></span>
+	      </button>
+	      <ul class="uib-dropdown-menu" role="menu" aria-labelledby="btn-append-to-body">
+	        <li role="menuitem" ng-repeat="gender in vm.genderOptions" ng-click="vm.setGender(gender)">
+	        	<a>{{gender}}</a>
+	        </li>
+	      </ul>
+    	</div>
+
+    	</div>
+			<h3>Interests <i ng-click="vm.addToField('interests', vm.options.NOT_TEXT_AREA)" class="fa fa-pencil-square-o"></i></h3>
+			<p class="profile-text" ng-hide="vm.profile.interests">No data specified yet</p>
+			<p class="profile-text">
+				<div ng-click="vm.deleteInterest($index)" class="interest btn btn-primary" ng-repeat="interest in vm.profile.interests">{{ interest }}<i class="fa fa-times"></i></div>
+			</p>
+		<div>
+	</div>
 </div>
 

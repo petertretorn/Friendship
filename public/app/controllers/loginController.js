@@ -17,7 +17,7 @@
 				var heading = 'Login Succesfull',
 					content = 'You\'ve looged in successfully! Welcome back!'
 
-				modalService.showToast(content, heading);
+				//modalService.showToast(content, heading);
 
 			$location.path('#/');
 			}

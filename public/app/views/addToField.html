@@ -1,10 +1,10 @@
 <div class="modal-header">
-  <h3 class="modal-title">Edit {{ vm.field }}</h3>
+  <h3 class="modal-title">Add new {{ vm.field }}</h3>
 </div>
 
 <div class="modal-body">
   <textarea ng-show="!!vm.textarea" rows="2" ng-model="vm.profile[vm.field]" class="form-control" placeholder="Enter data"></textarea>
-  <input ng-show="!vm.textarea" ng-model="vm.profile[vm.field]" type="text" class="form-control" placeholder="Enter data"/>
+  <input ng-show="!vm.textarea" ng-model="vm.newItem" type="text" class="form-control" placeholder="Enter data"/>
 </div>
 
 <div class="modal-footer">

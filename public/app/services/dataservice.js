@@ -54,6 +54,7 @@
 
 			function onSuccess(data) {
 				console.log('succesfully pdated profile: ' + profile.username);
+				return profile;
 			}
 		}
 

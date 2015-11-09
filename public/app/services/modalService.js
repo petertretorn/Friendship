@@ -3,48 +3,89 @@
 
   module.factory('modalService', ModalService);
     
-    ModalService.$inject = ['$uibModal'];
-    function ModalService($modal) {
+    ModalService.$inject = ['$uibModal', '$q'];
+    function ModalService($modal, $q) {
       
       return {
         showToast: showToast,
-        editField:editField
+        editField: editField,
+        addToField: addToField
       };
 
-      function editField(profile, field) {
-        
+      function addToField(profile, field) {
+
+        console.log(profile[field]);
+
+        var deferred = $q.defer();
+
         var modalInstance = $modal.open({
-          templateUrl: '/app/views/editField.html',
+          templateUrl: '/app/views/addToField.html',
           resolve: {
-            newRecord: function() {
-              //return vm.newRecord;
+            editProfile: function() {
+              return angular.copy(profile);
             }
           },
-          controller: function($scope, $modalInstance) {
+          controllerAs: 'vm',
+          controller: function($scope, $modalInstance, $q, editProfile) {
+            var vm = this;
             
-            $scope.profile = profile;
-            $scope.field = field;
-            $scope.ok = function() {
-              //console.log($scope.newRecord);
-              console.log('field edit :' + $scope.profile[$scope.field]);
-              //vm.records.push($scope.newRecord);
+            vm.profile = editProfile;
+            vm.field = field;
+
+            vm.ok = function() {
               $modalInstance.close();
+
+              vm.profile[field].push(vm.newItem);
+              console.log('pushing: ' + vm.profile[field]);
+              console.log(vm.profile);
+              deferred.resolve(vm.profile);
             }
-            $scope.cancel = function() {
+            vm.cancel = function() {
               $modalInstance.dismiss();
+
+              $q.resolve();
             }
           }
         });
+        return deferred.promise;
+      }
 
+      function editField(profile, field, isTextarea, options) {
+        
+        var deferred = $q.defer();
+
+        var modalInstance = $modal.open({
+          templateUrl: '/app/views/editField.html',
+          resolve: {
+            editProfile: function() {
+              return angular.copy(profile);
+            }
+          },
+          controllerAs: 'vm',
+          controller: function($scope, $modalInstance, $q, editProfile) {
+            var vm = this;
+            
+            vm.profile = editProfile;
+            vm.field = field;
+            vm.textarea = isTextarea || false;
+
+            vm.ok = function() {
+              $modalInstance.close();
+
+              deferred.resolve(vm.profile);
+            }
+            vm.cancel = function() {
+              $modalInstance.dismiss();
+
+              $q.resolve(vm.profile);
+            }
+          }
+        });
+        return deferred.promise;
+        /*
         modalInstance.result.then(onConfirm, onCancel);
 
-        function onConfirm() {
-          console.log('inside onconfirm: ' + '');
-        }
-
-        function onCancel() {
-          console.log('deletion cancelled!');
-        }
+*/
       }
       
       function showToast(message, heading) {
@@ -60,6 +101,5 @@
           });
       }
     }
-    ModalService.$inject = ['$modal'];
 
   })(angular.module('app'));

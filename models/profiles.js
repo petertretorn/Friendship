@@ -17,12 +17,27 @@ var profileSchema = new mongoose.Schema({
 	},
 	gender: String,
 	city: String,
+	interests: [String],
 	description: String,
 	lookingfor: String,
 	yearOfBirth: Number,
-	//birthDate: Date
+	birthDate: Date
 });
 
 //mongoose.model('User', userSchema);
+
+profileSchema.virtual('calculateAge').get(function() {
+	return 41;
+
+	var today = new Date(),
+		age;
+
+	if (this.birthDate) {
+		age = today - this.birthDate;
+	} else {
+		age = 41;
+	}
+	return age;
+})
 
 module.exports = mongoose.model('Profile', profileSchema);

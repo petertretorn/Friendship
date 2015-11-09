@@ -19,9 +19,7 @@
 
 		function signUp(signupModel) {
 
-
-
-			return $http.post(baseUrl + 'authenticate', signupModel).then(onSuccess, onFailure);
+			return $http.post(baseUrl + 'signup', signupModel).then(onSuccess, onFailure);
 
 			function onSuccess(response) {
 				var deferred = $q.defer();
