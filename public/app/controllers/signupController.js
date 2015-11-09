@@ -25,7 +25,7 @@
 
 				modalService.showToast(content, heading);
 
-				$location.path('#/');	
+				$location.path('#/');
 			}
 
 			function onFailure(repsonse) {

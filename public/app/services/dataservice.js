@@ -47,6 +47,16 @@
 			}	
 		}
 
+		function updateProfile(profile) {
+			console.log('updating profile: ' + profile.username);
+
+			return $http.put(baseUrl + 'api/profiles/' + profile.username, profile).then(onSuccess, onFailure);
+
+			function onSuccess(data) {
+				console.log('succesfully pdated profile: ' + profile.username);
+			}
+		}
+
 		function onFailure(err) {
 				console.log('err!!: ' + err);
 			}
@@ -57,7 +67,8 @@
 			registerProfile: registerProfile,
 			getProfiles: getProfiles,
 			getProfileById: getProfileById,
-			getProfileByUsername: getProfileByUsername
+			getProfileByUsername: getProfileByUsername,
+			updateProfile: updateProfile
 		};
 	}
 

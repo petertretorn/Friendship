@@ -2,7 +2,7 @@
 
 	'use strict';
 
-	var app = angular.module('app', ['ngRoute', 'ui.bootstrap', 'directives']);
+	var app = angular.module('app', ['ngRoute', 'ngMessages', 'ui.bootstrap']);
 
 	app.config(function($routeProvider) {
 		$routeProvider
@@ -17,7 +17,7 @@
 		  	controllerAs: 'vm'
 		  })
 		  .when('/detail/:id?', {
-		  	templateUrl: '/app/views/detail.html',
+		  	templateUrl: '/app/views/profile.html',
 		  	controller: 'DetailController',
 		  	controllerAs: 'vm',
 		  })
@@ -45,18 +45,19 @@
 	app.constant('settings', {
 		baseUrl: 'http://localhost:3000/'
 	});
-
+/*
 	app.run(["$rootScope", "$location", function($rootScope, $location) {
+	
 		$rootScope.$on("$routeChangeSuccess", function(userInfo) {
-	console.log(userInfo);
-	});
+			console.log(userInfo);
+		});
 
-	$rootScope.$on("$routeChangeError", function(event, current, previous, eventObj) {
-	if (eventObj.authenticated === false) {
-	  $location.path("/login");
-	}
-	});
-}]);
-
-
+		$rootScope.$on("$routeChangeError", function(event, current, previous, eventObj) {
+			if (eventObj.authenticated === false) {
+			  $location.path("/login");
+			}
+		});
+	
+	}]);
+*/
 })();

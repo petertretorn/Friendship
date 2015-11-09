@@ -12,8 +12,14 @@
 		vm.signout = function() {
 			authService.signout();
 			vm.signedIn = authService.currentUser.signedIn;
+			console.log('status: ' + vm.signedIn);
 			modalService.showToast('You\'ve successfully benn signed out. Have a good day!', 'See You!');
+
+			$rootScope.$broadcast('signedin');
+
 		}
+
+		
 
 		$rootScope.$on("signedin", function() {
 			vm.signedIn = authService.currentUser.signedIn;

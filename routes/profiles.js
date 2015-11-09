@@ -16,4 +16,20 @@ router.get('/:username?', function(req, res, next) {
 	});
 });
 
+router.put('/:username', function(req, res, next) {
+
+	var updatedProfile = req.body;
+
+	console.log(updatedProfile);
+
+	return res.json( 
+		{ 
+			status: 'update succesfull',
+			profile: updatedProfile
+	 	});
+
+
+
+})
+
 module.exports = router;

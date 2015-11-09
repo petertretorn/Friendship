@@ -18,7 +18,7 @@ var profileSchema = new mongoose.Schema({
 	gender: String,
 	city: String,
 	description: String,
-	lookingFor: String,
+	lookingfor: String,
 	yearOfBirth: Number,
 	//birthDate: Date
 });

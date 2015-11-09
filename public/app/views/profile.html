@@ -1,0 +1,17 @@
+
+
+<div class="page-header">
+	<h2>Detailed view of {{vm.profile.username}}</h2>
+</div>
+
+<div>
+	<h3>Description <i ng-click="vm.editField('description')" class="fa fa-pencil-square-o"></i></h3>
+	<p ng-hide="vm.profile.description">No desription yet</p>
+	<p>{{ vm.profile.description }}</p>
+</div>
+<div>
+	<h3>Looking for <i class="fa fa-pencil-square-o"></i></h3>
+	<p ng-hide="vm.profile.lookingfor">No looking for details specified yet</p>
+	<p>{{ vm.profile.lookingfor }}</p>
+</div>
+

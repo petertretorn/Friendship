@@ -4,8 +4,8 @@
 
 	module.factory('authService', authService);
 
-	authService.$inject = ['$http', '$rootScope', '$q', 'dataService'];
-	function authService($http, $rootScope, $q, dataService) {
+	authService.$inject = ['$http', '$rootScope', '$q', '$location', 'dataService'];
+	function authService($http, $rootScope, $q, $location, dataService) {
 		
 		var currentUser = { signedIn : false };
 
@@ -63,7 +63,7 @@
 					currentUser.username = username;
 
 					$rootScope.$broadcast('signedin');
-					
+
 					deferred.resolve('authentication failure');
 				}
 			}
@@ -77,9 +77,8 @@
 		}
 
 		function signout() {
-			currentUser = {
-				signedIn : false
-			};
+			currentUser.signedIn = false;
+			$location.path('/');
 		}
 
 		return {

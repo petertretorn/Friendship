@@ -27,6 +27,8 @@
 					content = 'Keep trying!!'
 
 				modalService.showToast(content, heading);
+
+				vm.loginModel = {};
 			}
 		}
 	}
