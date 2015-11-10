@@ -16,9 +16,9 @@
 		  	controller: 'RegisterController',
 		  	controllerAs: 'vm'
 		  })
-		  .when('/detail/:id?', {
-		  	templateUrl: '/app/views/profile.html',
-		  	controller: 'DetailController',
+		  .when('/user/profile', {
+		  	templateUrl: '/app/views/editProfile.html',
+		  	controller: 'EditProfileController',
 		  	controllerAs: 'vm',
 		  })
 		  .when('/edit/:id?', {
@@ -38,6 +38,11 @@
 		  })
 		  .when('/create-event', {
 		  	templateUrl: '/app/views/createEvent.html',
+		  	controller: 'CreateEventController',
+		  	controllerAs: 'vm',
+		  })
+		  .when('/events/:eventId', {
+		  	templateUrl: '/app/views/event.html',
 		  	controller: 'EventController',
 		  	controllerAs: 'vm',
 		  })
@@ -48,7 +53,7 @@
 
 
 	app.constant('settings', {
-		baseUrl: 'http://localhost:3000/'
+		baseUrl: 'http://localhost:3000/api/'
 	});
 /*
 	app.run(["$rootScope", "$location", function($rootScope, $location) {

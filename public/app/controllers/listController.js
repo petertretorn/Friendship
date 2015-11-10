@@ -16,7 +16,6 @@
 
 			function onSuccess(data) {
 				vm.profiles = data;
-				console.log('profiles: ' + vm.profiles);
 			}
 
 			function onFailure(error) {

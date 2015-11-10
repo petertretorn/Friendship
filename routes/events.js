@@ -16,4 +16,25 @@ router.post('/', function(req, res, next) {
 	})
 });
 
+router.get('/:id', function(req, res, next) {
+	
+	var id = req.params.id;
+
+	Event.findById(id, function(err, event) {
+		if (err) {
+			return res.status(400).send({ message: 'error fetching event: ' + err});
+		}
+		return res.json(event);
+	})
+});
+
+router.get('/', function(req, res, next) {
+	Event.find({}, function(err, events) {
+		if (err) {
+			return res.status(400).send({ message: 'error fetching events: ' + err});
+		}
+		return res.json(events);
+	})
+});
+
 module.exports = router;

@@ -11,74 +11,51 @@
 
 		function registerProfile(profile) {
 
-			console.log('profile registered: ' + profile.firstName);
-
 			$http.post('http://localhost:3000/register', profile).then(onSuccess, onFailure);
-
-			function onSuccess(data) {
-				console.log('succesfully registered new user: ' + profile.firstName);
-			}
 		}
 
 		function getProfiles() {
-			return $http.get('http://localhost:3000/api/profiles').then(onSuccess);
-
-			function onSuccess(response) {
-				console.log('succesfully fetched users...');
-				return response.data;
-			}
-		}
-
-		function getProfileById(id) {
-			return $http.get('http://localhost:3000/api/profiles/' + id).then(onSuccess);
-
-			function onSuccess(response) {
-				console.log('succesfully fetched single profile...');
-				return response.data;
-			}	
+			return $http.get(baseUrl + 'profiles')
+				.then(onSuccess, onFailure);
 		}
 
 		function getProfileByUsername(username) {
-			return $http.get(baseUrl + 'api/profiles/' + username).then(onSuccess);
-
-			function onSuccess(response) {
-				console.log('succesfully fetched single profile by username...');
-				return response.data;
-			}	
+			return $http.get(baseUrl + 'profiles/' + username)
+				.then(onSuccess, onFailure);
 		}
 
 		function updateProfile(profile) {
-			console.log('updating profile: ' + profile.username);
 
-			return $http.put(baseUrl + 'api/profiles/' + profile.username, profile).then(onSuccess, onFailure);
-
-			function onSuccess(data) {
-				console.log('succesfully pdated profile: ' + profile.username);
-				return profile;
-			}
+			return $http.put(baseUrl + 'profiles/' + profile.username, profile)
+				.then(onSuccess, onFailure);
 		}
 
 		function createEvent(event) {
-			 return $http.post(baseUrl + 'api/events', event).then(onSuccess, onFailure);
+			 return $http.post(baseUrl + 'events', event)
+			 	.then(onSuccess, onFailure);
+		}
 
-			 function onSuccess(data) {
-				console.log('succesfully created events: ');
-			}
+		function getEventById(id) {
+			return $http.get(baseUrl + 'events/' + id)
+				.then(onSuccess, onFailure);
+		}
+
+		function onSuccess(response) {
+			return response.data;
 		}
 
 		function onFailure(err) {
-				console.log('err!!: ' + err);
-			}
-
-
+			console.log('err!!: ' + err);
+		}
 
 		return {
 			registerProfile: registerProfile,
 			getProfiles: getProfiles,
-			getProfileById: getProfileById,
 			getProfileByUsername: getProfileByUsername,
 			updateProfile: updateProfile,
-			createEvent: createEvent
+			
+			createEvent: createEvent,
+			getEventById: getEventById
 		};
 	}
 

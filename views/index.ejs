@@ -23,7 +23,7 @@
                     <li ng-show="!vm.signedIn"><a ng-href="#/login"><i class="fa fa-sign-in"></i> Login</a></li>
                     <li ng-show="!vm.signedIn"><a ng-href="#/signup"><i class="fa fa-chevron-circle-up"></i> Sign Up</a></li>
                     <li><a href="#/"><i class="fa fa-home"></i> Home</a></li>
-                    <li ng-show="!!vm.signedIn"><a href="#/detail"><i class="fa fa-child"></i> Your Profile</a></li>
+                    <li ng-show="!!vm.signedIn"><a href="#/user/profile"><i class="fa fa-child"></i> Your Profile</a></li>
                     <li ng-show="vm.signedIn"><a ng-click="vm.signout()"><i class="fa fa-sign-in"></i> Sign Out</a></li>
                 </ul>
             </div>
@@ -34,13 +34,13 @@
 		<div ng-view="">Loading...</div>
 
 	</div>
-<!--
+
 	<div id="footer" class="container-fluid">
       <div class="navbar navbar-default navbar-fixed-bottom">
-        <h4 class="text-center text-info">&copy; 2015 The FriendShip by Peter B. Larsen</h4>
+        <h4 class="text-center text-info">&copy; 2015 The FriendShip by Peter Larsen</h4>
       </div>
     </div>
--->
+
 	<!--external libraries -->
 	<script type="text/javascript" src="/lib/lodash/lodash.min.js"></script>
 	<script type="text/javascript" src="/lib/angular/angular.js"></script>
@@ -58,12 +58,12 @@
 	<script type="text/javascript" src="/app/services/authService.js"></script>
 	<script type="text/javascript" src="/app/services/modalService.js"></script>
 	<script type="text/javascript" src="/app/controllers/listController.js"></script>
-	<script type="text/javascript" src="/app/controllers/editController.js"></script>
-	<script type="text/javascript" src="/app/controllers/detailController.js"></script>
+	<script type="text/javascript" src="/app/controllers/editProfileController.js"></script>
 	<script type="text/javascript" src="/app/controllers/loginController.js"></script>
 	<script type="text/javascript" src="/app/controllers/signupController.js"></script>
 	<script type="text/javascript" src="/app/controllers/navbarController.js"></script>
-	<script type="text/javascript" src="/app/controllers/EventController.js"></script>
+	<script type="text/javascript" src="/app/controllers/createEventController.js"></script>
+	<script type="text/javascript" src="/app/controllers/eventController.js"></script>
 	
 </body>
 </html>
