@@ -1,9 +1,35 @@
 body {
-  padding: 25px 5px;
+  padding: 0px 5px;
+  margin-top: 5px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
+.page-header {
+    padding-top: 0px;
+    margin-top: 0px;
+}
+
+.page-header h3 {
+    display: inline-block;
+}
+
+#googleMap {
+    width:400px; 
+    height:400px;
+}
+
+.event-form {
+    margin-top: 30px;
+}
+
+.event-button-group {
+    margin-top: 50px;
+    padding-top: 30px;
+}
+
+a:hover
+
+.profile a {
   color: #00B7FF;
 }
 
@@ -22,12 +48,38 @@ a {
 
 .profile .text {
     padding: 0px 5px;
+    height: 200px;
+    overflow: hidden;
+    background-color: olivedrab;
 }
 
-.profile .text .description {
+.profile .text:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.profile .text h3 {
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
+.interest-container {
+    margin: 10px 0;
+}
+
+.interest-label {
+    float: left;
+    background-color: olive;
+    border-radius: 5px;
+    padding: 4px;
+    text-size: 1em;
+    margin-top: 3px;
+    margin-right: 4px;
+}
+
+.bottum-aligned {
+    position: absolute;
+    bottom: 0;
+}
 
 .profile .picture {
     padding: 0px 0px;
@@ -41,23 +93,23 @@ a {
     padding: 0;
     width: 150px;
     height: 200px;
-}
-
-
-.profile img {
-    border-style: none;   
+    border-style: none;
 }
 
 .profile:hover {
 	cursor: pointer;
 	color: rgb(255, 255, 255);
 	text-decoration: none;
+    background-color: rbga(0,0,0, .5);
 }
 
 .profiles-section {
 	padding-top: 20px;
 }
 
+.float-left {
+    float: left;
+}
 
 .clear-left {
 	clear: left;
@@ -66,16 +118,6 @@ a {
 .fa-pencil-square-o:hover {
     cursor: pointer;
 }
-
-.profile-text {
-    font-size: 1.2em;
-    line-height: 1.2em;
-}
-
-.interest {
-    margin-right: 5px;
-    padding: 4px 8px;
-    }
 
 
  /* ANIMATIONS

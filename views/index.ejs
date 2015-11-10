@@ -12,8 +12,12 @@
             <nav class="navbar navbar-default">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="/">The FriendShip - Hook Up With New Friends</a>
+                    <a class="navbar-brand" href="/">The FriendShip</a>
                 </div>
+
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a ng-href="#/create-event"><i class="fa fa-star"></i> Create Event</a></li>
+                </ul>
 
                 <ul class="nav navbar-nav navbar-right">
                     <li ng-show="!vm.signedIn"><a ng-href="#/login"><i class="fa fa-sign-in"></i> Login</a></li>
@@ -30,19 +34,22 @@
 		<div ng-view="">Loading...</div>
 
 	</div>
-
+<!--
 	<div id="footer" class="container-fluid">
       <div class="navbar navbar-default navbar-fixed-bottom">
         <h4 class="text-center text-info">&copy; 2015 The FriendShip by Peter B. Larsen</h4>
       </div>
     </div>
-
+-->
 	<!--external libraries -->
 	<script type="text/javascript" src="/lib/lodash/lodash.min.js"></script>
 	<script type="text/javascript" src="/lib/angular/angular.js"></script>
 	<script type="text/javascript" src="/lib/angular-route/angular-route.js"></script>
 	<script type="text/javascript" src="/lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 	<script type="text/javascript" src="/lib/angular-messages/angular-messages.js"></script>
+	<script type="text/javascript" src="/lib/angularjs-geolocation/dist/angularjs-geolocation.min.js"></script>
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsNyjwdFd8l6xeQVOhZJT_y5MTrnO2VS0"></script>
 
 	<!--angular app scripts -->
 	<script type="text/javascript" src="/app/app.js"></script>
@@ -56,6 +63,7 @@
 	<script type="text/javascript" src="/app/controllers/loginController.js"></script>
 	<script type="text/javascript" src="/app/controllers/signupController.js"></script>
 	<script type="text/javascript" src="/app/controllers/navbarController.js"></script>
+	<script type="text/javascript" src="/app/controllers/EventController.js"></script>
 	
 </body>
 </html>

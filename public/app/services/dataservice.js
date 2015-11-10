@@ -58,6 +58,14 @@
 			}
 		}
 
+		function createEvent(event) {
+			 return $http.post(baseUrl + 'api/events', event).then(onSuccess, onFailure);
+
+			 function onSuccess(data) {
+				console.log('succesfully created events: ');
+			}
+		}
+
 		function onFailure(err) {
 				console.log('err!!: ' + err);
 			}
@@ -69,7 +77,8 @@
 			getProfiles: getProfiles,
 			getProfileById: getProfileById,
 			getProfileByUsername: getProfileByUsername,
-			updateProfile: updateProfile
+			updateProfile: updateProfile,
+			createEvent: createEvent
 		};
 	}
 

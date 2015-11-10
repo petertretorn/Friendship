@@ -20,24 +20,29 @@ var profileSchema = new mongoose.Schema({
 	interests: [String],
 	description: String,
 	lookingfor: String,
+	image: String,
 	yearOfBirth: Number,
 	birthDate: Date
 });
 
-//mongoose.model('User', userSchema);
+profileSchema.set('toJSON', {
+	transform: function(doc, ret, options) {
+		delete ret._id;
+		delete ret.__v;
 
-profileSchema.virtual('calculateAge').get(function() {
-	return 41;
+		if (ret.birthDate){
+			ret.age = calculateAge(ret.birthDate);
+		}
 
-	var today = new Date(),
-		age;
-
-	if (this.birthDate) {
-		age = today - this.birthDate;
-	} else {
-		age = 41;
+		return ret;
 	}
-	return age;
 })
+
+function calculateAge(birthDate) {
+	birthDate = new Date(birthDate);
+	var ageDifMs = Date.now() - birthDate.getTime();
+    var ageDate = new Date(ageDifMs); // miliseconds from epoch
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+}
 
 module.exports = mongoose.model('Profile', profileSchema);

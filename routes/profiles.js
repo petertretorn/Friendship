@@ -13,9 +13,7 @@ router.get('/:username?', function(req, res, next) {
 
 	Profile.find(query, function(error, profiles) {
 		if (error) return next(err);
-		profiles.forEach(function(pf) {
-			pf.age = pf.calculateAge;
-		})
+		
 		res.json(profiles);
 	});
 });
@@ -36,7 +34,7 @@ router.put('/:username', function(req, res, next) {
 
 		profile.save(function(err) {
 			if (err) {
-				return res.status(400).send({message: 'mongo error occured...'});
+				return res.status(400).send({message: 'mongo error occured...' + err});
 			}
 			return res.json(profile);
 	 	});

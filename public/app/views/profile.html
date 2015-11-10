@@ -19,12 +19,10 @@
 
 		<div>
 			<h3>Birthdate <i ng-click="vm.open($event)" class="fa fa-pencil-square-o"></i></h3>
-			<span type="text" uib-datepicker-popup={{vm.format}} ng-model="vm.profile.birthDate" 
-					is-open="vm.status.opened" min-date="vm.minDate" close-text="Close"/>
+			<span ng-change="vm.dateChanged()" type="text" uib-datepicker-popup={{vm.format}} ng-model="vm.profile.birthDate" 
+					is-open="vm.status.opened" min-date="vm.minDate" show-button-bar="false"/>
 			<p class="profile-text" ng-hide="vm.profile.birthDate">No data specified yet</p>
-			<p class="profile-text">{{ vm.profile.birthDate }}</p>
-			
-			
+			<p class="profile-text">{{ vm.profile.birthDate | date: 'dd/MM/yyyy'}}</p>
 		</div>
 		
 

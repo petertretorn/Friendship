@@ -2,7 +2,7 @@
 
 	'use strict';
 
-	var app = angular.module('app', ['ngRoute', 'ngMessages', 'ui.bootstrap']);
+	var app = angular.module('app', ['ngRoute', 'ngMessages', 'ui.bootstrap', 'geolocation']);
 
 	app.config(function($routeProvider) {
 		$routeProvider
@@ -34,6 +34,11 @@
 		  .when('/signup', {
 		  	templateUrl: '/app/views/signup.html',
 		  	controller: 'SignupController',
+		  	controllerAs: 'vm',
+		  })
+		  .when('/create-event', {
+		  	templateUrl: '/app/views/createEvent.html',
+		  	controller: 'EventController',
 		  	controllerAs: 'vm',
 		  })
 		  .otherwise({

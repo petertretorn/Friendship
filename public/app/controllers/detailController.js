@@ -26,24 +26,27 @@
 
 		vm.open = function($event) {
 	    	vm.status.opened = true;
-	    	console.log(vm.status.opened);
-	    	console.log('selected data: ' + vm.profile.birthDate);
 	  	};
 
 		vm.YearSelected = function() {
 			vm.profile.birthDate = new Date(vm.profile.yearOfBirth, 0, 1);
 		}
 
+		vm.dateChanged = function() {
+			updateProfile(vm.profile);
+		}
+
 		vm.deleteInterest = function(index) {
-			console.log('delingt : ' + index);
 			vm.profile.interests.splice(index, 1);
+			updateProfile(vm.profile);
+			/*
 			dataService.updateProfile(vm.profile).then(
 					function(profile) {
 						vm.profile = profile;
 					}, 
 					function() {
 						console.log('boo.. error updating profile');
-					});
+					});*/
 		}
 
 		vm.addToField = function(field) {
@@ -51,13 +54,16 @@
 			//vm.profile[field] =  ['music', 'drugs', 'sex'];
 
 			modalService.addToField(vm.profile, field).then(function(profile) {
+				
+				updateProfile(profile);
+				/*
 				dataService.updateProfile(profile).then(
 					function(profile) {
 						vm.profile = profile;
 					}, 
 					function() {
 						console.log('boo.. error updating profile');
-					});
+					});*/
 			})
 			//vm.profile[field].push(item);
 		}
@@ -67,27 +73,41 @@
 			vm.profile.gender = gender;
 			vm.editGender = false;
 
+			updateProfile(vm.profile);
+			/*
 			dataService.updateProfile(vm.profile).then(
 					function() {
 						console.log('profile updated');
 					}, 
 					function() {
 						console.log('boo.. error updating profile');
-					});
+					});*/
 		}
 
 
 		vm.editField = function(field, isTextarea) {
 			console.log('field attempted editted: ' + field);
 			modalService.editField(vm.profile, field, isTextarea).then(function(profile) {
+				updateProfile(profile);
+				/*
 				dataService.updateProfile(profile).then(
 					function(profile) {
 						vm.profile = profile;
 					}, 
 					function() {
 						console.log('boo.. error updating profile');
-					});
+					});*/
 			})
+		}
+
+		function updateProfile(profileToUpdate) {
+			dataService.updateProfile(profileToUpdate).then(
+					function(profile) {
+						vm.profile = profile;
+					}, 
+					function() {
+						console.log('boo.. error updating profile');
+					});
 		}
 
 		function createYearArray() {
