@@ -4,6 +4,14 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+.tabs-container {
+    margin-top: 25px;
+}
+
+.tab-container {
+    margin-top: 25px;
+}
+
 .page-header {
     padding-top: 0px;
     margin-top: 0px;
@@ -116,6 +124,10 @@ a:hover
 }
 
 .fa-pencil-square-o:hover {
+    cursor: pointer;
+}
+
+a:hover {
     cursor: pointer;
 }
 

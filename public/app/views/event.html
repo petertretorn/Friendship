@@ -1,3 +1,53 @@
-<h2>Event goes here</h2>
+<div class="row">
+	<div class="col-md-6">
+		
+		<div class="page-header">
+			<h3>{{vm.event.title}} event</h3>
+		</div>
 
-<p>{{vm.event.title}}</p>
+		<div>
+			<h4>Date</h4>
+			<p>{{ vm.event.date | date: 'dd/MM/yyyy'}}</p>
+		</div>
+		<h4>Description</h4>
+		<p>{{ vm.event.about }}</p>
+
+		<h4>Where</h4>
+		<p>{{ vm.event.location }}</p>
+
+
+	</div>
+
+	<div class="col-md-6">
+
+
+		<div class="tabs-container">
+
+			<uib-tabset>
+				<uib-tab heading="Google Map" disable="tab.disabled">
+			      <div class="tab-container">
+			      	<p>See location of {{ vm.event.title }} event</p>
+			      </div>
+			      <div>
+			      	<div id="googleMap"></div>
+			      </div>
+			    </uib-tab>
+			    <uib-tab heading="Comments"  disable="tab.disabled">
+    	  			<div class="tab-container">
+	    	  			<p ng-hide="!!vm.event.comments.length">No comments yet. Click to add</p>
+						<div>
+							<div ng-repeat="comment in vm.event.comments"></div>
+						</div>
+						<button class="btn btn-info" ng-click="vm.addComment()">Add Comment</button>
+					</div>
+			    </uib-tab>
+
+			    
+		    
+  		</uib-tabset>
+
+  		</div>
+
+
+	</div>
+</div>

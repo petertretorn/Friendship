@@ -23,10 +23,12 @@
 
 				var LatLng = {lat: data.coords.latitude, lng: data.coords.longitude};
 
+				var testLatLng = {lat: 39.500, lng: -98.350};
+
 				var map = new google.maps.Map(document.getElementById('googleMap'),
 					{
 	                    zoom: 15,
-	                    center: LatLng
+	                    center: testLatLng
 	                });
 	    		
 				addMapListener(map);
@@ -66,7 +68,7 @@
 	                lat = marker.getPosition().lat();
                 	lng = marker.getPosition().lng();
 
-                	vm.newEvent.location = [ lat, lng ]
+                	vm.newEvent.latlong = [ lat, lng ]
 
 	                $rootScope.$emit('map-clicked');
 			});
