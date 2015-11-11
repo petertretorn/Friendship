@@ -36,7 +36,12 @@
     	  			<div class="tab-container">
 	    	  			<p ng-hide="!!vm.event.comments.length">No comments yet. Click to add</p>
 						<div>
-							<div ng-repeat="comment in vm.event.comments"></div>
+							<div ng-repeat="comment in vm.event.comments">
+								<div class="comment">
+									<h4>Posted by {{comment.author}}, {{comment.datePosted | date: 'dd/MM/yyyy'}}</h4>
+									<p>{{comment.text}}</p>
+								</div>
+							</div>
 						</div>
 						<button class="btn btn-info" ng-click="vm.addComment()">Add Comment</button>
 					</div>

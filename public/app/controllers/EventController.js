@@ -3,8 +3,8 @@
 
 	module.controller('EventController', EventController);
 
-	EventController.$inject = ['$routeParams', 'dataService', 'mapService']
-	function EventController($routeParams, dataService, mapService) {
+	EventController.$inject = ['$routeParams', 'dataService', 'mapService', 'modalService']
+	function EventController($routeParams, dataService, mapService, modalService) {
 
 		var vm = this,
 			eventId = $routeParams.eventId;
@@ -29,6 +29,28 @@
 			var coordinates = { lat: vm.event.latlong[0], lng: vm.event.latlong[1]}
 
 			mapService.bootstrapMap(map, coordinates);
+		}
+
+		vm.addComment = function() {
+			modalService.textAreaInput("Add new Comment").then(function(text) {
+				console.log('EventController: ' + text);
+
+				var comment = {
+					author: 'Iggy',
+					text: text,
+					datePosted: new Date()
+				}
+
+				vm.event.comments.push(comment)
+
+				dataService.updateEvent(vm.event).then(function(event)
+					{console.log('updated event: ' + event); },
+					function() {});
+
+
+			}, function(err) {
+
+			});
 		}
 
 		function onError(err) {

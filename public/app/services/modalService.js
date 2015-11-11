@@ -9,8 +9,40 @@
       return {
         showToast: showToast,
         editField: editField,
-        addToField: addToField
+        addToField: addToField,
+        textAreaInput: textAreaInput
       };
+
+      function textAreaInput(modalTitle) {
+        var text,
+          deferred = $q.defer();
+
+
+        var modalInstance = $modal.open({
+          templateUrl: '/app/views/modalInput.html',
+          controllerAs: 'vm',
+          controller: function($modalInstance) {
+            var vm = this;
+            vm.inputText = '';
+            vm. title = modalTitle;
+            console.log('modalTitle: ' + modalTitle);
+            vm.ok = function() {
+
+              text = vm.inputText;
+              $modalInstance.close();
+
+              console.log('text: ' + text);
+
+              deferred.resolve(text);
+            }
+            vm.cancel = function() {
+              $modalInstance.dismiss();
+              $q.resolve();
+            }
+          }
+        });
+        return deferred.promise;
+      }
 
       function addToField(profile, field) {
 

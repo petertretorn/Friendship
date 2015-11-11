@@ -23,12 +23,12 @@
 
 				var LatLng = {lat: data.coords.latitude, lng: data.coords.longitude};
 
-				var testLatLng = {lat: 39.500, lng: -98.350};
+				//var testLatLng = {lat: 39.500, lng: -98.350};
 
 				var map = new google.maps.Map(document.getElementById('googleMap'),
 					{
 	                    zoom: 15,
-	                    center: testLatLng
+	                    center: LatLng
 	                });
 	    		
 				addMapListener(map);

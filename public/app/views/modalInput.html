@@ -1,0 +1,12 @@
+<div class="modal-header">
+  <h3 class="modal-title">{{ vm.title }}</h3>
+</div>
+
+<div class="modal-body">
+  <textarea rows="2" ng-model="vm.inputText" class="form-control" placeholder="Enter data"></textarea>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="vm.ok()">OK</button>
+  <button class="btn btn-warning" ng-click="vm.cancel()">Cancel</button>
+</div>

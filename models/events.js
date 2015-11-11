@@ -12,7 +12,8 @@ var eventSchema = new mongoose.Schema({
 		text: String,
 		datePosted: Date
 	}],
-	tags: [String]
+	tags: [String],
+	createdBy: String
 });
 
 

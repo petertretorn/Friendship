@@ -40,6 +40,12 @@
 				.then(onSuccess, onFailure);
 		}
 
+		function updateEvent(event) {
+			console.log('eventid: ' + event._id);
+			return $http.put(baseUrl + 'events/' + event._id, event)
+				.then(onSuccess, onFailure);
+		}
+
 		function onSuccess(response) {
 			return response.data;
 		}
@@ -55,7 +61,9 @@
 			updateProfile: updateProfile,
 			
 			createEvent: createEvent,
-			getEventById: getEventById
+			getEventById: getEventById,
+
+			updateEvent: updateEvent
 		};
 	}
 
