@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('friendship:server');
 var http = require('http');
+var mongoose = require('mongoose');
 
 /**
  * Get port from environment and store in Express.
@@ -15,6 +16,14 @@ var http = require('http');
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
+var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
+if (env === 'development') {
+  mongoose.connect('mongodb://localhost/friendship');
+} else {
+  console.log('production db');
+  mongoose.connect('mongodb://peterlarsen:flamenco@ds047524.mongolab.com:47524/friendship');
+}
 /**
  * Create HTTP server.
  */

@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/friendship');
+//mongoose.connect('mongodb://localhost/friendship');
 
 var profileSchema = new mongoose.Schema({
 	id: Number,
