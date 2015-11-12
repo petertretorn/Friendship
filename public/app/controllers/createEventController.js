@@ -3,8 +3,8 @@
 
 	module.controller('CreateEventController', CreateEventController);
 
-	CreateEventController.$inject = ['$rootScope', '$scope', 'geolocation', 'dataService'];
-	function CreateEventController($rootScope, $scope, geolocation, dataService) {
+	CreateEventController.$inject = ['$rootScope', '$scope', 'dataService', 'mapService'];
+	function CreateEventController($rootScope, $scope, dataService, mapService) {
 		var vm = this,
 			map;
 
@@ -14,67 +14,28 @@
 		init();
 
 		function init() {
-			
-			var coords,
-				longitude,
-				latitude;
+			var domElement;
 
-			geolocation.getLocation().then(function(data) {
+			mapService.getHtml5Location().then(function(coordinates) {
+				domElement = document.getElementById('googleMap');
 
-				var LatLng = {lat: data.coords.latitude, lng: data.coords.longitude};
+				var mapConfig = {
+					addListener: true,
+					addMarker: false,
+					coordinates: coordinates
+				}
 
-				//var testLatLng = {lat: 39.500, lng: -98.350};
-
-				var map = new google.maps.Map(document.getElementById('googleMap'),
-					{
-	                    zoom: 15,
-	                    center: LatLng
-	                });
-	    		
-				addMapListener(map);
-			});	
+				mapService.bootstrapMap(domElement, mapConfig)
+			});
 		}
 
-		$rootScope.$on('map-clicked', function() {
+		$rootScope.$on('map-clicked', function(event, coordinates) {
+			vm.newEvent.latlong = coordinates;
+
 			$scope.$apply(function() {
 				vm.locatationSelected = true;	
 			})
 		});
-
-		function addMapListener(map) {
-			
-			var lastMarker;
-
-			google.maps.event.addListener(map, 'click', function(e){
-	          		var lat,
-	          			lng;
-
-	                var marker = new google.maps.Marker({
-	                    position: e.latLng,
-	                    animation: google.maps.Animation.BOUNCE,
-	                    map: map,
-	                    icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
-	                });
-	                
-	                // When a new spot is selected, delete the old red bouncing marker
-	                if(lastMarker){
-	                    lastMarker.setMap(null);
-	                }
-
-	                // Create a new red bouncing marker and move to it
-	                lastMarker = marker;
-	                map.panTo(marker.position);
-
-	                lat = marker.getPosition().lat();
-                	lng = marker.getPosition().lng();
-
-                	vm.newEvent.latlong = [ lat, lng ]
-
-	                $rootScope.$emit('map-clicked');
-			});
-		}
-
-		google.maps.event.addDomListener(window, 'load', init());
 
 		vm.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 	  	vm.format = vm.formats[0];
@@ -96,6 +57,5 @@
 			console.log('createEvent');
 		}
 	}
-
 
 })(angular.module('app'));

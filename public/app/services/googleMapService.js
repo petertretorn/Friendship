@@ -1,32 +1,45 @@
 (function(module) {
 	'use strict';
 
-
+	
 	module.factory('mapService', mapService);
 
-	function mapService() {
+	mapService.$inject = ['$q', '$rootScope', 'geolocation'];
+	function mapService($q, $rootScope, geolocation) {
 		
-		function bootstrapMap(element, coordinates) {
-			//google.maps.event.addDomListener(window, 'load', init(element, coordinates));
+		function getHtml5Location() {
 
-			init(element, coordinates);
+			return geolocation.getLocation().then(function(data) {
+
+				var LatLng = {lat: data.coords.latitude, lng: data.coords.longitude};
+				return LatLng;
+			});
 		}
 
-		function init(element, coordinates) {
-			//var LatLng = {lat: coordinates.latitude, lng: coordinates.longitude};
-			//var coordinates = { lat: vm.event.location[0], lng: vm.event.location[1]}
-			console.log('latitude: ' + coordinates.lat);
-			console.log('longitude: ' + coordinates.lng);
+		function bootstrapMap(domElement, config, coordinates, shouldListener) {
 
-			var mapConfig = {
-	                zoom: 15,
-	                center: coordinates
-	            }
+			google.maps.event.addDomListener(window, 'load', init(domElement, config));
 
-			var map = new google.maps.Map(element, mapConfig);
+			function init(domElement, config) {
+				var mapConfig = {
+		                zoom: 15,
+		                center: config.coordinates
+		            }
 
-			//var initialLocation = new google.maps.LatLng(latitude, longitude);
-            var marker = new google.maps.Marker({
+				var map = new google.maps.Map(domElement, mapConfig);
+
+				if (config.addListener) {
+					addMapListener(map);	
+				}
+
+				if (config.addMarker) {
+					addMarker(map, config.coordinates);	
+				}
+			}
+		}
+
+		function addMarker(map, coordinates) {
+			var marker = new google.maps.Marker({
                 position: coordinates,
                 animation: google.maps.Animation.BOUNCE,
                 map: map,
@@ -39,6 +52,8 @@
 			var lastMarker;
 
 			google.maps.event.addListener(map, 'click', function(e){
+
+					console.log('map clicked!');
 	          		var lat,
 	          			lng;
 
@@ -61,9 +76,11 @@
 	                lat = marker.getPosition().lat();
                 	lng = marker.getPosition().lng();
 
-                	vm.newEvent.latlong = [ lat, lng ]
+                	console.log('lat: ' + lat);
+                	
+                	var coordinates = [ lat, lng ]
 
-	                $rootScope.$emit('map-clicked');
+	                $rootScope.$broadcast('map-clicked', coordinates);
 			});
 		}
 
@@ -71,7 +88,9 @@
 
 
 		return {
-			bootstrapMap: bootstrapMap
+			bootstrapMap: bootstrapMap,
+			getHtml5Location: getHtml5Location,
+			addMapListener: addMapListener
 		}
 	}
 })(angular.module('app'));

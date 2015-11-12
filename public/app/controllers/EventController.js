@@ -1,3 +1,5 @@
+https://github.com/petertretorn/friendship.git
+
 (function(module) {
 	'use strict';
 
@@ -22,13 +24,21 @@
 		function onEventFetched(event) {
 			vm.event = event;
 
-			var map = document.getElementById('googleMap');
-
-			//var LatLng = {lat: data.coords.latitude, lng: data.coords.longitude};
+			var domElement = document.getElementById('googleMap');
 
 			var coordinates = { lat: vm.event.latlong[0], lng: vm.event.latlong[1]}
 
-			mapService.bootstrapMap(map, coordinates);
+
+			var mapConfig = {
+				addListener: false,
+				addMarker: true,
+				coordinates: coordinates
+			}
+
+			mapService.bootstrapMap(domElement, mapConfig);
+
+
+			//mapService.addBounceMarkerToMap(map, coordinates);
 		}
 
 		vm.addComment = function() {
@@ -45,7 +55,7 @@
 
 				dataService.updateEvent(vm.event).then(function(event)
 					{console.log('updated event: ' + event); },
-					function() {});
+				function() {});
 
 
 			}, function(err) {
