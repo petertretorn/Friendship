@@ -14,7 +14,7 @@
 
 		vm.signup = function() {
 
-			authService.signUp(vm.signupModel).then(onSuccess, onFailure);
+			authService.register(vm.signupModel).then(onSuccess, onFailure);
 
 			function onSuccess(repsonse) {
 				//clear form

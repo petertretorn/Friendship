@@ -3,7 +3,8 @@ var users = require('../routes/users');
 var register = require('../routes/register');
 var profiles = require('../routes/profiles');
 var events = require('../routes/events');
-var auth = require('../routes/auth').router;
+var auth = require('../routes/auth');
+var register = require('../routes/register');
 
 module.exports = function(app) {
   app.use('/', routes);
@@ -12,6 +13,7 @@ module.exports = function(app) {
   app.use('/api/users', users);
   app.use('/api/profiles', profiles);
   app.use('/api/events', events);
+  app.use('/api/register', register);
 
 
   // catch 404 and forward to error handler

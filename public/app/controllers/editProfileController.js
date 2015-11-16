@@ -2,13 +2,13 @@
 
 	module.controller('EditProfileController', EditProfileController);
 
-	EditProfileController.$inject = ['$routeParams', 'dataService', 'authService', 'modalService']
-	function EditProfileController($routeParams, dataService, authService, modalService) {
+	EditProfileController.$inject = ['$routeParams', '$location', 'dataService', 'identityService', 'modalService']
+	function EditProfileController($routeParams, $location, dataService, identityService, modalService) {
 
 		//var id = $routeParams.id || authService.currentUser.username,
-		var id = (authService.currentUser.signedIn) ? authService.currentUser.username : '',
+		var username,
 			vm = this;
-			
+		
 		vm.profile = {};
 		vm.genderOptions = ['male', 'female', 'katoy'];
 		vm.years = createYearArray();
@@ -26,9 +26,15 @@
 		init();
 
 		function init() {
-			console.log('DetailController, id: %s', id);
+			if (!identityService.isAuthenticated()) {
+				console.log('not authenticated');
+				$location.path('/');
+			}
+			username = identityService.currentUser.username || '';
 
-			dataService.getProfileByUsername(id).then(onSuccess, onFailure);
+			console.log('DetailController, username: %s', username);
+
+			dataService.getProfileByUsername(username).then(onSuccess, onFailure);
 
 			function onSuccess(data) {
 				console.log('success fetching profile : %s', data[0].username);

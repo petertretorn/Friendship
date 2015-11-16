@@ -1,30 +1,20 @@
-var mongoose = require('mongoose');
-var crypto = require('crypto');
+var mongoose = require('mongoose'),
+	encrypt = require('../util/encryption');
 
-var UserSchema = mongoose.Schema({
+var userSchema = mongoose.Schema({
 	username: String,
-	password: String
+	hashed_pwd: String,
+	salt: String
 });
 
-/*
-UserSchema.pre('save', function(next) {
-	if (this.password) {
-		this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
-		this.password = this.hashPassword(this.password);
-	}
-
-	next();
-});
-*/
-
-// Create an instance method for hashing a password
-UserSchema.methods.hashPassword = function(password) {
-	return crypto.pbkdf2Sync(password, this.salt, 10000, 64).toString('base64');
+userSchema.methods = {
+  authenticate: function(passwordToMatch) {
+    return encrypt.hashPwd(this.salt, passwordToMatch) === this.hashed_pwd;
+  },
+  hasRole: function(role) {
+    return this.roles.indexOf(role) > -1;
+  }
 };
 
-// Create an instance method for authenticating user
-UserSchema.methods.authenticate = function(password) {
-	return this.password === this.hashPassword(password);
-};
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', userSchema);

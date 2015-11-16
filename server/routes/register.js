@@ -1,15 +1,54 @@
-var express = require('express');
-var router = express.Router();
-//require('../models/users.js');
-//var mongoose = require('mongoose');
-var Profile = require('../models/profiles.js');
+var express = require('express'),
+	router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('get request register route again');
-});
+	mongoose = require('mongoose');
+	Profile = mongoose.model('Profile'),
+	User = mongoose.model('User'),
+	encrypt = require('../util/encryption');
 
-router.post('/', function(req, res, next) {
+
+
+var registerUser = function(req, res, next) {
+
+	console.log('new registered');
+
+	var userData = req.body;
+	userData.username = userData.username.toLowerCase();
+	userData.salt = encrypt.createSalt();
+	userData.hashed_pwd = encrypt.hashPwd(userData.salt, userData.password);
+	User.create(userData, function(err, user) {
+		if(err) {
+		  if(err.toString().indexOf('E11000') > -1) {
+		    err = new Error('Duplicate Username');
+		  }
+		  res.status(400);
+		  return res.send({reason:err.toString()});
+		}
+		req.logIn(user, function(err) {
+		  if(err) { return next(err); }
+		  
+		  // -------------------
+		  console.log('before');
+		    var profile = new Profile({ username: user.username });
+		    console.log('after');
+
+		    profile.save(function(err){
+		      if (err) return res.json({ message : 'failure setting up new profile!'})
+		      
+		      res.send(user);
+		      //return res.json({ username : user.username })
+		    });
+		    // -------------------
+
+		  //res.send(user);
+		})
+	})
+};
+
+router.post('/', registerUser);
+
+
+function old(req, res, next) {
 
 	var name = req.body.firstName || 'no name specified'
 	console.log('user registered: ' + name);
@@ -28,7 +67,7 @@ router.post('/', function(req, res, next) {
 			res.json(newUser);
 		}
 	})
-});
+}
 
 
 module.exports = router;

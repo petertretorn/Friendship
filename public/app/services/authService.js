@@ -4,34 +4,25 @@
 
 	module.factory('authService', authService);
 
-	authService.$inject = ['$http', '$rootScope', '$q', '$location', 'dataService', 'settings'];
-	function authService($http, $rootScope, $q, $location, dataService, settings) {
+	authService.$inject = ['$http', '$rootScope', '$q', '$location', 'dataService', 'identityService', 'settings'];
+	function authService($http, $rootScope, $q, $location, dataService, identityService, settings) {
 		
-		var currentUser = { signedIn : false };
+		var currentUser;
 
 		var baseUrl = settings.baseUrl;
 
-		init();
 
-		function init() {
-			currentUser = { signedIn : false };
-		}
 
-		function signUp(signupModel) {
+		function register(signupModel) {
 
-			return $http.post(baseUrl + 'auth/signup', signupModel).then(onSuccess, onFailure);
+			return $http.post(baseUrl + 'register', signupModel).then(onSuccess, onFailure);
 
 			function onSuccess(response) {
 				var deferred = $q.defer();
 
-				console.log('signed up succesfully : ' + response.data.username);
-				console.log('signed up succesfully : ' + response.data.token);
-				
-				currentUser.signedIn = true;
-				
-				var username = response.data.username;
-				
-				currentUser.username = username;
+				var loggedInUser;
+				angular.extend(loggedInUser, response.data.user);
+				identityService.currentUser = loggedInUser;
 
 				$rootScope.$broadcast('signedin');
 			}
@@ -44,25 +35,25 @@
 		function login(loginModel) {
 			var deferred = $q.defer();
 
-			$http.post(baseUrl + 'auth/authenticate', loginModel).then(onSuccess, onFailure);
+			$http.post(baseUrl + 'auth/login', loginModel).then(onSuccess, onFailure);
 
 			function onSuccess(response) {
-				console.log('username : ' + response.data.username);
-				console.log('token : ' + response.data.token);
+				console.log('user : ' + response.data.user);
 
-				if (!response.data.token) {
+				if (!response.data.success) {
 					console.log('authentication failure!');
 					deferred.reject('authentication failure');
 				} else {
-					currentUser.signedIn = true;
-					currentUser.token = response.data.token;
-					var username = response.data.username;
 					
-					currentUser.username = username;
+					//var loggedInUser;
+					//angular.extend(loggedInUser, response.data.user);
+					identityService.currentUser = response.data.user;
+
+					console.log('user : ' + identityService.currentUser.username);
 
 					$rootScope.$broadcast('signedin');
 
-					deferred.resolve('authentication failure');
+					deferred.resolve('authentication success!');
 				}
 			}
 
@@ -75,15 +66,14 @@
 		}
 
 		function signout() {
-			currentUser.signedIn = false;
+			identityService.currentUser = undefined;
 			$location.path('/');
 		}
 
 		return {
-			signUp : signUp,
+			register : register,
 			login : login,
-			signout : signout,
-			currentUser : currentUser
+			signout : signout
 		};
 	}
 

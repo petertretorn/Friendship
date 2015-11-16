@@ -1,47 +1,37 @@
 var passport = require('passport'),
-	LocalStrategy = require('passport-local'),
- 	User = require('../models/users');
+  mongoose = require('mongoose'),
+  LocalStrategy = require('passport-local').Strategy,
+  User = mongoose.model('User');
 
 module.exports = function() {
-		
-	passport.serializeUser(function(user, done) {
-        done(null, user.id);
-    });
+  passport.use(new LocalStrategy(
+    function(username, password, done) {
+      User.findOne({username:username}).exec(function(err, user) {
+        if(user && user.authenticate(password)) {
+          console.log('pp succes');
+          return done(null, user);
+        } else {
+        	console.log('pp failure: '+ user.username);
+          return done(null, false);
+        }
+      })
+    }
+  ));
 
-    // used to deserialize the user
-    passport.deserializeUser(function(id, done) {
-        User.findById(id, function(err, user) {
-            done(err, user);
-        });
-    });
+  passport.serializeUser(function(user, done) {
+    if(user) {
+      done(null, user._id);
+    }
+  });
 
-	// Use the Passport's Local strategy 
-	passport.use(new LocalStrategy(function(username, password, done) {
-		// Use the 'User' model 'findOne' method to find a user with the current username
-		User.findOne({
-			username: username
-		}, function(err, user) {
-			// If an error occurs continue to the next middleware
-			if (err) {
-				return done(err);
-			}
-			
-			// If a user was not found, continue to the next middleware with an error message
-			if (!user) {
-				return done(null, false, {
-					message: 'Unknown user'
-				});
-			}
+  passport.deserializeUser(function(id, done) {
+    User.findOne({_id:id}).exec(function(err, user) {
+      if(user) {
+        return done(null, user);
+      } else {
+        return done(null, false);
+      }
+    })
+  })
 
-			// If the passport is incorrect, continue to the next middleware with an error message
-			if (!user.authenticate(password)) {
-				return done(null, false, {
-					message: 'Invalid password'
-				});
-			}
-			
-			// Otherwise, continue to the next middleware with the user object
-			return done(null, user);
-		});
-	}));
-};
+}
