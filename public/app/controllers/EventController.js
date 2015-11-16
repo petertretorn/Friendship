@@ -1,5 +1,3 @@
-https://github.com/petertretorn/friendship.git
-
 (function(module) {
 	'use strict';
 
