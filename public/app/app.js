@@ -51,7 +51,6 @@
 		  });
 	});
 
-
 	app.constant('settings', {
 		development {
 			baseUrl: 'http://localhost:3000/api/'
