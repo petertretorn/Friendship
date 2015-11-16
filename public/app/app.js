@@ -51,13 +51,9 @@
 		  });
 	});
 
+
 	app.constant('settings', {
-		development {
-			baseUrl: 'http://localhost:3000/api/'
-		},
-		production {
-			baseUrl: 'thefriendship.herokuapp.com'	
-		}
+		baseUrl: 'http://localhost:3000/api/'
 	});
 /*
 	app.run(["$rootScope", "$location", function($rootScope, $location) {
