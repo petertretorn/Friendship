@@ -4,12 +4,12 @@
 
 	module.factory('authService', authService);
 
-	authService.$inject = ['$http', '$rootScope', '$q', '$location', 'dataService'];
-	function authService($http, $rootScope, $q, $location, dataService) {
+	authService.$inject = ['$http', '$rootScope', '$q', '$location', 'dataService', 'settings'];
+	function authService($http, $rootScope, $q, $location, dataService, settings) {
 		
 		var currentUser = { signedIn : false };
 
-		var baseUrl = 'http://localhost:3000/auth/';
+		var baseUrl = settings.baseUrl;
 
 		init();
 
@@ -19,7 +19,7 @@
 
 		function signUp(signupModel) {
 
-			return $http.post(baseUrl + 'signup', signupModel).then(onSuccess, onFailure);
+			return $http.post(baseUrl + 'auth/signup', signupModel).then(onSuccess, onFailure);
 
 			function onSuccess(response) {
 				var deferred = $q.defer();
@@ -44,7 +44,7 @@
 		function login(loginModel) {
 			var deferred = $q.defer();
 
-			$http.post(baseUrl + 'authenticate', loginModel).then(onSuccess, onFailure);
+			$http.post(baseUrl + 'auth/authenticate', loginModel).then(onSuccess, onFailure);
 
 			function onSuccess(response) {
 				console.log('username : ' + response.data.username);

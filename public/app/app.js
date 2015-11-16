@@ -53,7 +53,7 @@
 
 
 	app.constant('settings', {
-		baseUrl: 'http://localhost:3000/api/'
+		baseUrl: 'http://localhost:3030/api/'
 	});
 /*
 	app.run(["$rootScope", "$location", function($rootScope, $location) {
