@@ -15,7 +15,7 @@
 		}
 
 		function getProfiles() {
-			return $http.get(baseUrl + 'profiles')
+			return $http.get('/profiles')
 				.then(onSuccess, onFailure);
 		}
 
