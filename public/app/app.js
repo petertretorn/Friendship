@@ -53,7 +53,12 @@
 
 
 	app.constant('settings', {
-		baseUrl: 'http://localhost:3000/api/'
+		development {
+			baseUrl: 'http://localhost:3000/api/'
+		},
+		production {
+			baseUrl: 'thefriendship.herokuapp.com'	
+		}
 	});
 /*
 	app.run(["$rootScope", "$location", function($rootScope, $location) {

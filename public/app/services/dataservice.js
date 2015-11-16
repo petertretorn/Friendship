@@ -11,7 +11,7 @@
 
 		function registerProfile(profile) {
 
-			$http.post('http://localhost:3000/register', profile).then(onSuccess, onFailure);
+			$http.post(baseUrl + 'register', profile).then(onSuccess, onFailure);
 		}
 
 		function getProfiles() {
@@ -20,7 +20,7 @@
 		}
 
 		function getProfileByUsername(username) {
-			return $http.get(baseUrl + 'profiles/' + username)
+			return $http.get('/profiles/' + username)
 				.then(onSuccess, onFailure);
 		}
 
