@@ -11,38 +11,38 @@
 
 		function registerProfile(profile) {
 
-			$http.post(baseUrl + 'register', profile).then(onSuccess, onFailure);
+			$http.post('/api/register', profile).then(onSuccess, onFailure);
 		}
 
 		function getProfiles() {
-			return $http.get('/profiles')
+			return $http.get('/api/profiles')
 				.then(onSuccess, onFailure);
 		}
 
 		function getProfileByUsername(username) {
-			return $http.get('/profiles/' + username)
+			return $http.get('/api/profiles/' + username)
 				.then(onSuccess, onFailure);
 		}
 
 		function updateProfile(profile) {
 
-			return $http.put(baseUrl + 'profiles/' + profile.username, profile)
+			return $http.put('/api/profiles/' + profile.username, profile)
 				.then(onSuccess, onFailure);
 		}
 
 		function createEvent(event) {
-			 return $http.post(baseUrl + 'events', event)
+			 return $http.post('/api/events', event)
 			 	.then(onSuccess, onFailure);
 		}
 
 		function getEventById(id) {
-			return $http.get(baseUrl + 'events/' + id)
+			return $http.get('/api/events/' + id)
 				.then(onSuccess, onFailure);
 		}
 
 		function updateEvent(event) {
 			console.log('eventid: ' + event._id);
-			return $http.put(baseUrl + 'events/' + event._id, event)
+			return $http.put('/api/events/' + event._id, event)
 				.then(onSuccess, onFailure);
 		}
 
