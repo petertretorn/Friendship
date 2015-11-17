@@ -35,12 +35,21 @@
 			mapService.bootstrapMap(domElement, mapConfig);
 		}
 
+		vm.joinEvent = function() {
+			var user = getUserName();
+			console.log('user: ' + user);
+
+			if (vm.event.participants.indexOf(user) === -1) {
+				vm.event.participants.push(user);	
+				updateEvent(vm.event);
+			}
+		}
+
 		vm.addComment = function() {
 			modalService.textAreaInput("Add new Comment").then(function(text) {
-				console.log('EventController: ' + text);
 
 				var comment = {
-					author: 'Iggy',
+					author: getUserName(),
 					text: text,
 					datePosted: new Date()
 				}
@@ -62,7 +71,7 @@
 
 
 			console.log('authenticated : ' + identityService.isAuthenticated());
-			var voter = getVoter()
+			var voter = getUserName()
 			console.log(voter + ' : ' + canVote(comment.upVotes, voter))
 
 			if(!!voter && canVote(comment.upVotes, voter)) {
@@ -72,7 +81,7 @@
 		}
 
 		vm.downvote = function(comment) {
-			var voter = getVoter();
+			var voter = getUserName();
 
 			if(!!voter && canVote(comment.downVotes, voter)) {
 				comment.downVotes.push(voter);
@@ -80,7 +89,7 @@
 			}	
 		}
 
-		function getVoter() {
+		function getUserName() {
 			if ( identityService.isAuthenticated() ) {
 				return identityService.currentUser.username;	
 			}

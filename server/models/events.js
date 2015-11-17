@@ -18,5 +18,12 @@ var eventSchema = new mongoose.Schema({
 	createdBy: String
 });
 
+eventSchema.set('toJSON', {
+	transform: function(doc, ret, options) {
+		delete ret.__v;
+
+		return ret;
+	}
+})
 
 module.exports = mongoose.model('Event', eventSchema);

@@ -48,14 +48,8 @@ body {
     display: inline-block;
 }
 
-.map-container {
-    width: 90%;
-}
 
-#googleMap {
-    
-    height:400px;
-}
+
 
 .event-form {
     margin-top: 30px;
@@ -63,6 +57,14 @@ body {
 
 .event-part {
     margin: 4% 0;
+    font-size: 1.1em;
+}
+
+.event-participant {
+    
+    color: rosybrown;
+    font-size: 1.1em;
+    border-radius: 3px;
 }
 
 .event-button-group {
@@ -166,6 +168,36 @@ a:hover {
 
 .hover:hover {
     cursor: pointer;
+}
+
+.left-side {
+    height:100vh;
+}
+
+.center-element {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%
+}
+
+.join-button {
+    font-size: 1.8em;
+    background-color: grey;
+    padding: 10px 20px;
+}
+
+.join-container {
+    position: absolute;
+    bottom: 30%;
+}
+
+.map-container {
+    padding-top: 5%;
+}
+
+#googleMap {
+    width: 400px;
+    height:400px;
 }
 
 

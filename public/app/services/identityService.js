@@ -6,7 +6,7 @@
 	function IdentityService() {
 		var currentUser;
 
-		function getCurrentUser() {
+		function getCurrentUserName() {
 			return currentUser;
 		}
 
@@ -17,7 +17,7 @@
 		return {
 			currentUser: currentUser,
 			isAuthenticated: isAuthenticated,
-			getCurrentUser: getCurrentUser
+			getCurrentUserName: getCurrentUserName
 		};
 	}
 
