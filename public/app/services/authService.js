@@ -7,11 +7,13 @@
 	authService.$inject = ['$http', '$rootScope', '$q', '$location', 'dataService', 'identityService', 'settings'];
 	function authService($http, $rootScope, $q, $location, dataService, identityService, settings) {
 		
-		var currentUser;
+		return {
+			register : register,
+			login : login,
+			signout : signout
+		};
 
 		var baseUrl = settings.baseUrl;
-
-
 
 		function register(signupModel) {
 
@@ -38,15 +40,10 @@
 			$http.post(baseUrl + 'auth/login', loginModel).then(onSuccess, onFailure);
 
 			function onSuccess(response) {
-				console.log('user : ' + response.data.user);
-
 				if (!response.data.success) {
 					console.log('authentication failure!');
 					deferred.reject('authentication failure');
 				} else {
-					
-					//var loggedInUser;
-					//angular.extend(loggedInUser, response.data.user);
 					identityService.currentUser = response.data.user;
 
 					console.log('user : ' + identityService.currentUser.username);
@@ -69,13 +66,6 @@
 			identityService.currentUser = undefined;
 			$location.path('/');
 		}
-
-		return {
-			register : register,
-			login : login,
-			signout : signout
-		};
 	}
-
 
 })(angular.module('app'));

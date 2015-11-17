@@ -35,6 +35,12 @@
 			 	.then(onSuccess, onFailure);
 		}
 
+		
+		function getEvents() {
+			return $http.get('/api/events/')
+				.then(onSuccess, onFailure);
+		}		
+
 		function getEventById(id) {
 			return $http.get('/api/events/' + id)
 				.then(onSuccess, onFailure);
@@ -60,6 +66,7 @@
 			getProfileByUsername: getProfileByUsername,
 			updateProfile: updateProfile,
 			
+			getEvents: getEvents,
 			createEvent: createEvent,
 			getEventById: getEventById,
 

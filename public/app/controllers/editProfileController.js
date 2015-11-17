@@ -106,17 +106,6 @@
 		    }
 		  };
 
-   	  vm.upload = function(file, resumable) {
-		    $scope.errorMsg = null;
-		    if ($scope.howToSend === 1) {
-		      uploadUsingUpload(file, resumable);
-		    } else if ($scope.howToSend == 2) {
-		      uploadUsing$http(file);
-		    } else {
-		      uploadS3(file);
-		    }
-		  };
-
 		function updateProfile(profileToUpdate) {
 			dataService.updateProfile(profileToUpdate).then(
 					function(profile) {

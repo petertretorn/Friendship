@@ -46,6 +46,11 @@
 		  	controller: 'EventController',
 		  	controllerAs: 'vm',
 		  })
+		  .when('/events/', {
+		  	templateUrl: '/app/views/eventList.html',
+		  	controller: 'EventListController',
+		  	controllerAs: 'vm',
+		  })
 		  .otherwise({
 		  	redirectTo: '/'
 		  });

@@ -1,0 +1,13 @@
+<div class="page-header">
+	<h2>Upcoming Events</h2>
+</div>
+
+<div>
+	<div ng-repeat="event in vm.events">
+		<span class="pull-right">{{ event.date| date: 'MMMM dd, yyyy' }}</span>
+		<h3>{{ event.title }}</h3>
+		<p>{{ event.about }}</p>
+		<a ng-href="#/events/{{ event._id }}">View Event</a>
+		<hr/>
+	</div>
+</div>
