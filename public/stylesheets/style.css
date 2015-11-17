@@ -4,6 +4,11 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+.image-container img {
+    width: 400px;
+    height: 400px;
+}
+
 .tabs-container {
     margin-top: 25px;
 }

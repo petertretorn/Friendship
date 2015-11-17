@@ -43,10 +43,7 @@ router.put('/:username', function(req, res, next) {
 			return res.json(profile);
 	 	});
 	})
-	//return res.json(updatedProfile);
 });
-
-//router.post('/photo', uploader.uploadAvatar);
 
 router.post('/photo', multipartyMiddleware, uploader.uploadImage);
 

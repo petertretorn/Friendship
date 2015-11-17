@@ -8,6 +8,7 @@
 
 		console.log('ListController!!');
 		vm.profiles = [];
+		vm.imageUrl = 'WIN_20151029_113437.JPG'
 
 		init();
 

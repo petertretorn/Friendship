@@ -1,21 +1,19 @@
-
-
 <div class="page-header">
 	<h2>Profile of {{vm.profile.username}}</h2>
 </div>
 
 <div class="row">
-	<div class="col-md-10">
-		</div>
+	<div class="col-md-6">
+		<div>
 			<h3>City <i ng-click="vm.editField('firstName', vm.options.NOT_TEXT_AREA)" class="fa fa-pencil-square-o"></i></h3>
 			<p class="profile-text" ng-hide="vm.profile.firstName">No data specified yet</p>
 			<p class="profile-text">{{ vm.profile.firstName }}</p>
-		<div>
 		</div>
+		<div>
 			<h3>City <i ng-click="vm.editField('lastName', vm.options.NOT_TEXT_AREA)" class="fa fa-pencil-square-o"></i></h3>
 			<p class="profile-text" ng-hide="vm.profile.lastName">No data specified yet</p>
 			<p class="profile-text">{{ vm.profile.lastName }}</p>
-		<div>
+		</div>
 
 		<div>
 			<h3>Birthdate <i ng-click="vm.open($event)" class="fa fa-pencil-square-o"></i></h3>
@@ -35,16 +33,17 @@
 			<p class="profile-text" ng-hide="vm.profile.lookingfor">No looking for details specified yet</p>
 			<p class="profile-text">{{ vm.profile.lookingfor }}</p>
 		</div>
+		<div>
 			<h3>City <i ng-click="vm.editField('city', vm.options.NOT_TEXT_AREA)" class="fa fa-pencil-square-o"></i></h3>
 			<p class="profile-text" ng-hide="vm.profile.city">No data specified yet</p>
 			<p class="profile-text">{{ vm.profile.city }}</p>
-		<div>
-
 		</div>
+
+		<div>
 			<h3>Gender <i ng-click="vm.editGender = true" class="fa fa-pencil-square-o"></i></h3>
 			<p class="profile-text" ng-hide="vm.profile.gender || vm.editGender">No data specified yet</p>
 			<p class="profile-text" ng-hide="vm.editGender">{{ vm.profile.gender }}</p>
-		<div>
+		</div>
 		<div ng-show="!!vm.editGender" class="btn-group" uib-dropdown dropdown-append-to-body>
 	      <button id="btn-append-to-body" type="button" class="btn btn-primary" uib-dropdown-toggle>
 	        Choose gender <span class="caret"></span>
@@ -56,24 +55,30 @@
 	      </ul>
     	</div>
 
-    	</div>
+    	<div>
 			<h3>Interests <i ng-click="vm.addToField('interests', vm.options.NOT_TEXT_AREA)" class="fa fa-pencil-square-o"></i></h3>
 			<p class="profile-text" ng-hide="vm.profile.interests">No data specified yet</p>
 			<p class="profile-text">
 				<div ng-click="vm.deleteInterest($index)" class="interest btn btn-primary" ng-repeat="interest in vm.profile.interests">{{ interest }}<i class="fa fa-times"></i></div>
 			</p>
-		<div>
+		</div>
 
 		<div>
 			<h3>Profile foto</h3>
 			<div>
-				Picture: <input type="file" ngf-select ng-model="vm.picFile" name="file" accept="image/*">
-				<button ng-click="vm.uploadPic(vm.picFile)">Submit</button>
-
-				<button id="uploadWidget" class="btn btn-default" ngf-select ng-model="vm.files" ng-file-change="upload($files)">Select File</button>
-				
+				<div class="btn btn-default" ngf-select ng-model="vm.picFile" name="file" accept="image/*">Choose file</div>
+				<span>{{ vm.picFile.name }}</span>
+				<div>
+					<button class="btn btn-default" ng-click="vm.uploadPic(vm.picFile)">Upload</button>
+				</div>
 			</div>
 		</div>
 	</div>
+	<div class="col-md-6">
+		<div class="image-container">
+			<img ng-src="/photos/{{vm.profile.imageUrl}}"/>
+		</div>
+	</div>
+
 </div>
 

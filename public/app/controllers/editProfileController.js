@@ -34,8 +34,6 @@
 			}
 			username = identityService.currentUser.username || '';
 
-			console.log('DetailController, username: %s', username);
-
 			dataService.getProfileByUsername(username).then(onSuccess, onFailure);
 
 			function onSuccess(data) {
@@ -47,11 +45,6 @@
 			function onFailure() {
 				console.log('boo.. error fetching profile');
 			}
-
-			$scope.$watch('vm.files', function () {
-        	console.log('files: ' + vm.files.length);
-        	vm.uploadPhoto(vm.files);
-    	});
 		}
 
 		vm.open = function($event) {
@@ -95,28 +88,20 @@
 		}
 
 		vm.uploadPhoto = function (files) {
-            console.log('opload 1');
-            //if (files && files.length) {
-            	console.log('opload 2');
-                Upload.upload({
-                	url: '/api/profiles/photo', 
-                	method: 'POST',
-                	fields: { username: vm.profile.username }, 
-                	file: files
-                }).progress(function (event) {
-                    var progressPercentage = parseInt(100.0 * event.loaded / event.total);
-                    console.log('progress: ' + progressPercentage + '% ' + event.config.file.name);
-                }).success(function (data, status, headers, config) {
-                    console.log('file ' + config.file.name + 'uploaded. Response: ' + JSON.stringify(data));
-                    vm.profile.imageUrl = data.path;
-                });
-            //}
+            Upload.upload({
+            	url: '/api/profiles/photo', 
+            	method: 'POST',
+            	fields: { username: vm.profile.username }, 
+            	file: files
+            }).success(function (data, status, headers, config) {
+                console.log('file ' + config.file.name + 'uploaded. Response: ' + JSON.stringify(data));
+                vm.profile.imageUrl = vm.picFile.name;
+                vm.picFile = undefined;
+            });
         }
 
         vm.uploadPic = function (file) {
-		    //$scope.formUpload = true;
 		    if (file != null) {
-		      //vm.upload(file)
 		      vm.uploadPhoto(file)
 		    }
 		  };
