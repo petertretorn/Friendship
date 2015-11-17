@@ -32,8 +32,8 @@
 							<div class="interest-label" ng-repeat="i in pf.interests">{{i}}</div>
 						</div>
 					</div>
-					<div class="col-sm-6 picture">
-						<img ng-src="/images/peter.JPG"/>
+					<div ng-show="!!pf.imageUrl" class="col-sm-6 picture">
+						<img ng-src="/images/{{pf.imageUrl}}"/>
 						<!--<img src="http://placekitten.com/400/600">-->
 					</div>
 				</a>

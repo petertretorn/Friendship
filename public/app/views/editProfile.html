@@ -63,6 +63,17 @@
 				<div ng-click="vm.deleteInterest($index)" class="interest btn btn-primary" ng-repeat="interest in vm.profile.interests">{{ interest }}<i class="fa fa-times"></i></div>
 			</p>
 		<div>
+
+		<div>
+			<h3>Profile foto</h3>
+			<div>
+				Picture: <input type="file" ngf-select ng-model="vm.picFile" name="file" accept="image/*">
+				<button ng-click="vm.uploadPic(vm.picFile)">Submit</button>
+
+				<button id="uploadWidget" class="btn btn-default" ngf-select ng-model="vm.files" ng-file-change="upload($files)">Select File</button>
+				
+			</div>
+		</div>
 	</div>
 </div>
 

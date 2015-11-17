@@ -2,7 +2,7 @@
 
 	'use strict';
 
-	var app = angular.module('app', ['ngRoute', 'ngMessages', 'ui.bootstrap', 'geolocation']);
+	var app = angular.module('app', ['ngRoute', 'ngMessages', 'ngFileUpload', 'ui.bootstrap', 'geolocation']);
 
 	app.config(function($routeProvider) {
 		$routeProvider

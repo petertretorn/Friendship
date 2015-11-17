@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
+var uploader = require('../controllers/uploadController');
 var _ = require('lodash');
+
+var multiparty = require('connect-multiparty');
+var multipartyMiddleware = multiparty();
 
 var Profile = require('../models/profiles.js');
 
@@ -41,5 +45,9 @@ router.put('/:username', function(req, res, next) {
 	})
 	//return res.json(updatedProfile);
 });
+
+//router.post('/photo', uploader.uploadAvatar);
+
+router.post('/photo', multipartyMiddleware, uploader.uploadImage);
 
 module.exports = router;

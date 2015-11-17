@@ -2,8 +2,8 @@
 
 	module.controller('EditProfileController', EditProfileController);
 
-	EditProfileController.$inject = ['$routeParams', '$location', 'dataService', 'identityService', 'modalService']
-	function EditProfileController($routeParams, $location, dataService, identityService, modalService) {
+	EditProfileController.$inject = ['$scope','$routeParams', '$location', 'Upload', 'dataService', 'identityService', 'modalService']
+	function EditProfileController($scope, $routeParams, $location, Upload, dataService, identityService, modalService) {
 
 		//var id = $routeParams.id || authService.currentUser.username,
 		var username,
@@ -14,6 +14,8 @@
 		vm.years = createYearArray();
   		vm.format = 'dd-MMMM-yyyy';
 		
+  		vm.files = [];
+
 		vm.options = {
 			TEXT_AREA: true,
 			NOT_TEXT_AREA: false
@@ -45,6 +47,11 @@
 			function onFailure() {
 				console.log('boo.. error fetching profile');
 			}
+
+			$scope.$watch('vm.files', function () {
+        	console.log('files: ' + vm.files.length);
+        	vm.uploadPhoto(vm.files);
+    	});
 		}
 
 		vm.open = function($event) {
@@ -86,6 +93,44 @@
 				updateProfile(profile);
 			})
 		}
+
+		vm.uploadPhoto = function (files) {
+            console.log('opload 1');
+            //if (files && files.length) {
+            	console.log('opload 2');
+                Upload.upload({
+                	url: '/api/profiles/photo', 
+                	method: 'POST',
+                	fields: { username: vm.profile.username }, 
+                	file: files
+                }).progress(function (event) {
+                    var progressPercentage = parseInt(100.0 * event.loaded / event.total);
+                    console.log('progress: ' + progressPercentage + '% ' + event.config.file.name);
+                }).success(function (data, status, headers, config) {
+                    console.log('file ' + config.file.name + 'uploaded. Response: ' + JSON.stringify(data));
+                    vm.profile.imageUrl = data.path;
+                });
+            //}
+        }
+
+        vm.uploadPic = function (file) {
+		    //$scope.formUpload = true;
+		    if (file != null) {
+		      //vm.upload(file)
+		      vm.uploadPhoto(file)
+		    }
+		  };
+
+   	  vm.upload = function(file, resumable) {
+		    $scope.errorMsg = null;
+		    if ($scope.howToSend === 1) {
+		      uploadUsingUpload(file, resumable);
+		    } else if ($scope.howToSend == 2) {
+		      uploadUsing$http(file);
+		    } else {
+		      uploadS3(file);
+		    }
+		  };
 
 		function updateProfile(profileToUpdate) {
 			dataService.updateProfile(profileToUpdate).then(

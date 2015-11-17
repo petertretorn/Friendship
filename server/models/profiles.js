@@ -20,7 +20,7 @@ var profileSchema = new mongoose.Schema({
 	interests: [String],
 	description: String,
 	lookingfor: String,
-	image: String,
+	imageUrl: String,
 	yearOfBirth: Number,
 	birthDate: Date
 });
