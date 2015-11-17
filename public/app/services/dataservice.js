@@ -52,6 +52,10 @@
 				.then(onSuccess, onFailure);
 		}
 
+		function updateComment(commment) {
+			return $http.post(baseUrl + 'events')
+		}
+
 		function onSuccess(response) {
 			return response.data;
 		}
@@ -69,7 +73,6 @@
 			getEvents: getEvents,
 			createEvent: createEvent,
 			getEventById: getEventById,
-
 			updateEvent: updateEvent
 		};
 	}

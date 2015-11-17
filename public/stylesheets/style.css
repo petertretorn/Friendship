@@ -1,7 +1,29 @@
+@media (max-width: 768) {
+    .pull-right-lg {
+        float: left;
+    }
+}
+
+ @media (min-width: 769px) {
+    .pull-right-lg {
+        float: right;
+    }
+
+    .nav-tabs > li {
+        float: right;
+    }
+}
+
 body {
   padding: 0px 5px;
   margin-top: 5px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.vote-section {
+    position: absolute;
+    bottom: 3%;
+    right: 3%;
 }
 
 .image-container img {
@@ -17,10 +39,6 @@ body {
     margin-top: 25px;
 }
 
-.nav-tabs>li {
-  float: right;
-}
-
 .page-header {
     padding-top: 0px;
     margin-top: 0px;
@@ -30,8 +48,12 @@ body {
     display: inline-block;
 }
 
+.map-container {
+    width: 90%;
+}
+
 #googleMap {
-    width:400px; 
+    
     height:400px;
 }
 
@@ -39,12 +61,14 @@ body {
     margin-top: 30px;
 }
 
+.event-part {
+    margin: 4% 0;
+}
+
 .event-button-group {
     margin-top: 50px;
     padding-top: 30px;
 }
-
-a:hover
 
 .profile a {
   color: #00B7FF;
@@ -137,6 +161,10 @@ a:hover
 }
 
 a:hover {
+    text-decoration: none;
+}
+
+.hover:hover {
     cursor: pointer;
 }
 

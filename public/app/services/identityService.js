@@ -6,13 +6,18 @@
 	function IdentityService() {
 		var currentUser;
 
+		function getCurrentUser() {
+			return currentUser;
+		}
+
 		function isAuthenticated() {
 			return !!this.currentUser;
 		}
 
 		return {
 			currentUser: currentUser,
-			isAuthenticated: isAuthenticated
+			isAuthenticated: isAuthenticated,
+			getCurrentUser: getCurrentUser
 		};
 	}
 

@@ -3,8 +3,8 @@
 
 	module.controller('EventController', EventController);
 
-	EventController.$inject = ['$routeParams', 'dataService', 'mapService', 'modalService']
-	function EventController($routeParams, dataService, mapService, modalService) {
+	EventController.$inject = ['$routeParams', 'dataService', 'mapService', 'modalService', 'identityService']
+	function EventController($routeParams, dataService, mapService, modalService, identityService) {
 
 		var vm = this,
 			eventId = $routeParams.eventId;
@@ -26,7 +26,6 @@
 
 			var coordinates = { lat: vm.event.latlong[0], lng: vm.event.latlong[1]}
 
-
 			var mapConfig = {
 				addListener: false,
 				addMarker: true,
@@ -34,9 +33,6 @@
 			}
 
 			mapService.bootstrapMap(domElement, mapConfig);
-
-
-			//mapService.addBounceMarkerToMap(map, coordinates);
 		}
 
 		vm.addComment = function() {
@@ -61,11 +57,49 @@
 			});
 		}
 
+		vm.upvote = function(comment) {
+			
+
+
+			console.log('authenticated : ' + identityService.isAuthenticated());
+			var voter = getVoter()
+			console.log(voter + ' : ' + canVote(comment.upVotes, voter))
+
+			if(!!voter && canVote(comment.upVotes, voter)) {
+				comment.upVotes.push(voter);
+				updateEvent(vm.event);
+			}
+		}
+
+		vm.downvote = function(comment) {
+			var voter = getVoter();
+
+			if(!!voter && canVote(comment.downVotes, voter)) {
+				comment.downVotes.push(voter);
+				updateEvent(vm.event);
+			}	
+		}
+
+		function getVoter() {
+			if ( identityService.isAuthenticated() ) {
+				return identityService.currentUser.username;	
+			}
+			return undefined;
+		}
+
+		function canVote(votes, voter) {
+			return votes.indexOf(voter) === -1;
+		}
+
+		function updateEvent(event) {
+			dataService.updateEvent(event).then(function(updatedEvent) {
+				vm.event = updatedEvent;
+			}, onError);
+		}
+
 		function onError(err) {
 				console.log('error : ' + err);
 		}
 
 	}
-
-//test
 })(angular.module('app'));

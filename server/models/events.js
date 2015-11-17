@@ -10,7 +10,9 @@ var eventSchema = new mongoose.Schema({
 	comments: [{
 		author: String,
 		text: String,
-		datePosted: Date
+		datePosted: Date,
+		upVotes: [String],
+		downVotes: [String]
 	}],
 	tags: [String],
 	createdBy: String

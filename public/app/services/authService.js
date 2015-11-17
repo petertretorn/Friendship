@@ -7,13 +7,13 @@
 	authService.$inject = ['$http', '$rootScope', '$q', '$location', 'dataService', 'identityService', 'settings'];
 	function authService($http, $rootScope, $q, $location, dataService, identityService, settings) {
 		
+		var baseUrl = settings.baseUrl;
+		
 		return {
 			register : register,
 			login : login,
 			signout : signout
 		};
-
-		var baseUrl = settings.baseUrl;
 
 		function register(signupModel) {
 
