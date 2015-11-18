@@ -13,6 +13,7 @@
 		vm.genderOptions = ['male', 'female', 'katoy'];
 		vm.years = createYearArray();
   		vm.format = 'dd-MMMM-yyyy';
+  		vm.initDate = undefined;
 		
   		vm.files = [];
 
@@ -39,6 +40,8 @@
 			function onSuccess(data) {
 				console.log('success fetching profile : %s', data[0].username);
 				vm.profile = data[0];
+
+				vm.initDate = vm.profile.birthDate || new Date();
 				console.log(vm.profile.username);
 			}
 
@@ -51,8 +54,21 @@
 	    	vm.status.opened = true;
 	  	};
 
-		vm.YearSelected = function() {
-			vm.profile.birthDate = new Date(vm.profile.yearOfBirth, 0, 1);
+		vm.yearSelected = function(year) {
+			var month,
+				day;
+
+			vm.editYearOfBirth = false;
+			vm.profile.yearOfBirth = year;
+			
+			if (!!vm.profile.birthDate) {
+				month = new Date(vm.profile.birthDate).getUTCMonth(),
+				day = new Date(vm.profile.birthDate).getUTCDate();
+				vm.profile.birthDate = new Date( year, month, day );
+			} else {
+				vm.initDate = new Date(year, 0, 1);
+			}
+			updateProfile(vm.profile);
 		}
 
 		vm.dateChanged = function() {
@@ -72,7 +88,6 @@
 		}
 
 		vm.setGender = function(gender) {
-			console.log('inside setGender: ' + gender);
 			vm.profile.gender = gender;
 			vm.editGender = false;
 
@@ -119,7 +134,7 @@
 		function createYearArray() {
 	  		var years = [];
 
-	  		for (var i = 1910; i <= 2015; i++) {
+	  		for (var i = 1940; i <= 2007; i++) {
 	  			years.push(i);
 	  		}
 

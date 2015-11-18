@@ -20,7 +20,14 @@
 		}
 
 		function onEventFetched(event) {
+
+			var userName = getUserName();
+			
 			vm.event = event;
+
+			vm.hasJoined = ( event.participants.indexOf( userName ) !== -1 );
+
+			console.log('joined: ' + vm.hasJoined);
 
 			var domElement = document.getElementById('googleMap');
 
@@ -37,40 +44,43 @@
 
 		vm.joinEvent = function() {
 			var user = getUserName();
-			console.log('user: ' + user);
 
-			if (vm.event.participants.indexOf(user) === -1) {
-				vm.event.participants.push(user);	
-				updateEvent(vm.event);
+			if (!!user && vm.event.participants.indexOf(user) === -1) {
+				vm.event.participants.push(user);
+
+				var callback = function() { vm.hasJoined = true; }
+				updateEvent(vm.event, callback);
 			}
 		}
 
 		vm.addComment = function() {
+			var user = getUserName();
+
+			if (!user) {
+				return;
+			}
+
 			modalService.textAreaInput("Add new Comment").then(function(text) {
 
 				var comment = {
-					author: getUserName(),
+					author: user,
 					text: text,
-					datePosted: new Date()
+					datePosted: new Date(),
+					upVotes: [],
+					downVotes : []
 				}
 
 				vm.event.comments.push(comment)
 
-				dataService.updateEvent(vm.event).then(function(event)
-					{console.log('updated event: ' + event); },
-				function() {});
+				dataService.updateEvent(vm.event).then(function(event) {
+					vm.event = event;
+				}, onError());  // updateEvent
 
 
-			}, function(err) {
-
-			});
-		}
+			}, onError()); // textAreaInput
+		}// addComment
 
 		vm.upvote = function(comment) {
-			
-
-
-			console.log('authenticated : ' + identityService.isAuthenticated());
 			var voter = getUserName()
 			console.log(voter + ' : ' + canVote(comment.upVotes, voter))
 
@@ -96,14 +106,23 @@
 			return undefined;
 		}
 
+		vm.isAuthenticated = function() {
+			return identityService.isAuthenticated();
+		}
+
 		function canVote(votes, voter) {
 			return votes.indexOf(voter) === -1;
 		}
 
-		function updateEvent(event) {
-			dataService.updateEvent(event).then(function(updatedEvent) {
-				vm.event = updatedEvent;
-			}, onError);
+		function updateEvent(event, callback) {
+			dataService.updateEvent(event)
+				.then(function(updatedEvent) {
+					vm.event = updatedEvent;
+				}, onError)
+				.then(function() {
+					if (!!callback) callback();
+					else return;
+				}, onError);
 		}
 
 		function onError(err) {

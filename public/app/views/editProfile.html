@@ -1,26 +1,43 @@
 <div class="page-header">
-	<h2>Profile of {{vm.profile.username}}</h2>
+	<h2>Your Profile {{vm.profile.username}}</h2>
 </div>
 
 <div class="row">
 	<div class="col-md-6">
 		<div>
-			<h3>City <i ng-click="vm.editField('firstName', vm.options.NOT_TEXT_AREA)" class="fa fa-pencil-square-o"></i></h3>
+			<h3>First Name <i ng-click="vm.editField('firstName', vm.options.NOT_TEXT_AREA)" class="fa fa-pencil-square-o"></i></h3>
 			<p class="profile-text" ng-hide="vm.profile.firstName">No data specified yet</p>
 			<p class="profile-text">{{ vm.profile.firstName }}</p>
 		</div>
 		<div>
-			<h3>City <i ng-click="vm.editField('lastName', vm.options.NOT_TEXT_AREA)" class="fa fa-pencil-square-o"></i></h3>
+			<h3>Familiy Name <i ng-click="vm.editField('lastName', vm.options.NOT_TEXT_AREA)" class="fa fa-pencil-square-o"></i></h3>
 			<p class="profile-text" ng-hide="vm.profile.lastName">No data specified yet</p>
 			<p class="profile-text">{{ vm.profile.lastName }}</p>
 		</div>
 
 		<div>
-			<h3>Birthdate <i ng-click="vm.open($event)" class="fa fa-pencil-square-o"></i></h3>
+			<h3>Year of birth <i ng-click="vm.editYearOfBirth = true" class="fa fa-pencil-square-o"></i></h3>
+			<p class="profile-text" ng-hide="vm.profile.yearOfBirth || vm.editYearOfBirth">No data specified yet</p>
+			<p class="profile-text" ng-hide="vm.editYearOfBirth">{{ vm.profile.yearOfBirth }}</p>
+			
+			<div ng-show="!!vm.editYearOfBirth" class="btn-group" uib-dropdown dropdown-append-to-body>
+				<button id="btn-append-to-body" type="button" class="btn btn-primary" uib-dropdown-toggle>
+				    Pick year <span class="caret"></span>
+			    </button>
+			    <ul class="uib-dropdown-menu" role="menu" aria-labelledby="btn-append-to-body">
+			        <li role="menuitem" ng-repeat="year in vm.years" ng-click="vm.yearSelected(year)">
+			        	<a>{{year}}</a>
+			        </li>
+		     	</ul>
+    		</div>
+		</div>
+
+		<div>
+			<h3>Date of birth <i ng-click="vm.open($event)" class="fa fa-pencil-square-o"></i></h3>
 			<span ng-change="vm.dateChanged()" type="text" uib-datepicker-popup={{vm.format}} ng-model="vm.profile.birthDate" 
-					is-open="vm.status.opened" min-date="vm.minDate" show-button-bar="false"/>
-			<p class="profile-text" ng-hide="vm.profile.birthDate">No data specified yet</p>
-			<p class="profile-text">{{ vm.profile.birthDate | date: 'dd/MM/yyyy'}}</p>
+					is-open="vm.status.opened" init-date="vm.initDate" min-date="vm.minDate" show-button-bar="false"/>
+			<p class="profile-text" ng-hide="!!vm.profile.birthDate">No data specified yet</p>
+			<p class="profile-text">{{ vm.profile.birthDate | date: 'MMMM dd, yyyy'}}</p>
 		</div>
 	
 		<div>

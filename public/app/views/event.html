@@ -20,14 +20,23 @@
 			<h4><em>Description</em></h4>
 			<p>{{ vm.event.about }}</p>
 		</div>
+
 		<div class="event-part">
 			<h4><em>Participants</em></h4>
-			<span ng-show="!!vm.event.participants.length" ng-repeat="p in vm.event.participants" class="label label-default event-participant">{{ p }}</span>
-			<span ng-show="!vm.event.participants.length">Be the first to join<span>
+		
+			<span ng-show="!!vm.event.participants.length" ng-repeat="p in vm.event.participants">
+				<span class="label label-default event-participant">{{ p }}</span><span> </span>
+			</span>
 		</div>
-		<div class="join-container">
-			<div class="center-element">
-				<button ng-click="vm.joinEvent()" class="join-button">JOIN EVENT</button>
+
+		<div class="event-status-container">
+			<p ng-show="!!vm.hasJoined">You have joined the event!</p>
+				<p ng-show="!vm.event.participants.length">Be the very first to join<p>
+				<p ng-show="!vm.isAuthenticated()">Login or register to join</p>
+			<div ng-show="!vm.hasJoined && vm.isAuthenticated()">
+				<div class="center-element">
+					<button ng-click="vm.joinEvent()" class="join-button">JOIN EVENT</button>
+				</div>
 			</div>
 		</div>
 
@@ -44,12 +53,10 @@
 			    </uib-tab>
 			    <uib-tab heading="Comments"  disable="tab.disabled">
     	  			<div class="tab-container col-md-push-2 col-md-10">
-	    	  			<p ng-hide="!!vm.event.comments.length">No comments yet. Click to add</p>
+	    	  			<p ng-hide="!!vm.event.comments.length">No comments yet!</p>
 						<ul class="list-group" ng-repeat="cm in vm.event.comments">
 							<li class="list-group-item">
-								<!--<span class="pull-right">{{comment.datePosted | date: 'MMMM dd, yyyy'}}</span>-->
 								<h4>{{cm.text}}</h4>
-								
 								<div class="vote-section">
 									<i ng-click="vm.upvote(cm)" class="hover fa fa-thumbs-up"> {{ cm.upVotes.length }}</i>
 									<i ng-click="vm.downvote(cm)" class="hover fa fa-thumbs-down"> {{ cm.downVotes.length }}</i>
@@ -58,8 +65,11 @@
 								
 							</li>
 						</ul>
-						<div>
+						<div ng-show="vm.isAuthenticated()">
 							<button class="btn btn-default pull-right" ng-click="vm.addComment()">Add Comment</button>
+						</div>
+						<div ng-show="!vm.isAuthenticated()">
+							<p>Log in to comment</p>
 						</div>
 					</div>
 			    </uib-tab>
