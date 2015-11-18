@@ -8,8 +8,6 @@
 	function SignupController($location, authService, modalService) {
 		var vm = this;
 
-		console.log('inside controller signing up!!');
-
 		vm.signupModel = {};
 
 		vm.signup = function() {
@@ -23,7 +21,7 @@
 				var heading = 'Welcome On Board',
 					content = 'You\'ve signed up successfully! Welcome onboard the Friendship!. Enjoy your trip!'
 
-				modalService.showToast(content, heading);
+				//	modalService.showToast(content, heading);
 
 				$location.path('#/');
 			}

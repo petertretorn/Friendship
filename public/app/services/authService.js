@@ -20,12 +20,7 @@
 			return $http.post(baseUrl + 'register', signupModel).then(onSuccess, onFailure);
 
 			function onSuccess(response) {
-				var deferred = $q.defer();
-
-				var loggedInUser;
-				angular.extend(loggedInUser, response.data.user);
-				identityService.currentUser = loggedInUser;
-
+				identityService.currentUser = response.data;
 				$rootScope.$broadcast('signedin');
 			}
 
@@ -45,8 +40,6 @@
 					deferred.reject('authentication failure');
 				} else {
 					identityService.currentUser = response.data.user;
-
-					console.log('user : ' + identityService.currentUser.username);
 
 					$rootScope.$broadcast('signedin');
 
