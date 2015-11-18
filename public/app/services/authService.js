@@ -4,10 +4,8 @@
 
 	module.factory('authService', authService);
 
-	authService.$inject = ['$http', '$rootScope', '$q', '$location', 'dataService', 'identityService', 'settings'];
-	function authService($http, $rootScope, $q, $location, dataService, identityService, settings) {
-		
-		var baseUrl = settings.baseUrl;
+	authService.$inject = ['$http', '$rootScope', '$q', '$location', 'dataService', 'identityService'];
+	function authService($http, $rootScope, $q, $location, dataService, identityService) {
 		
 		return {
 			register : register,
@@ -17,7 +15,7 @@
 
 		function register(signupModel) {
 
-			return $http.post(baseUrl + 'register', signupModel).then(onSuccess, onFailure);
+			return $http.post('/api/register', signupModel).then(onSuccess, onFailure);
 
 			function onSuccess(response) {
 				identityService.currentUser = response.data;
@@ -32,7 +30,7 @@
 		function login(loginModel) {
 			var deferred = $q.defer();
 
-			$http.post(baseUrl + 'auth/login', loginModel).then(onSuccess, onFailure);
+			$http.post('/api/auth/login', loginModel).then(onSuccess, onFailure);
 
 			function onSuccess(response) {
 				if (!response.data.success) {

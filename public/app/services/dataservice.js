@@ -3,12 +3,10 @@
 
 	module.factory('dataService', dataService);
 
-	dataService.$inject = ['$http', 'settings'];
+	dataService.$inject = ['$http'];
 
-	function dataService($http, settings) {
+	function dataService($http) {
 		
-		var baseUrl = settings.baseUrl;
-
 		function registerProfile(profile) {
 
 			$http.post('/api/register', profile).then(onSuccess, onFailure);
@@ -52,9 +50,7 @@
 				.then(onSuccess, onFailure);
 		}
 
-		function updateComment(commment) {
-			return $http.post(baseUrl + 'events')
-		}
+		function joinEvent(event, username)
 
 		function onSuccess(response) {
 			return response.data;
@@ -73,7 +69,8 @@
 			getEvents: getEvents,
 			createEvent: createEvent,
 			getEventById: getEventById,
-			updateEvent: updateEvent
+			updateEvent: updateEvent,
+			joinEvent: joinEvent
 		};
 	}
 
