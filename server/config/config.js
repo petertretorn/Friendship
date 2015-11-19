@@ -9,7 +9,7 @@ module.exports = {
   },
   production: {
     rootPath: rootPath,
-    db: 'mongodb://peterlarsen:flamenco@ds047524.mongolab.com:47524/friendship',
+    db: 'mongodb://' + process.env.DB_USER +':' + process.env.DB_PW + '@ds047524.mongolab.com:47524/friendship',
     port: process.env.PORT || 80
   }
 }
