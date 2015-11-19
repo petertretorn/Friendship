@@ -16,14 +16,14 @@
 		  	controller: 'RegisterController',
 		  	controllerAs: 'vm'
 		  })
-		  .when('/user/profile', {
+		  .when('/user/edit-profile', {
 		  	templateUrl: '/app/views/editProfile.html',
 		  	controller: 'EditProfileController',
 		  	controllerAs: 'vm',
 		  })
-		  .when('/edit/:id?', {
-		  	templateUrl: '/app/views/edit.html',
-		  	controller: 'EditController',
+		  .when('/profile/:username', {
+		  	templateUrl: '/app/views/profile.html',
+		  	controller: 'ProfileController',
 		  	controllerAs: 'vm',
 		  })
 		  .when('/login', {

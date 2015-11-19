@@ -8,17 +8,23 @@ var multipartyMiddleware = multiparty();
 
 var Profile = require('../models/profiles.js');
 
-router.get('/:username?', function(req, res, next) {
+router.get('/', function(req, res, next) {
 
-	var username = req.params.username,
-		query = { };
-
-	if (username) query.username = username;
-
-	Profile.find(query, function(error, profiles) {
+	Profile.find({}, function(error, profiles) {
 		if (error) return next(err);
 		
 		res.json(profiles);
+	});
+});
+
+router.get('/:username', function(req, res, next) {
+
+	var username = req.params.username;
+		
+	Profile.findOne( { username: username }, function(error, profile) {
+		if (error) return next(err);
+		
+		res.json(profile);
 	});
 });
 

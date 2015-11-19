@@ -22,7 +22,7 @@
 
 		<div ng-repeat="pf in vm.profiles" ng-show="!vm.listview">
 
-				<a ng-href="#/detail/{{pf._id}}" class="profile row" ng-show="!vm.listview">
+				<a ng-href="#/profile/{{pf.username}}" class="profile row" ng-show="!vm.listview">
 					<div class="col-sm-6 text">
 						<h3>{{ pf.firstName }}</h3>
 						<p>{{pf.gender}} {{pf.age }} years</p>

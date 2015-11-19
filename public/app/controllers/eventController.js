@@ -27,8 +27,6 @@
 
 			vm.hasJoined = ( event.participants.indexOf( userName ) !== -1 );
 
-			console.log('joined: ' + vm.hasJoined);
-
 			var domElement = document.getElementById('googleMap');
 
 			var coordinates = { lat: vm.event.latlong[0], lng: vm.event.latlong[1]}

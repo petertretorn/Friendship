@@ -37,12 +37,10 @@
 
 			dataService.getProfileByUsername(username).then(onSuccess, onFailure);
 
-			function onSuccess(data) {
-				console.log('success fetching profile : %s', data[0].username);
-				vm.profile = data[0];
+			function onSuccess(profile) {
+				vm.profile = profile;
 
 				vm.initDate = vm.profile.birthDate || new Date();
-				console.log(vm.profile.username);
 			}
 
 			function onFailure() {

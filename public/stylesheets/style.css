@@ -207,6 +207,12 @@ a:hover {
     height:400px;
 }
 
+.round {
+    margin: 10px;
+    border: 1px solid #666;
+    background-color: #CCC;
+    padding: 10px;
+}
 
  /* ANIMATIONS
 ============================================================================= */

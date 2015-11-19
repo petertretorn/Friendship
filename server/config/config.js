@@ -9,7 +9,7 @@ module.exports = {
   },
   production: {
     rootPath: rootPath,
-    db: process.env.MONGO_CONNECTION;
+    db: process.env.MONGO_CONNECTION,
     port: process.env.PORT || 80
   }
 }
