@@ -1,14 +1,12 @@
 var express = require('express'),
 	router = express.Router();
-
 	mongoose = require('mongoose');
 	Profile = mongoose.model('Profile'),
 	User = mongoose.model('User'),
 	encrypt = require('../util/encryption');
 
-router.post('/', registerUser);
-
 var registerUser = function(req, res, next) {
+
 	var userData = req.body;
 	userData.username = userData.username.toLowerCase();
 	userData.salt = encrypt.createSalt();
@@ -27,12 +25,14 @@ var registerUser = function(req, res, next) {
 		    var profile = new Profile({ username: user.username });
 
 		    profile.save(function(err){
-		      if (err) return res.json({ success: false, message : 'failure setting up new profile!'})
+		      if (err) return res.json({ status: false, message : 'failure setting up new profile!'})
 		      
 		      res.send(user);
 		    });
 		});
-	});
+	})
 };
+
+router.post('/', registerUser);
 
 module.exports = router;
