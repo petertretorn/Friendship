@@ -10,7 +10,8 @@
 		return {
 			register : register,
 			login : login,
-			signout : signout
+			signout : signout,
+			authorizeForRoute: authorizeForRoute
 		};
 
 		function register(signupModel) {
@@ -57,6 +58,14 @@
 			identityService.currentUser = undefined;
 			$location.path('/');
 		}
+
+		function authorizeForRoute() {
+     		if(identityService.isAuthenticated()) {
+        		return true;
+      		} else {
+    			return $q.reject('not authorized');
+      		}
+    	}
 	}
 
 })(angular.module('app'));

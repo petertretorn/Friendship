@@ -1,8 +1,5 @@
 <div class="page-header">
 	<h3>Create Social Event</h3>
-	<span ng-show="!!vm.locatationSelected"class="alert alert-success pull-right">
-		<p>Location has been selected!</p>
-	</span>
 </div>
 
 <div class="row">
@@ -24,7 +21,7 @@
 
 				<div class="form-group">
 					<label>Where</label>
-					<textarea class="form-control" ng-model="vm.newEvent.location"></textarea>
+					<input class="form-control" ng-model="vm.newEvent.location"></input>
 				</div>
 
 				<div class="form-group">
@@ -41,29 +38,18 @@
 						</input>
 					</div>
 				</div>
-				
 
 				<div class="event-button-group">
 					<button class="btn btn-success" type="submit">Create</button>
 					<a ng-href="#/" class="btn btn-warning">Cancel</a>
 				</div>
-				
-				
-
 			</form>
 		</div>
-
-
 	</div>
-
 
 	<div class="col-md-6">
 		<div class="pull-right">
 			<div id="googleMap"></div>
 		</div>
-		
-		
-
-
 	</div>
 </div>

@@ -3,13 +3,12 @@
 
 	module.controller('CreateEventController', CreateEventController);
 
-	CreateEventController.$inject = ['$rootScope', '$scope', 'dataService', 'mapService'];
-	function CreateEventController($rootScope, $scope, dataService, mapService) {
+	CreateEventController.$inject = ['$rootScope', '$scope', '$location' ,'dataService', 'mapService'];
+	function CreateEventController($rootScope, $scope, $location, dataService, mapService) {
 		var vm = this,
 			map;
 
 		vm.newEvent = {};
-		vm.locatationSelected = false;
 
 		init();
 
@@ -31,10 +30,7 @@
 
 		$rootScope.$on('map-clicked', function(event, coordinates) {
 			vm.newEvent.latlong = coordinates;
-
-			$scope.$apply(function() {
-				vm.locatationSelected = true;	
-			})
+			toastr.info('Location has been selected!');
 		});
 
 		vm.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
@@ -49,8 +45,11 @@
 	  	};
 
 		vm.createEvent = function() {
-			dataService.createEvent(vm.newEvent).then(function(data) {
-				console.log('event created!!'); 
+			dataService.createEvent(vm.newEvent).then(function(event) {
+				vm.newEvent = {};
+				toastr.info('Event created succesfully', 'Success!');
+				$location.path('/events/' +  event._id);
+
 			}, function(err) {
 				console.log('event create error');
 			})

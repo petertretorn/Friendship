@@ -5,6 +5,17 @@
 	var app = angular.module('app', ['ngRoute', 'ngMessages', 'ngFileUpload', 'ui.bootstrap', 'geolocation']);
 
 	app.config(function($routeProvider) {
+
+		var routeRoleChecks = {
+		    admin: { auth: function(authService) {
+		    	//TODO
+      			//return authService.authorizeCurrentUserForRoute('admin')
+    		}},
+    		user: {auth: function(authService) {
+      			return authService.authorizeForRoute();
+    		}}
+  		}
+
 		$routeProvider
 		  .when('/', {
 		  	templateUrl: '/app/views/list.html',
@@ -40,6 +51,7 @@
 		  	templateUrl: '/app/views/createEvent.html',
 		  	controller: 'CreateEventController',
 		  	controllerAs: 'vm',
+		  	resolve: routeRoleChecks.user
 		  })
 		  .when('/events/:eventId', {
 		  	templateUrl: '/app/views/event.html',
@@ -65,19 +77,24 @@
 			baseUrl: 'http://thefriendship.herokuapp.com/api'
 		}
 	});
+
+	app.run(function($rootScope, $location) {
+		toastr.options.timeOut = 4000;
+        toastr.options.positionClass = 'toast-bottom-right';
+
+        $rootScope.$on("$routeChangeError", function(event, current, previous, rejection) {
+			if (rejection === 'not authorized') {
+		  		toastr.info('Login to create event!');
+		  		$location.path('/login');
+			}
+		});	
+	});
+
 /*
 	app.run(["$rootScope", "$location", function($rootScope, $location) {
 	
 		$rootScope.$on("$routeChangeSuccess", function(userInfo) {
 			console.log(userInfo);
 		});
-
-		$rootScope.$on("$routeChangeError", function(event, current, previous, eventObj) {
-			if (eventObj.authenticated === false) {
-			  $location.path("/login");
-			}
-		});
-	
-	}]);
 */
 })();
