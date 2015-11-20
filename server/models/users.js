@@ -16,5 +16,14 @@ userSchema.methods = {
   }
 };
 
+userSchema.set('toJSON', {
+  transform: function(doc, ret, options) {
+    delete ret._id;
+    delete ret.hashed_pwd;
+    delete ret.salt;
+
+    return ret;
+  }
+});
 
 module.exports = mongoose.model('User', userSchema);

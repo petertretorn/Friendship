@@ -36,7 +36,7 @@ profileSchema.set('toJSON', {
 
 		return ret;
 	}
-})
+});
 
 function calculateAge(birthDate) {
 	birthDate = new Date(birthDate);
