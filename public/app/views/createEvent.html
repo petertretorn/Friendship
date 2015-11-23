@@ -1,12 +1,11 @@
 <div class="page-header">
-	<h3>Create Social Event</h3>
+	<h3>Create Event</h3>
 </div>
 
 <div class="row">
 	<div class="col-md-6">
-		<div class="well">
-			<h4>Fill out the form and click on the map for location of event</h4>
-		</div>
+		
+			<h4>Complete form and click on the map</h4>
 		<div class="event-form">
 			<form novalidate ng-submit="vm.createEvent()" name="event-form">
 				<div class="form-group">
@@ -15,17 +14,17 @@
 				</div>
 
 				<div class="form-group">
-					<label>Event Description</label>
+					<label>Description</label>
 					<textarea class="form-control" ng-model="vm.newEvent.about" ></textarea>
 				</div>
 
 				<div class="form-group">
-					<label>Where</label>
+					<label>Address</label>
 					<input class="form-control" ng-model="vm.newEvent.location"></input>
 				</div>
 
 				<div class="form-group">
-					<label>Event Date</label>
+					<label>Date</label>
 					<div class="input-group">
 						<input type="text" class="form-control" uib-datepicker-popup={{vm.format}} ng-model="vm.newEvent.date" 
 						is-open="vm.status.opened" show-button-bar="false" placeholder="click icon to pick date">
@@ -38,6 +37,12 @@
 						</input>
 					</div>
 				</div>
+
+				<!--
+				<div class="form-group">
+					<label>Time</label>
+					<timepicker ng-model="vm.newEvent.time" minute-step="15" show-meridian="true"></timepicker>
+				</div>-->
 
 				<div class="event-button-group">
 					<button class="btn btn-success" type="submit">Create</button>

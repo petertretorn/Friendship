@@ -9,7 +9,7 @@
 
 
 
-		vm.isSignedIn = false;
+		vm.isSignedIn = identityService.isAuthenticated();
 
 		vm.signout = function() {
 			authService.signout();

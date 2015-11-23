@@ -38,7 +38,10 @@
 					console.log('authentication failure!');
 					deferred.reject('authentication failure');
 				} else {
-					identityService.currentUser = response.data.user;
+					var user = response.data.user;
+					console.log('user: ' + user.username);
+					identityService.setCurrentUser(user);
+					//identityService.currentUser = response.data.user;
 
 					$rootScope.$broadcast('signedin');
 
@@ -55,7 +58,7 @@
 		}
 
 		function signout() {
-			identityService.currentUser = undefined;
+			identityService.clearCurrentUser();
 			$location.path('/');
 		}
 
