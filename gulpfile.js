@@ -10,7 +10,7 @@ gulp.task('injectjs', function(){
     var target = gulp.src('./server/views/index.ejs');
     var sources = gulp.src([paths.appScripts]);
 
-    return target.pipe(inject(sources, {relative: true}))
+    return target.pipe(inject(sources, {relative: false, ignorePath: "public"}))
         .pipe(gulp.dest('./server/views'));
 
 });

@@ -1,7 +1,6 @@
 <div>
-	<div class="jumbotron">
-		<h2>The FrindShip</h2>
-		<p>Welcome on board the fabulous FrindShip! Hook up with new and old friends and arrange events togehter</p>
+	<div class="page-header">
+		<h3>Profiles</h3>
 	</div>
 
 	<a href="" ng-show="!vm.listview" ng-click="vm.listview = true">View as list</a>
@@ -9,20 +8,17 @@
 
 	<div class="profiles-section">
 		<div ng-show="!!vm.listview">
-			<table class="table table-striped table-hover">
-
-				<tr ng-repeat="pf in vm.profiles" ng-click="vm.detailsView(pf)">
-					<td>{{pf.username}}</td>
-					<td>{{pf.gender}}</td>
-					<td>{{pf.yearOfBirth}}</td>
-					<td>{{pf.city}}</td>
-				</tr>
-			</table>		
+			<ul class="list-group" ng-repeat="pf in vm.profiles" ng-click="vm.detailsView(pf)">
+				<li class="list-group-item">{{pf.username}}</li>
+				<li class="list-group-item">{{pf.gender}}</li>
+				<li class="list-group-item">{{pf.yearOfBirth}}</li>
+				<li class="list-group-item">{{pf.city}}</li>
+			</ul>
 		</div>
 
 		<div ng-repeat="pf in vm.profiles" ng-show="!vm.listview">
 
-				<a ng-href="#/profile/{{pf.username}}" class="profile row" ng-show="!vm.listview">
+				<a ui-sref="profile({ username: pf.username })" class="profile" ng-show="!vm.listview">
 					<div class="col-sm-6 text">
 						<h3>{{ pf.firstName }}</h3>
 						<p>{{pf.gender}} {{pf.age }} years</p>

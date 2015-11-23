@@ -2,9 +2,12 @@
 
 	'use strict';
 
-	var app = angular.module('app', ['ngRoute', 'ngMessages', 'ngFileUpload', 'ui.bootstrap', 'geolocation']);
+	var app = angular.module('app', ['ngMessages', 'ngFileUpload', 'ui.bootstrap', 'ui.router', 'geolocation']);
 
-	app.config(function($routeProvider) {
+	app.config(Config);
+
+	Config.$Inject = ['$stateProvider', '$urlRouterProvider'];
+	function Config ($stateProvider, $urlRouterProvider) {
 
 		var routeRoleChecks = {
 		    admin: { auth: function(authService) {
@@ -16,57 +19,65 @@
     		}}
   		}
 
-		$routeProvider
-		  .when('/', {
+		$stateProvider
+		  .state('home', {
+		  	url: '/',
 		  	templateUrl: '/app/views/list.html',
 		  	controller: 'ListController',
 		  	controllerAs: 'vm'
 		  })
-		  .when('/register', {
+		  .state('register', {
+		  	url: '/register',
 		  	templateUrl: '/app/views/register.html',
 		  	controller: 'RegisterController',
 		  	controllerAs: 'vm'
 		  })
-		  .when('/user/edit-profile', {
+		  .state('edit', {
+		  	url: '/user/edit-profile',
 		  	templateUrl: '/app/views/editProfile.html',
 		  	controller: 'EditProfileController',
 		  	controllerAs: 'vm',
 		  })
-		  .when('/profile/:username', {
+		  .state('profile', {
+		  	url: '/profile/:username', 
 		  	templateUrl: '/app/views/profile.html',
 		  	controller: 'ProfileController',
 		  	controllerAs: 'vm',
 		  })
-		  .when('/login', {
+		  .state('login', {
+		  	url: '/login',
 		  	templateUrl: '/app/views/login.html',
 		  	controller: 'LoginController',
 		  	controllerAs: 'vm',
 		  })
-		  .when('/signup', {
+		  .state('signup', {
+		  	url: '/signup',
 		  	templateUrl: '/app/views/signup.html',
 		  	controller: 'SignupController',
 		  	controllerAs: 'vm',
 		  })
-		  .when('/create-event', {
+		  .state('create-event', {
+		  	url: '/create-event',
 		  	templateUrl: '/app/views/createEvent.html',
 		  	controller: 'CreateEventController',
 		  	controllerAs: 'vm',
 		  	resolve: routeRoleChecks.user
 		  })
-		  .when('/events/:eventId', {
+		  .state('event', {
+		  	url: '/events/:eventId',
 		  	templateUrl: '/app/views/event.html',
 		  	controller: 'EventController',
 		  	controllerAs: 'vm',
 		  })
-		  .when('/events/', {
+		  .state('all-events', {
+		  	url: '/all-events/',
 		  	templateUrl: '/app/views/eventList.html',
 		  	controller: 'EventListController',
 		  	controllerAs: 'vm',
-		  })
-		  .otherwise({
-		  	redirectTo: '/'
 		  });
-	});
+
+	    $urlRouterProvider.otherwise('/');
+	};
 
 
 	app.constant('settings', {
@@ -78,17 +89,21 @@
 		}
 	});
 
-	app.run(function($rootScope, $location) {
+	app.run(Run);
+
+	Run.$Inject = ['$rootScope', '$state'];
+	function Run($rootScope, $state) {
 		toastr.options.timeOut = 4000;
         toastr.options.positionClass = 'toast-bottom-right';
 
-        $rootScope.$on("$routeChangeError", function(event, current, previous, rejection) {
-			if (rejection === 'not authorized') {
+        $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error)  {
+			console.log('error: ' + error);
+			if (error === 'not authorized') {
 		  		toastr.info('Login to create event!');
-		  		$location.path('/login');
+		  		$state.go('login');
 			}
 		});	
-	});
+	};
 
 /*
 	app.run(["$rootScope", "$location", function($rootScope, $location) {

@@ -21,6 +21,7 @@
     "ng-file-upload-shim": "~10.0.2",
     "moment": "~2.10.6",
     "toastr": "~2.1.2",
-    "angularjs-toaster": "~0.4.16"
+    "angularjs-toaster": "~0.4.16",
+    "angular-ui-router": "~0.2.15"
   }
 }

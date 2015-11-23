@@ -14,6 +14,12 @@ require('./server/config/passport')();
 
 require('./server/config/routes')(app);
 
+app.get('*', function(req, res) {
+    res.render('index', {
+      bootstrappedUser: req.user
+    });
+  });
+
 app.listen(config.port);
 console.log('Listening on port ' + config.port + '...');
 

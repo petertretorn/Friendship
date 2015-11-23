@@ -2,10 +2,9 @@
 
 	module.controller('EditProfileController', EditProfileController);
 
-	EditProfileController.$inject = ['$scope','$routeParams', '$location', 'Upload', 'dataService', 'identityService', 'modalService']
-	function EditProfileController($scope, $routeParams, $location, Upload, dataService, identityService, modalService) {
+	EditProfileController.$inject = ['$scope', '$location', 'Upload', 'dataService', 'identityService', 'modalService']
+	function EditProfileController($scope, $location, Upload, dataService, identityService, modalService) {
 
-		//var id = $routeParams.id || authService.currentUser.username,
 		var username,
 			vm = this;
 		

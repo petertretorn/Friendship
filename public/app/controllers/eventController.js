@@ -3,11 +3,11 @@
 
 	module.controller('EventController', EventController);
 
-	EventController.$inject = ['$routeParams', 'dataService', 'mapService', 'modalService', 'identityService']
-	function EventController($routeParams, dataService, mapService, modalService, identityService) {
+	EventController.$inject = ['$stateParams', 'dataService', 'mapService', 'modalService', 'identityService']
+	function EventController($stateParams, dataService, mapService, modalService, identityService) {
 
 		var vm = this,
-			eventId = $routeParams.eventId;
+			eventId = $stateParams.eventId;
 
 		vm.event = {},
 		vm.tabs = [{ title: 'Comments', active: true}, { title: 'Google Map', active: false }];

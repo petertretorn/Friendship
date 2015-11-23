@@ -3,8 +3,8 @@
 
 	module.controller('ProfileController', ProfileController);
 
-	ProfileController.$inject = ['$routeParams', 'dataService'];
-	function ProfileController($routeParams, dataService) {
+	ProfileController.$inject = ['$stateParams', 'dataService'];
+	function ProfileController($stateParams, dataService) {
 		var vm = this;
 
 		vm.profile = {};
@@ -12,7 +12,7 @@
 		init();
 
 		function init() {
-			var username = $routeParams.username;
+			var username = $stateParams.username;
 
 			console.log(username);
 
