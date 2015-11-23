@@ -22,6 +22,7 @@
     "moment": "~2.10.6",
     "toastr": "~2.1.2",
     "angularjs-toaster": "~0.4.16",
-    "angular-ui-router": "~0.2.15"
+    "angular-ui-router": "~0.2.15",
+    "angular-ui-calendar": "~1.0.1"
   }
 }

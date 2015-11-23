@@ -9,6 +9,7 @@
 			map;
 
 		vm.newEvent = {};
+		vm.newEvent.time = moment().minute(0).hour(8);
 
 		init();
 
@@ -45,6 +46,11 @@
 	  	};
 
 		vm.createEvent = function() {
+
+			vm.newEvent.date = combineDateAndTime(vm.newEvent.date,vm.newEvent.time);
+			console.log('time: ' + vm.newEvent.date)
+			delete vm.newEvent.time;
+
 			dataService.createEvent(vm.newEvent).then(function(event) {
 				vm.newEvent = {};
 				toastr.info('Event created succesfully', 'Success!');
@@ -55,6 +61,11 @@
 			})
 			console.log('createEvent');
 		}
+
+		function combineDateAndTime(date, time) {
+            var dateString = moment(date).format('MM/DD/YYYY');
+            return moment(dateString + ' ' + moment(time).format('HH:mm')).format('YYYY-MM-DDTHH:mm:00');
+        }
 	}
 
 })(angular.module('app'));

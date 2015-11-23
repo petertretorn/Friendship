@@ -4,6 +4,10 @@
 	</div>
 </div>
 
+<div>
+	<a ui-sref="calender">Calender</a>
+</div>
+
 <div class="row">
 	<div ng-repeat="event in vm.events">
 		<span class="pull-right">{{ event.date| date: 'MMMM dd, yyyy' }}</span>

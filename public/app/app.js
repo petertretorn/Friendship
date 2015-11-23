@@ -2,7 +2,7 @@
 
 	'use strict';
 
-	var app = angular.module('app', ['ngMessages', 'ngFileUpload', 'ui.bootstrap', 'ui.router', 'geolocation']);
+	var app = angular.module('app', ['ngMessages', 'ngFileUpload', 'ui.bootstrap', 'ui.router', 'ui.calendar', 'geolocation']);
 
 	app.config(Config);
 
@@ -67,14 +67,25 @@
 		  	url: '/events/:eventId',
 		  	templateUrl: '/app/views/event.html',
 		  	controller: 'EventController',
-		  	controllerAs: 'vm',
+		  	controllerAs: 'vm'
 		  })
 		  .state('all-events', {
 		  	url: '/all-events/',
 		  	templateUrl: '/app/views/eventList.html',
 		  	controller: 'EventListController',
+		  	controllerAs: 'vm'
+		  })
+		  .state('calender', {
+		  	url: '/calender/',
+		  	templateUrl: '/app/views/calender.html',
+		  	controller: 'CalenderController',
 		  	controllerAs: 'vm',
-		  });
+		  	resolve: {
+		  		events : ['dataService', function(dataService) {
+		  			return dataService.getEvents();
+		  		}]
+		  	} 
+		  })
 
 	    $urlRouterProvider.otherwise('/');
 	};
