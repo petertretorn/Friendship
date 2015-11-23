@@ -102,8 +102,8 @@
 
 	app.run(Run);
 
-	Run.$Inject = ['$rootScope', '$state'];
-	function Run($rootScope, $state) {
+	Run.$Inject = ['$rootScope', '$state', 'redirectService'];
+	function Run($rootScope, $state, redirectService) {
 		toastr.options.timeOut = 4000;
         toastr.options.positionClass = 'toast-bottom-right';
 
@@ -111,16 +111,9 @@
 			console.log('error: ' + error);
 			if (error === 'not authorized') {
 		  		toastr.info('Login to create event!');
+		  		redirectService.setLastState(toState);
 		  		$state.go('login');
 			}
 		});	
 	};
-
-/*
-	app.run(["$rootScope", "$location", function($rootScope, $location) {
-	
-		$rootScope.$on("$routeChangeSuccess", function(userInfo) {
-			console.log(userInfo);
-		});
-*/
 })();

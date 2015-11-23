@@ -4,8 +4,8 @@
 	module.controller('LoginController', LoginController);
 
 
-	LoginController.$inject = ['$location', 'authService', 'modalService']
-	function LoginController($location, authService, modalService) {
+	LoginController.$inject = ['$location', 'authService', 'modalService', 'redirectService']
+	function LoginController($location, authService, modalService, redirectService) {
 		var vm = this;
 
 		vm.loginModel = {};
@@ -14,19 +14,12 @@
 			authService.login(vm.loginModel).then(onSuccess, onFailure);
 
 			function onSuccess(response) {
-				var heading = 'Login Succesfull',
-					content = 'You\'ve looged in successfully! Welcome back!'
-
-				//modalService.showToast(content, heading);
-
-			$location.path('#/');
+				toastr.info('Logged in succesfully!');
+				redirectService.reditctToLastState();
 			}
 			
 			function onFailure(response) {
-				var heading = 'Login failed',
-					content = 'Keep trying!!'
-
-				modalService.showToast(content, heading);
+				toastr.info('Username or password incorrect!');
 
 				vm.loginModel = {};
 			}
