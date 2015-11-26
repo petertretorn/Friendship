@@ -109,7 +109,7 @@
 		}
 
 		function canVote(votes, voter) {
-			return votes.indexOf(voter) === -1;
+			// return votes.indexOf(voter) === -1;
 		}
 
 		function updateEvent(event, callback) {

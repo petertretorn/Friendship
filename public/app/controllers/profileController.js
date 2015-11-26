@@ -14,8 +14,6 @@
 		function init() {
 			var username = $stateParams.username;
 
-			console.log(username);
-
 			dataService.getProfileByUsername(username)
 				.then(function(profile) {
 					vm.profile = profile;
@@ -26,7 +24,6 @@
 					console.log(err);
 				});
 		}
-
 	}
 
 })(angular.module('app'));

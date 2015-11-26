@@ -1,0 +1,14 @@
+<div class="container">
+	<div class="row">
+		<h3>Upcoming Events</h3>
+
+	    <tabset class="list-tabs-container">
+	        <tab ng-repeat="tab in vm.tabs" heading="{{tab.text}}" ui-sref="{{tab.state}}" active="tab.active">
+	        	<div ui-view id="tabContent" ></div>
+	        </tab>
+	    </tabset>
+
+	    
+
+	</div>
+</div>

@@ -37,6 +37,7 @@
 		  	templateUrl: '/app/views/editProfile.html',
 		  	controller: 'EditProfileController',
 		  	controllerAs: 'vm',
+		  	resolve: routeRoleChecks.user
 		  })
 		  .state('profile', {
 		  	url: '/profile/:username', 
@@ -70,26 +71,31 @@
 		  	controllerAs: 'vm'
 		  })
 		  .state('all-events', {
-		  	url: '/all-events/',
-		  	templateUrl: '/app/views/eventList.html',
+		  	url: '/all-events',
+		  	abstract: true,
+		  	templateUrl: '/app/views/allEvents.html',
 		  	controller: 'EventListController',
 		  	controllerAs: 'vm'
 		  })
-		  .state('calender', {
-		  	url: '/calender/',
-		  	templateUrl: '/app/views/calender.html',
-		  	controller: 'CalenderController',
-		  	controllerAs: 'vm',
-		  	resolve: {
-		  		events : ['dataService', function(dataService) {
-		  			return dataService.getEvents();
-		  		}]
-		  	} 
-		  })
+		  	.state('all-events.calender', {
+		  		url: '/calender',
+			  	templateUrl: '/app/views/calender.html',
+			  	controller: 'CalenderController',
+			  	controllerAs: 'calenderVm',
+			  	resolve: {
+			  		events: ['dataService', function(dataService) {
+			  			return dataService.getEvents();
+			  		}]
+			  	}
+		  	})
+		  	.state('all-events.list', {
+		  		url: '/list',
+			  	templateUrl: '/app/views/eventsList.html'
+		  	});
+		  
 
 	    $urlRouterProvider.otherwise('/');
 	};
-
 
 	app.constant('settings', {
 		development : {
@@ -100,15 +106,14 @@
 		}
 	});
 
-	app.run(Run);
+	app.run(runner);
 
-	Run.$Inject = ['$rootScope', '$state', 'redirectService'];
-	function Run($rootScope, $state, redirectService) {
+	runner.$Inject = ['$rootScope', '$state', 'redirectService'];
+	function runner($rootScope, $state, redirectService) {
 		toastr.options.timeOut = 4000;
         toastr.options.positionClass = 'toast-bottom-right';
 
         $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error)  {
-			console.log('error: ' + error);
 			if (error === 'not authorized') {
 		  		toastr.info('Login to create event!');
 		  		redirectService.setLastState(toState);

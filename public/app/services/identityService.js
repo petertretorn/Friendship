@@ -6,10 +6,11 @@
 	IdentityService.$inject = ['localStorage'];
 	
 	function IdentityService(localStorage) {
-		var currentUser = initialize();
+		var currentUser = initialize(),
+			USER_KEY = 'currentUser';
 
 		function initialize() {
-			var savedUser = localStorage.get('currentUser');
+			var savedUser = localStorage.get( USER_KEY );
 
 			var user = {
 				signedIn: false
@@ -25,14 +26,16 @@
 		}
 
 		function setCurrentUser(user) {
-			console.log(user.username);
-			localStorage.add('currentUser', user);
-			user.signedIn = true;
-			currentUser = user;
+
+			currentUser.username = user.username			
+			currentUser.signedIn = true;
+
+			localStorage.add(USER_KEY, currentUser);
+			console.log('idendityservice: ' + currentUser.username);
 		}
 
 		function clearCurrentUser() {
-			localStorage.remove('currentUser');
+			localStorage.remove(USER_KEY);
 			currentUser = initialize;
 		}
 

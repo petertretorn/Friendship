@@ -3,12 +3,17 @@
 
 	module.controller('EventListController', EventListController);
 
-	EventListController.$inject = ['dataService', 'settings'];
-	function EventListController(dataService, settings) {
+	EventListController.$inject = ['$state', 'dataService', 'settings'];
+	function EventListController($state, dataService, settings) {
 		var vm = this,
 			baseUrl = settings.baseUrl;
 
 		vm.events = [];
+
+		vm.tabs = [
+			{ text: 'List', state: 'all-events.list' },
+            { text: 'Calender', state: 'all-events.calender' }
+        ];
 
 		init();
 
@@ -22,6 +27,10 @@
 			function onFailure(err) {
 				console.log('Error: ' + err);
 			}
+		}
+
+		vm.gotoEvent = function(id) {
+			$state.go('event', { eventId: id} );
 		}
 	}
 

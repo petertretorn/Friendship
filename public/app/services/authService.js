@@ -19,7 +19,9 @@
 			return $http.post('/api/register', signupModel).then(onSuccess, onFailure);
 
 			function onSuccess(response) {
-				identityService.currentUser = response.data;
+				console.log(response.data);
+				identityService.setCurrentUser(response.data);
+				console.log('auth : ' + identityService.currentUser.username);
 				$rootScope.$broadcast('signedin');
 			}
 

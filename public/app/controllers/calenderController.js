@@ -3,12 +3,14 @@
 
 	module.controller('CalenderController', CalenderController)
 
-	function CalenderController(events) {
-		var vm = this;
-		
-		vm.eventSources =  [ _.map(events, mapToCalenderEvent) ];
 
-		//vm.eventSources =  [makeEvents()];
+	function CalenderController($state, events) {
+		var calenderVm = this;
+		
+		calenderVm.eventSources =  [ _.map(events, mapToCalenderEvent) ];
+
+
+		//calenderVm.eventSources =  [makeEvents()];
 
 		function makeEvents() {
 			return [
@@ -23,13 +25,17 @@
 			]
 		}
 
-		vm.calendarConfig = {
+		calenderVm.calendarConfig = {
             height: 550,
             header: {
                 left: 'month agendaWeek agendaDay',
                 center: 'title',
                 right: 'today prev,next'
-            } /*,
+            },
+            dayClick: dayClick,
+            editable: true,
+            eventClick: eventClick
+             /*,
             defaultView: 'agendaDay',
             firstHour: 8,
             dayClick: dayClick,
@@ -40,13 +46,22 @@
 
         function mapToCalenderEvent(event) {
         	return {
-        		id: event._id,
+        		id: event._id,    
                 start: event.date || new Date(),
                 title: event.title,
                 allDay: false,
                 durationEditable: false,
-                end: moment(event.date).add(1, 'hour').toDate()
+                end: moment(event.date).add(2, 'hour').toDate()
         	}
+        }
+
+        function eventClick(event) {
+            console.log('clicked');
+            $state.go('event', { eventId: event.id} );
+        }
+
+        function dayClick() {
+            console.log('day clicked');
         }
 	}
 

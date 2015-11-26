@@ -28,12 +28,8 @@
 		init();
 
 		function init() {
-			if (!identityService.isAuthenticated()) {
-				console.log('not authenticated');
-				$location.path('/');
-			}
 			username = identityService.currentUser.username || '';
-
+			console.log('username: ' + username);
 			dataService.getProfileByUsername(username).then(onSuccess, onFailure);
 
 			function onSuccess(profile) {
@@ -79,9 +75,8 @@
 
 		vm.addToField = function(field) {
 			modalService.addToField(vm.profile, field).then(function(profile) {
-				
 				updateProfile(profile);
-			})
+			});
 		}
 
 		vm.setGender = function(gender) {
@@ -122,19 +117,18 @@
 			dataService.updateProfile(profileToUpdate).then(
 					function(profile) {
 						vm.profile = profile;
+						toastr.info('Profile saved!');
 					}, 
 					function() {
-						console.log('boo.. error updating profile');
+						toastr.info('Error saving profile!');
 					});
 		}
 
 		function createYearArray() {
 	  		var years = [];
-
 	  		for (var i = 1940; i <= 2007; i++) {
 	  			years.push(i);
 	  		}
-
 	  		return years;
 	  	}
 	}

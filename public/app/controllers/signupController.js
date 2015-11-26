@@ -3,9 +3,8 @@
 
 	module.controller('SignupController', SignupController);
 
-
-	SignupController.$inject = ['$location', 'authService', 'modalService']
-	function SignupController($location, authService, modalService) {
+	SignupController.$inject = ['$location', '$state', 'authService', 'modalService']
+	function SignupController($location, $state, authService, modalService) {
 		var vm = this;
 
 		vm.signupModel = {};
@@ -15,19 +14,13 @@
 			authService.register(vm.signupModel).then(onSuccess, onFailure);
 
 			function onSuccess(repsonse) {
-				//clear form
 				vm.signupModel = {};
-
-				var heading = 'Welcome On Board',
-					content = 'You\'ve signed up successfully! Welcome onboard the Friendship!. Enjoy your trip!'
-
-				//	modalService.showToast(content, heading);
-
-				$location.path('#/');
+				toastr.info('Registration successfull!');
+				$state.go('edit');
 			}
 
 			function onFailure(repsonse) {
-				console.log('boo... failure!!');
+				toastr.info('Registration failure!');
 			}
 		}
 	}

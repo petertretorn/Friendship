@@ -14,7 +14,6 @@
 
 		function setLastState(state) {
 			lastState = state;
-			console.log('last state set: ' + lastState);
 		}
 
 		function reditctToLastState() {

@@ -1,0 +1,18 @@
+<div class="outer-events-container">
+	<div ng-repeat="event in vm.events | orderBy: 'date'" class="event-list-item" ng-click="vm.gotoEvent(event._id)">
+		<div class="left-part clear-left">
+			<div class="content-box">
+				<div class="vertical-align">
+					<span class="big">{{event.date| date: 'dd' }}</span><span> {{event.date| date: 'MMM' }}</span>
+				</div>
+			</div>
+		</div>
+		<div class="main-part">
+			<div class="content-box">
+				<span class="pull-right">{{ event.location }}</span>
+				<p class="big">{{ event.title }} event</p>
+				<p>{{ event.about }}</p>
+			</div>
+		</div>
+	</div>
+</div>

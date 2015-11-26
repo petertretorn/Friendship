@@ -1,5 +1,5 @@
 @media (max-width: 768) {
-    .pull-right-lg {
+    .event-tabs-container .pull-right-lg {
         float: left;
     }
 }
@@ -9,7 +9,7 @@
         float: right;
     }
 
-    .nav-tabs > li {
+    .event-tabs-container .nav-tabs > li {
         float: right;
     }
 }
@@ -26,6 +26,58 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+.outer-events-container {
+    margin-top: 25px;
+}
+
+.event-list-item {
+    height: 100px;
+    width: 80%;
+    padding-left: 10px;
+    border-radius: 10px;
+}
+
+.event-list-item:hover {
+    background-color: rgba(0, 0, 0, .3);
+    cursor: pointer;
+}
+.event-list-item .left-part {
+    float: left;
+    height: 100px;
+    width: 15%;
+}
+
+.event-list-item .main-part {
+    margin-left: 5%;
+    width: 90%;
+    height: 100px;
+}
+
+.big {
+    font-size: 1.8em;
+}
+
+.event-list-item .left-part .content-box {
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    vertical-align: middle;
+    text-align: center;
+    background-color: cyan;
+    color: black;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+}
+
+.content-box {
+
+    position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .vote-section {
     position: absolute;
     bottom: 3%;
@@ -37,7 +89,7 @@ body {
     height: 400px;
 }
 
-.tabs-container {
+.event-tabs-container,  .list-tabs-container {
     margin-top: 25px;
 }
 
@@ -58,7 +110,6 @@ body {
     float: left;
 }
 
-
 .event-form {
     margin-top: 30px;
 }
@@ -69,7 +120,6 @@ body {
 }
 
 .event-participant {
-    
     color: rosybrown;
     font-size: 1.1em;
     border-radius: 3px;
@@ -132,7 +182,6 @@ body {
     padding: 0px 0px;
     margin: 0;
     border: none;
-
  }
 
 .profile img {

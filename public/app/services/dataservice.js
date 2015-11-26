@@ -3,12 +3,10 @@
 
 	module.factory('dataService', dataService);
 
-	dataService.$inject = ['$http', 'settings'];
+	dataService.$inject = ['$http'];
 
-	function dataService($http, settings) {
+	function dataService($http) {
 		
-		var baseUrl = settings.baseUrl;
-
 		function registerProfile(profile) {
 
 			$http.post('/api/register', profile).then(onSuccess, onFailure);
