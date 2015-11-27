@@ -18,6 +18,14 @@
     box-sizing: border-box;
 }
 
+.view.ng-leave {
+  animation: fadeOut 0.5s; 
+}
+
+.view.ng-enter {
+  animation: fadeIn 0.5s;
+}
+
 img { max-width: 100%; }
 
 body {

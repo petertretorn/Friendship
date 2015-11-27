@@ -9,7 +9,6 @@ module.exports = function(app) {
   app.use('/', routes);
   app.use('/api/register', register);
   app.use('/api/auth', auth);
-  //app.use('/api/users', users);
   app.use('/api/profiles', profiles);
   app.use('/api/events', events);
   app.use('/api/register', register);

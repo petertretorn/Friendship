@@ -23,6 +23,7 @@
     "toastr": "~2.1.2",
     "angularjs-toaster": "~0.4.16",
     "angular-ui-router": "~0.2.15",
-    "angular-ui-calendar": "~1.0.1"
+    "angular-ui-calendar": "~1.0.1",
+    "animate.css": "~3.4.0"
   }
 }

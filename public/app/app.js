@@ -2,7 +2,7 @@
 
 	'use strict';
 
-	var app = angular.module('app', ['ngMessages', 'ngFileUpload', 'ui.bootstrap', 'ui.router', 'ui.calendar', 'geolocation']);
+	var app = angular.module('app', ['ngMessages', 'ngFileUpload', 'ngAnimate', 'ui.bootstrap', 'ui.router', 'ui.calendar', 'geolocation']);
 
 	app.config(Config);
 
