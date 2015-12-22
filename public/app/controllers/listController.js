@@ -2,8 +2,8 @@
 
 	module.controller('ListController', ListController);
 
-	ListController.$inject = ['$location', 'dataService'];
-	function ListController($location, dataService) {
+	ListController.$inject = ['$location', '$state', 'dataService'];
+	function ListController($location, $state, dataService) {
 		var vm = this;
 
 		console.log('ListController!!');
