@@ -18,24 +18,23 @@
 
 		<div ng-repeat="pf in vm.profiles" ng-show="!vm.listview">
 
-				<a ui-sref="profile({ username: pf.username })" class="profile" ng-show="!vm.listview">
-					<div class="col-sm-6 text">
-						<h3>{{ pf.firstName }}</h3>
-						<p>{{pf.gender}} {{pf.age }} years</p>
-						<span>Lives in {{pf.city}}</span>
-						<div class="interest-container bottum-aligned">
-							<h3>Interests</h3>
-							<div class="interest-label" ng-repeat="i in pf.interests">{{i}}</div>
-						</div>
+			<div ng-click="vm.gotoProfile(pf)" class="profile" ng-show="!vm.listview">
+				<div class="col-sm-6 ">
+					<h3>{{ pf.firstName }}</h3>
+					<p>{{pf.gender}} {{pf.age }} years</p>
+					<span>Lives in {{pf.city}}</span>
+					<div class="interest-container bottum-aligned">
+						<h3>Interests</h3>
+						<div class="interest-label" ng-repeat="i in pf.interests">{{i}}</div>
 					</div>
-					<div ng-show="!!pf.imageUrl" class="col-sm-6 picture">
-						<img ng-src="/photos/{{pf.imageUrl}}"/>
-						<!--<img src="http://placekitten.com/400/600">-->
-					</div>
-				</a>
+				</div>
+				<div ng-show="!!pf.imageUrl" class="col-sm-6 picture">
+					<img ng-src="/photos/{{pf.imageUrl}}"/>
+					<!--<img src="http://placekitten.com/400/600">-->
+				</div>
+			</div>
+		
+		
 		</div>
-		
-		
-	</div>
 	
 </div>

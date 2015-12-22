@@ -31,6 +31,11 @@
 		vm.redirectToLogin = function() {
 			$location.path('/login');
 		}
+
+		vm.gotoProfile = function(profile) {
+			$state.go('profile', { username: profile.username} );
+		}
+
 		vm.message = 'List of Profiles';
 	}
 

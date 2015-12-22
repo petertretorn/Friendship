@@ -80,7 +80,7 @@
 
 		vm.upvote = function(comment) {
 			var voter = getUserName()
-			console.log(voter + ' : ' + canVote(comment.upVotes, voter))
+			console.log('ok ' + voter + ' : ' + canVote(comment.upVotes, voter))
 
 			if(!!voter && canVote(comment.upVotes, voter)) {
 				comment.upVotes.push(voter);
@@ -109,7 +109,7 @@
 		}
 
 		function canVote(votes, voter) {
-			// return votes.indexOf(voter) === -1;
+			return votes.indexOf(voter) === -1;
 		}
 
 		function updateEvent(event, callback) {
