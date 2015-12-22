@@ -36,7 +36,7 @@
 
 		function clearCurrentUser() {
 			localStorage.remove(USER_KEY);
-			currentUser = initialize;
+			currentUser = initialize();
 		}
 
 		function isAuthenticated() {

@@ -10,6 +10,7 @@
     "npm": "3.3.*"
   },
   "dependencies": {
+    "aws-sdk": "^2.2.19",
     "body-parser": "~1.13.2",
     "connect-flash": "~0.1.1",
     "connect-multiparty": "^2.0.0",
