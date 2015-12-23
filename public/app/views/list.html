@@ -17,7 +17,25 @@
 		</div>
 
 		<div ng-repeat="pf in vm.profiles" ng-show="!vm.listview">
+			<div class="col-md-4 profile">
+				<div class="row">
+					<div class="col-md-7">
+							<img class="img-circle" ng-src="/photos/{{pf.imageUrl || 'dummy.jpg' }}"/>
+					</div>
+					<div class="col-md-5">
+						<h4>{{ pf.firstName }}</h4>
+						<p>from {{pf.city}}</p>
+						<div>
+							<div class="interest-label" ng-repeat="i in pf.interests">{{i}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
+
+
+
+<!--
 			<div ng-click="vm.gotoProfile(pf)" class="profile" ng-show="!vm.listview">
 				<div class="col-sm-6 ">
 					<h3>{{ pf.firstName }}</h3>
@@ -28,12 +46,12 @@
 						<div class="interest-label" ng-repeat="i in pf.interests">{{i}}</div>
 					</div>
 				</div>
-				<div ng-show="!!pf.imageUrl" class="col-sm-6 picture">
+				<div class="col-sm-6 picture">
 					<img ng-src="/photos/{{pf.imageUrl}}"/>
-					<!--<img src="http://placekitten.com/400/600">-->
+					<!--<img src="http://placekitten.com/400/600">
 				</div>
 			</div>
-		
+	-->	
 		
 		</div>
 	

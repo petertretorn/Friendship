@@ -138,40 +138,14 @@ body {
 }
 
 .profile {
+	height: 250px;
 	float: left;
-	height: 300px;
-	background-color: #aaa;
-	padding: 0px 0px;
-    padding-right: 0;
-	border-radius: 3px;
-	margin: 10px 10px;
-    padding: 0px 5px;
-    height: 200px;
-    overflow: hidden;
+    padding: 10px;
 }
 
-.profile .text {
-    padding: 0px 5px;
-    height: 200px;
-    overflow: hidden;
-    /*background-color: olivedrab;*/
-}
-
-.profile .text:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.profile .text h3 {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.profile-text {
-    font-size: 1.2em;
-}
-
-.interest-container {
-    margin: 10px 0;
+.profile:hover {
+    background-color: rgba(0, 0, 0, .5);
+    border-radius: 10px;
 }
 
 .interest-label {
@@ -184,11 +158,6 @@ body {
     margin-right: 4px;
 }
 
-.bottum-aligned {
-    position: absolute;
-    bottom: 0;
-}
-
 .profile .picture {
     padding: 0px 0px;
     margin: 0;
@@ -198,8 +167,8 @@ body {
 .profile img {
     margin: 0;
     padding: 0;
-    width: 150px;
-    height: 200px;
+    width: 100%;
+    height: 220px;
     border-style: none;
 }
 
