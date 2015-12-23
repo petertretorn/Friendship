@@ -17,7 +17,7 @@
 		</div>
 
 		<div ng-repeat="pf in vm.profiles" ng-show="!vm.listview">
-			<div class="col-md-4 profile">
+			<div ng-click="vm.gotoProfile(pf)" class="col-md-4 profile">
 				<div class="row">
 					<div class="col-md-7">
 							<img class="img-circle" ng-src="/photos/{{pf.imageUrl || 'dummy.jpg' }}"/>
