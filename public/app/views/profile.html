@@ -11,6 +11,13 @@
 		<profile-part profile="vm.profile" field="city" text="City"></profile-part>
 		
 		<profile-part profile="vm.profile" field="description" text="About me"></profile-part>
+
+		<div ng-show="vm.isAuthenticated()">
+			<div class="center-element">
+				<button ng-click="vm.sendMessage(vm.profile.username)" class="action-button">SEND MESSAGE</button>
+			</div>
+		</div>
+	
 	</div>
 
 	<div class="col-md-6">

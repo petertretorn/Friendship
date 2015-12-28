@@ -28,6 +28,12 @@
 				.then(onSuccess, onFailure);
 		}
 
+		function sendMessage(receiver, message) {
+			var url = 'api/profiles/' + receiver + '/messages';
+			return $http.post(url, message)
+				.then(onSuccess, onFailure);
+		}
+
 		function createEvent(event) {
 			 return $http.post('/api/events', event)
 			 	.then(onSuccess, onFailure);
@@ -63,6 +69,7 @@
 			getProfiles: getProfiles,
 			getProfileByUsername: getProfileByUsername,
 			updateProfile: updateProfile,
+			sendMessage :sendMessage,
 			
 			getEvents: getEvents,
 			createEvent: createEvent,

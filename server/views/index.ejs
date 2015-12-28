@@ -28,6 +28,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li ng-show="!vm.isSignedIn"><a ui-sref="login"><i class="fa fa-sign-in"></i> Login</a></li>
                     <li ng-show="!vm.isSignedIn"><a ui-sref="signup"><i class="fa fa-chevron-circle-up"></i> Sign Up</a></li>
+                    <li ng-show="!!vm.isSignedIn"><a ui-sref="messages"><i class="fa fa-envelope"></i> Messages</a></li>
                     <li ng-show="!!vm.isSignedIn"><a ui-sref="edit"><i class="fa fa-child"></i> Your Profile</a></li>
                     <li ng-show="vm.isSignedIn"><a ng-click="vm.signout()"><i class="fa fa-sign-in"></i> Sign Out</a></li>
                 </ul>

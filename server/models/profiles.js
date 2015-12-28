@@ -15,6 +15,12 @@ var profileSchema = new mongoose.Schema({
 		// Trim the 'username' field
 		trim: true
 	},
+	messages : [{
+		from: String,
+		content: String,
+		timeSent: Date,
+		hasBeenRead: Boolean
+	}],
 	gender: String,
 	city: String,
 	interests: [String],

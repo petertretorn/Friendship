@@ -3,8 +3,8 @@
 
 	module.controller('ProfileController', ProfileController);
 
-	ProfileController.$inject = ['$stateParams', 'dataService'];
-	function ProfileController($stateParams, dataService) {
+	ProfileController.$inject = ['$stateParams', 'dataService', 'modalService', 'identityService'];
+	function ProfileController($stateParams, dataService, modalService, identityService) {
 		var vm = this;
 
 		vm.profile = {};
@@ -23,6 +23,25 @@
 				}, function(err) {
 					console.log(err);
 				});
+		}
+
+		vm.sendMessage = function(reciever) {
+			var message = {};
+			message.from = identityService.currentUser.username;
+
+			modalService.textAreaInput('Enter message to ' + reciever)
+				.then(function(text) {
+					message.content = text;
+					dataService.sendMessage(reciever, message)
+				.then(function(response) {
+					console.log('success: ' + response.success);
+					toastr.info('Message has been sent');
+				})
+			})
+		}
+
+		vm.isAuthenticated = function() {
+			return identityService.isAuthenticated();
 		}
 	}
 

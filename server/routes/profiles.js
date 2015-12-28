@@ -39,6 +39,29 @@ router.put('/:username', function(req, res, next) {
 	})
 });
 
+router.post('/:username/messages', function(req,res, next) {
+	var username = req.params.username;
+	var message = req.body;
+
+	message.hasBeenRead = false;
+	message.timeSent = new Date();
+
+	Profile.findOne({ username: username }, function(err, profile) {
+		if (err) return res.json({ message : 'error fetching profile'});
+
+		profile.messages.push(message);
+
+		profile.save(function(err) {
+			var returnObj = {};
+
+			if (err) returnObj.success = false;
+			else returnObj.success = true;
+
+			return res.json(returnObj);
+	 	});
+	});
+});
+
 router.post('/photo', multipartyMiddleware, uploader.uploadImage);
 
 module.exports = router;
