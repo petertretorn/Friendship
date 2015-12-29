@@ -37,13 +37,10 @@
 
 			function onSuccess(response) {
 				if (!response.data.success) {
-					console.log('authentication failure!');
 					deferred.reject('authentication failure');
 				} else {
 					var user = response.data.user;
-					console.log('user: ' + user.username);
 					identityService.setCurrentUser(user);
-					//identityService.currentUser = response.data.user;
 
 					$rootScope.$broadcast('signedin');
 

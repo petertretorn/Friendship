@@ -20,6 +20,7 @@
 				console.log('saved!: '+ savedUser);
 				user.signedIn = true;
 				user.username = savedUser.username;
+				user.profile = savedUser.profile;
 			}
 			console.log(user.username);	
 			return user;
@@ -29,6 +30,7 @@
 
 			currentUser.username = user.username			
 			currentUser.signedIn = true;
+			currentUser.profile = user;
 
 			localStorage.add(USER_KEY, currentUser);
 			console.log('idendityservice: ' + currentUser.username);

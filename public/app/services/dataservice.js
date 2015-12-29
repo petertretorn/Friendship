@@ -29,9 +29,20 @@
 		}
 
 		function sendMessage(receiver, message) {
-			var url = 'api/profiles/' + receiver + '/messages';
+			var url = getMessageUrlForUser(receiver);
 			return $http.post(url, message)
 				.then(onSuccess, onFailure);
+		}
+
+		function getMessagesForUser(username) {
+			var url = getMessageUrlForUser(username);
+			return $http.get(url)
+				.then(onSuccess, onFailure);
+		}
+
+		function getMessageUrlForUser(username) {
+			var url = 'api/profiles/' + receiver + '/messages';
+			return url;
 		}
 
 		function createEvent(event) {
@@ -51,7 +62,6 @@
 		}
 
 		function updateEvent(event) {
-			console.log('eventid: ' + event._id);
 			return $http.put('/api/events/' + event._id, event)
 				.then(onSuccess, onFailure);
 		}
@@ -70,6 +80,7 @@
 			getProfileByUsername: getProfileByUsername,
 			updateProfile: updateProfile,
 			sendMessage :sendMessage,
+			getMessagesForUser: getMessagesForUser,
 			
 			getEvents: getEvents,
 			createEvent: createEvent,

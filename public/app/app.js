@@ -45,6 +45,12 @@
 		  	controller: 'ProfileController',
 		  	controllerAs: 'vm',
 		  })
+		  .state('messages', {
+		  	url: '/profile/:username/messages', 
+		  	templateUrl: '/app/views/messagesReceived.html',
+		  	controller: 'MessagesController',
+		  	controllerAs: 'vm',
+		  })
 		  .state('login', {
 		  	url: '/login',
 		  	templateUrl: '/app/views/login.html',
