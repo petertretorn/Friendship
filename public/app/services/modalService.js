@@ -121,6 +121,8 @@
       }
       
       function showToast(message, heading) {
+        var deferred = $q.defer();
+
         var modalInstance = $modal.open({
             templateUrl: '/app/views/modal.html',
             controller: function($scope, $uibModalInstance) {
@@ -128,9 +130,11 @@
               $scope.heading = heading || Notification;
               $scope.ok = function() {
                 $uibModalInstance.close();
+                deferred.resolve();
               }
             }
           });
+        return deferred.promise;
       }
     }
 

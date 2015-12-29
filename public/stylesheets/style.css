@@ -241,6 +241,30 @@ a:hover {
     padding: 10px;
 }
 
+.message span {
+    display: inline-block;
+}
+
+.message span.from {
+    width: 100px;
+    overflow: hidden;
+}
+
+.message-nav .badge {
+    background-color: red;
+}
+
+.message span.content {
+    width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.message span.new {
+    width: 43px;
+}
+
  /* ANIMATIONS
 ============================================================================= */
 

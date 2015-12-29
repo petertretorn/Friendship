@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/lib/angular-animate/angular-animate.min.js"/>
     <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
-<body>
+<body ng-cloak>
 	<header ng-controller="navbarController as vm">
             <nav class="navbar navbar-default">
             <div class="container">
@@ -28,7 +28,25 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li ng-show="!vm.isSignedIn"><a ui-sref="login"><i class="fa fa-sign-in"></i> Login</a></li>
                     <li ng-show="!vm.isSignedIn"><a ui-sref="signup"><i class="fa fa-chevron-circle-up"></i> Sign Up</a></li>
-                    <li ng-show="!!vm.isSignedIn"><a ui-sref="messages"><i class="fa fa-envelope"></i> Messages</a></li>
+
+                    <li class="message-nav" ng-show="!!vm.isSignedIn" uib-dropdown is-open="vm.status.isopen">
+				      <a id="single-button" uib-dropdown-toggle>
+				      	<i class="fa fa-envelope"></i> Messages <span ng-show="!!vm.newMessages.length" class="badge">{{vm.newMessages.length}}</span>
+				      </a>
+				      <ul class="uib-dropdown-menu" role="menu" aria-labelledby="single-button">
+				        <li class="message" ng-repeat="m in vm.messages" role="menuitem" ng-click="vm.showMessage(m)">
+				        	<a href="#">
+				        		<div>
+				        			<span class="from">{{ m.from }} </span><span class="content">{{ m.content }}</span>
+				        			<span ng-show="!m.hasBeenRead" class="badge new">new</span>
+				        		</div>
+				        	</a>
+				        </li>
+				        <li class="divider"></li>
+				        <li role="menuitem"><a href="#">New Message</a></li>
+				      </ul>
+				    </li>
+
                     <li ng-show="!!vm.isSignedIn"><a ui-sref="edit"><i class="fa fa-child"></i> Your Profile</a></li>
                     <li ng-show="vm.isSignedIn"><a ng-click="vm.signout()"><i class="fa fa-sign-in"></i> Sign Out</a></li>
                 </ul>

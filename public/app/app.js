@@ -110,11 +110,7 @@
 		production : {
 			baseUrl: 'http://thefriendship.herokuapp.com/api'
 		},
-		aws : {
-			AWS_ACCESS_KEY_ID: 'AKIAIJ5JSVMIHQCBWSGA',
-			AWS_SECRET_ACCESS_KEY: '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',
-			S3_BUCKET_NAME: 'thefriendship'
-		}
+		
 	});
 
 	app.run(runner);
