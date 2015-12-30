@@ -23,16 +23,25 @@ var registerUser = function(req, res, next) {
 		  if(err) { return next(err); }
 		  
 		    var profile = new Profile({ username: user.username });
+		    profile.messages.push( _createWelcomeMessage() );
 
 		    profile.save(function(err){
 		      if (err) return res.json({ status: false, message : 'failure setting up new profile!'})
-		      
-		      res.send(user);
+		      res.send(profile);
 		    });
 		});
 	})
 };
 
 router.post('/', registerUser);
+
+function _createWelcomeMessage() {
+	return {
+		from: 'admin',
+		content: 'Welcome on board and thank you for signing up with the FriendShip. Hope you enjoy your trip!',
+		timeSent: new Date(),
+		hasBeenRead: false
+  	}
+}
 
 module.exports = router;

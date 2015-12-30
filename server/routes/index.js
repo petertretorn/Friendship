@@ -8,5 +8,9 @@ router.get('/', function(req, res, next) {
 	  //user: JSON.stringify(req.user)
 	});
 });
-
+/*
+app.get('/', function(req, res,next) {  
+    res.sendFile(__dirname + '/index.html');
+});
+*/
 module.exports = router;

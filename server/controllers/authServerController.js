@@ -6,10 +6,7 @@ var passport = require('passport'),
 
 exports.authenticate = function(req, res, next) {
   
-  console.log('hitting authenticate');
-
   req.body.username = req.body.username.toLowerCase();
-
 
   var auth = passport.authenticate('local', function(err, user) {
     if(err) {return next(err);}
@@ -21,8 +18,6 @@ exports.authenticate = function(req, res, next) {
         if (err) res.send({ success: false });
         else res.send({ success: true, user: profile });
       });
-
-      //res.send({ success: true, user: user });
     });
   });
   auth(req, res, next);
@@ -64,16 +59,12 @@ exports.registerUser = function(req, res, next) {
     req.logIn(user, function(err) {
       if(err) { return next(err); }
       
-      // -------------------
-      console.log('before');
         var profile = new Profile({ username: user.username });
-        console.log('after');
 
         profile.save(function(err){
           if (err) return res.json({ message : 'failure setting up new profile!'})
           return res.json({ username : user.username })
         });
-        // -------------------
 
       res.send(user);
     })

@@ -22,6 +22,7 @@ router.get('/:id', function(req, res, next) {
 
 	Event.findById(id, function(err, event) {
 		if (err) {
+			
 			return res.status(400).send({ message: 'error fetching event: ' + err});
 		}
 		return res.json(event);

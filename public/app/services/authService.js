@@ -4,8 +4,8 @@
 
 	module.factory('authService', authService);
 
-	authService.$inject = ['$http', '$rootScope', '$q', '$location', 'dataService', 'identityService'];
-	function authService($http, $rootScope, $q, $location, dataService, identityService) {
+	authService.$inject = ['$http', '$rootScope', '$q', '$location', 'dataService', 'identityService', 'Socket'];
+	function authService($http, $rootScope, $q, $location, dataService, identityService, Socket) {
 		
 		return {
 			register : register,
@@ -19,7 +19,6 @@
 			return $http.post('/api/register', signupModel).then(onSuccess, onFailure);
 
 			function onSuccess(response) {
-				console.log(response.data);
 				identityService.setCurrentUser(response.data);
 				console.log('auth : ' + identityService.currentUser.username);
 				$rootScope.$broadcast('signedin');
@@ -45,6 +44,8 @@
 					$rootScope.$broadcast('signedin');
 
 					deferred.resolve('authentication success!');
+
+					Socket.emit('member.login');
 				}
 			}
 
@@ -57,6 +58,7 @@
 		}
 
 		function signout() {
+			Socket.emit('member.logout');
 			identityService.clearCurrentUser();
 			$location.path('/');
 		}

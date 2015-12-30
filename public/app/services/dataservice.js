@@ -7,6 +7,8 @@
 
 	function dataService($http) {
 		
+		/* ----------------------- Profiles --------------------------------------------- */
+
 		function registerProfile(profile) {
 
 			$http.post('/api/register', profile).then(onSuccess, onFailure);
@@ -28,6 +30,8 @@
 				.then(onSuccess, onFailure);
 		}
 
+		/* ----------------------- Messages --------------------------------------------- */
+
 		function sendMessage(receiver, message) {
 			var url = getMessageUrlForUser(receiver);
 			return $http.post(url, message)
@@ -40,16 +44,29 @@
 				.then(onSuccess, onFailure);
 		}
 
-		function getMessageUrlForUser(username) {
+		function getMessageUrlForUser(receiver) {
 			var url = 'api/profiles/' + receiver + '/messages';
 			return url;
 		}
+
+		function markMessageAsRead(message, username) {
+			var url = 'api/profiles/' + username + '/messages/' + message._id;
+			return $http.put(url, message)
+				.then(onSuccess, onFailure);
+		}
+
+		function deleteMessage(username, message) {
+			var url = 'api/profiles/' + username + '/messages/' + message._id;
+			return $http.delete(url)
+				.then(onSuccess, onFailure);
+		}
+
+		/* ----------------------- Events --------------------------------------------- */
 
 		function createEvent(event) {
 			 return $http.post('/api/events', event)
 			 	.then(onSuccess, onFailure);
 		}
-
 		
 		function getEvents() {
 			return $http.get('/api/events/')
@@ -75,13 +92,19 @@
 		}
 
 		return {
+			//profile
 			registerProfile: registerProfile,
 			getProfiles: getProfiles,
 			getProfileByUsername: getProfileByUsername,
 			updateProfile: updateProfile,
+			
+			//messages
 			sendMessage :sendMessage,
 			getMessagesForUser: getMessagesForUser,
+			markMessageAsRead:markMessageAsRead,
+			deleteMessage: deleteMessage,
 			
+			//events
 			getEvents: getEvents,
 			createEvent: createEvent,
 			getEventById: getEventById,

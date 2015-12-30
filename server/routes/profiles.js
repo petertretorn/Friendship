@@ -62,6 +62,56 @@ router.post('/:username/messages', function(req,res, next) {
 	});
 });
 
+router.put('/:username/messages/:messageId', function(req, res, next) {
+	var username = req.params.username,
+		messageId = req.params.messageId,
+		message = req.body;
+
+	Profile.findOne({ username: username }, function(err, profile) {
+		if (err) return res.json({ message : 'error fetching profile'});
+
+		var messageToUpdate = _.filter(profile.messages, function(currentMessage) {
+			return (currentMessage._id == message._id);
+		})[0];
+
+		messageToUpdate.hasBeenRead = true;
+
+		profile.save(function(err) {
+			var returnObj = {};
+
+			if (err) returnObj.success = false;
+			else {
+				returnObj.success = true;
+				returnObj.message = messageToUpdate;
+			}
+
+			return res.json(returnObj);
+	 	});
+	});
+});
+
+router.delete('/:username/messages/:messageId', function(req, res, next) {
+	var username = req.params.username,
+		messageId = req.params.messageId;
+
+	Profile.findOne({ username: username }, function(err, profile) {
+		if (err) return res.json({ message : 'error fetching profile'});
+
+		profile.messages.pull( { _id: messageId } );
+
+		profile.save(function(err) {
+			var returnObj = {};
+
+			if (err) returnObj.success = false;
+			else {
+				returnObj.success = true;
+			}
+
+			return res.json(returnObj);
+	 	});
+	});
+});
+
 router.post('/photo', multipartyMiddleware, uploader.uploadImage);
 
 module.exports = router;

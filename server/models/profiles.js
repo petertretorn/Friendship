@@ -1,6 +1,11 @@
 var mongoose = require('mongoose');
 
-//mongoose.connect('mongodb://localhost/friendship');
+var messageSchema = new mongoose.Schema({
+	from: String,
+	content: String,
+	timeSent: Date,
+	hasBeenRead: Boolean
+});
 
 var profileSchema = new mongoose.Schema({
 	id: Number,
@@ -15,12 +20,7 @@ var profileSchema = new mongoose.Schema({
 		// Trim the 'username' field
 		trim: true
 	},
-	messages : [{
-		from: String,
-		content: String,
-		timeSent: Date,
-		hasBeenRead: Boolean
-	}],
+	messages : [messageSchema],
 	gender: String,
 	city: String,
 	interests: [String],
@@ -30,6 +30,8 @@ var profileSchema = new mongoose.Schema({
 	yearOfBirth: Number,
 	birthDate: Date
 });
+
+
 
 profileSchema.set('toJSON', {
 	transform: function(doc, ret, options) {

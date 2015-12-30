@@ -21,6 +21,7 @@
                 </div>
 
                 <ul class="nav navbar-nav navbar-left">
+                	<li ng-show="vm.isSignedIn"><a href="">{{ vm.membersOnline }} member{{vm.membersOnline > 1 ? 's' : ''}} online</a></li>
                     <li><a ui-sref="create-event"><i class="fa fa-star"></i> Create Event</a></li>
                     <li><a ui-sref="all-events.list"><i class="fa fa-users"></i> Upcoming Events</a></li>
                 </ul>
@@ -34,12 +35,15 @@
 				      	<i class="fa fa-envelope"></i> Messages <span ng-show="!!vm.newMessages.length" class="badge">{{vm.newMessages.length}}</span>
 				      </a>
 				      <ul class="uib-dropdown-menu" role="menu" aria-labelledby="single-button">
-				        <li class="message" ng-repeat="m in vm.messages" role="menuitem" ng-click="vm.showMessage(m)">
-				        	<a href="#">
-				        		<div>
-				        			<span class="from">{{ m.from }} </span><span class="content">{{ m.content }}</span>
-				        			<span ng-show="!m.hasBeenRead" class="badge new">new</span>
-				        		</div>
+				      	<li ng-show="vm.messages.length === 0"><a>No messages in inbox</a></li>
+				        <li class="message" ng-repeat="m in vm.messages" role="menuitem">
+				        	<a>
+			        			<span class="from">{{ m.from }} </span>
+			        			<span class="content"  ng-click="vm.showMessage(m)">{{ m.content }}</span>
+			        			<span ng-show="!m.hasBeenRead" class="badge new">new</span>
+			        			<span ng-show="m.hasBeenRead" class="remove">
+			        				<i ng-click="vm.deleteMessage(m)" class="fa fa-times pull-right"></i>
+			        			</span>
 				        	</a>
 				        </li>
 				        <li class="divider"></li>
@@ -80,11 +84,25 @@
 	<script type="text/javascript" src="/lib/ng-file-upload/ng-file-upload.min.js"></script>
 	<script type="text/javascript" src="/lib/toastr/toastr.js"></script>
 	<script type="text/javascript" src="/lib/angular-animate/angular-animate.min.js"/></script>
+	<!--<script type="text/javascript" src="/lib/socket.io-client/socket.io.js"/></script>-->
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsNyjwdFd8l6xeQVOhZJT_y5MTrnO2VS0"></script>
 
 	<!-- inject:js -->
 	<script src="/app/app.js"></script>
+	<script src="/app/directives/module.js"></script>
+	<script src="/app/directives/passwordDirective.js"></script>
+	<script src="/app/directives/profilePartDirective.js"></script>
+	<script src="/app/models/users.js"></script>
+	<script src="/app/services/authService.js"></script>
+	<script src="/app/services/socketService.js"></script>
+	<script src="/app/services/dataservice.js"></script>
+	<script src="/app/services/googleMapService.js"></script>
+	<script src="/app/services/identityService.js"></script>
+	<script src="/app/services/localStorage.js"></script>
+	<script src="/app/services/modalService.js"></script>
+	<script src="/app/services/redirectService.js"></script>
 	<script src="/app/controllers/calenderController.js"></script>
 	<script src="/app/controllers/createEventController.js"></script>
 	<script src="/app/controllers/editProfileController.js"></script>
@@ -96,17 +114,6 @@
 	<script src="/app/controllers/navbarController.js"></script>
 	<script src="/app/controllers/profileController.js"></script>
 	<script src="/app/controllers/signupController.js"></script>
-	<script src="/app/directives/module.js"></script>
-	<script src="/app/directives/passwordDirective.js"></script>
-	<script src="/app/directives/profilePartDirective.js"></script>
-	<script src="/app/models/users.js"></script>
-	<script src="/app/services/authService.js"></script>
-	<script src="/app/services/dataservice.js"></script>
-	<script src="/app/services/googleMapService.js"></script>
-	<script src="/app/services/identityService.js"></script>
-	<script src="/app/services/localStorage.js"></script>
-	<script src="/app/services/modalService.js"></script>
-	<script src="/app/services/redirectService.js"></script>
 	<!-- endinject -->
 
 	

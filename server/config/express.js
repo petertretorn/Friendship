@@ -7,6 +7,9 @@ var express = require('express'),
     passport = require('passport');
 
 module.exports = function(app, config) {
+
+  var server = require('../controllers/socket.io.controller.js').server(app);
+
   app.set('views', config.rootPath + '/server/views');
   app.set('view engine', 'ejs');
 
@@ -19,6 +22,8 @@ module.exports = function(app, config) {
   
   app.use(express.static(config.rootPath + '/public'));
 
+  require('./routes')(app);
+
   app.use(bodyParser.json());
 
 // parse application/vnd.api+json as json
@@ -26,4 +31,13 @@ module.exports = function(app, config) {
 
 // parse application/x-www-form-urlencoded
   app.use(bodyParser.urlencoded({ extended: true })); 
+
+  
+  app.get('*', function(req, res) {
+    res.render('index', {
+      bootstrappedUser: req.user
+    });
+  });
+
+  return server;
 }

@@ -110,15 +110,18 @@
 		production : {
 			baseUrl: 'http://thefriendship.herokuapp.com/api'
 		},
-		
 	});
 
 	app.run(runner);
 
-	runner.$Inject = ['$rootScope', '$state', 'redirectService'];
-	function runner($rootScope, $state, redirectService) {
+	runner.$Inject = ['$rootScope', '$state', '$window', 'redirectService', 'authService'];
+	function runner($rootScope, $state, $window, redirectService, authService) {
 		toastr.options.timeOut = 4000;
         toastr.options.positionClass = 'toast-bottom-right';
+
+        window.onbeforeunload = function(event) {
+        	authService.signout();
+        }
 
         $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error)  {
 			if (error === 'not authorized') {

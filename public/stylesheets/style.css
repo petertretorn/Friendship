@@ -248,6 +248,7 @@ a:hover {
 .message span.from {
     width: 100px;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .message-nav .badge {
@@ -255,13 +256,16 @@ a:hover {
 }
 
 .message span.content {
-    width: 300px;
+    width: 220px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
+.message span.content:hover, .message span.remove:hover {
+    cursor: pointer;
+}
 
-.message span.new {
+.message span.new, .message span.remove {
     width: 43px;
 }
 
