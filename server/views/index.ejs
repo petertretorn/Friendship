@@ -40,8 +40,8 @@
 				        	<a class="row">
 				        		<span class="col-xs-3 from">{{ m.from }}</span>
 				        		<span class="col-xs-5 content" ng-click="vm.showMessage(m)">{{ m.content }}</span>
-				        		<span class="col-xs-3">
-				        			<span ng-show="!m.hasBeenRead" class="badge new pull-right">new</span>
+				        		<span class="pull-right">
+				        			<span ng-show="!m.hasBeenRead" class="badge new">new</span>
 				        			<span class="remove" ng-show="!!m.hasBeenRead"><i ng-click="vm.deleteMessage(m)" class="fa fa-times pull-right"></i></span>
 				        		</span>
 				        	</a>
@@ -62,13 +62,7 @@
 		<div class="ng-cloak view" ui-view="">Loading...</div>
 
 	</div>
-<!--
-	<div id="footer" class="container-fluid">
-      <div class="navbar navbar-default navbar-fixed-bottom">
-        <h4 class="text-center text-info">&copy; 2015 The FriendShip by Peter Larsen</h4>
-      </div>
-    </div>
--->
+
 	<!--external libraries -->
 	<script type="text/javascript" src="/lib/lodash/lodash.min.js"></script>
 	<script type="text/javascript" src="/lib/jquery/dist/jquery.min.js"></script>

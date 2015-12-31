@@ -1,56 +1,53 @@
 (function(module) {
 	'use strict';
 
-	module.factory('identityService', IdentityService);
+	module.service('identityService', IdentityService);
 
 	IdentityService.$inject = ['localStorage'];
 	
 	function IdentityService(localStorage) {
-		var currentUser = initialize(),
-			USER_KEY = 'currentUser';
+		var USER_KEY = 'currentUser';
 
-		function initialize() {
+		var _currentUser = {
+			signedIn: false
+		}
+
+		_init()
+
+		function _init() {
 			var savedUser = localStorage.get( USER_KEY );
 
-			var user = {
+			if (savedUser) {
+				_currentUser.signedIn = true;
+				_currentUser.username = savedUser.username;
+				_currentUser.profile = savedUser.profile;
+			}
+		}
+
+		this.setCurrentUser = function(user) {
+			_currentUser.username = user.username			
+			_currentUser.signedIn = true;
+			_currentUser.profile = user;
+
+			console.log('length : ' + _currentUser.profile.messages.length);
+
+			localStorage.add(USER_KEY, _currentUser);
+		}
+
+		this.clearCurrentUser = function() {
+			localStorage.remove(USER_KEY);
+			_currentUser =  {
 				signedIn: false
 			}
-
-			if (savedUser) {
-				console.log('saved!: '+ savedUser);
-				user.signedIn = true;
-				user.username = savedUser.username;
-				user.profile = savedUser.profile;
-			}
-			console.log(user.username);	
-			return user;
 		}
 
-		function setCurrentUser(user) {
-
-			currentUser.username = user.username			
-			currentUser.signedIn = true;
-			currentUser.profile = user;
-
-			localStorage.add(USER_KEY, currentUser);
-			console.log('idendityservice: ' + currentUser.username);
+		this.isAuthenticated = function() {
+			return _currentUser.signedIn;
 		}
 
-		function clearCurrentUser() {
-			localStorage.remove(USER_KEY);
-			currentUser = initialize();
+		this.getCurrentUser = function() {
+			return _currentUser;
 		}
-
-		function isAuthenticated() {
-			return currentUser.signedIn;
-		}
-
-		return {
-			currentUser: currentUser,
-			isAuthenticated: isAuthenticated,
-			setCurrentUser: setCurrentUser,
-			clearCurrentUser: clearCurrentUser
-		};
 	}
 
 })(angular.module('app'))

@@ -43,9 +43,9 @@
 
 					$rootScope.$broadcast('signedin');
 
-					deferred.resolve('authentication success!');
-
 					Socket.emit('member.login');
+
+					deferred.resolve('authentication success!');
 				}
 			}
 
@@ -58,11 +58,12 @@
 		}
 
 		function signout() {
-			if (identityService.currentUser.signedIn) {
+			$location.path('/');
+			if (identityService.getCurrentUser().signedIn === true) {
+				console.log('signing out');
 				Socket.emit('member.logout');
 				identityService.clearCurrentUser();	
 			}
-			$location.path('/');
 		}
 
 		function authorizeForRoute() {

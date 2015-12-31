@@ -30,7 +30,8 @@
 
 		vm.signout = function() {
 			authService.signout();
-			$rootScope.$broadcast('signedin');
+			vm.isSignedIn = identityService.isAuthenticated();
+			//$rootScope.$broadcast('signedin');
 		}
 
 		vm.showMessage = function(message) {
@@ -58,7 +59,8 @@
 
 		$rootScope.$on("signedin", function() {
 			vm.isSignedIn = identityService.isAuthenticated();
-			vm.messages = identityService.currentUser.profile.messages;
+			console.log('vm.isSignedIn: ' + vm.isSignedIn);
+			vm.messages = identityService.getCurrentUser().profile.messages;
 			console.log('messsage: ' + vm.messages.length);
 			_filterMessages();
 		});
@@ -70,7 +72,7 @@
 		}
 
 		function _getUserName() {
-			return identityService.currentUser.profile.username;
+			return identityService.getCurrentUser().profile.username;
 		}
 	}
 

@@ -28,7 +28,7 @@
 		init();
 
 		function init() {
-			username = identityService.currentUser.username || '';
+			username = identityService.getCurrentUser().username || '';
 			dataService.getProfileByUsername(username).then(onSuccess, onFailure);
 
 			function onSuccess(profile) {

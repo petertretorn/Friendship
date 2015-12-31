@@ -114,13 +114,16 @@
 
 	app.run(runner);
 
-	runner.$Inject = ['$rootScope', '$state', '$window', 'redirectService', 'authService'];
-	function runner($rootScope, $state, $window, redirectService, authService) {
+	runner.$Inject = ['$rootScope', '$state', '$window', 'redirectService', 'authService', 'identityService'];
+	function runner($rootScope, $state, $window, redirectService, authService, identityService) {
 		toastr.options.timeOut = 4000;
         toastr.options.positionClass = 'toast-bottom-right';
 
         window.onbeforeunload = function(event) {
         	authService.signout();
+        	if (identityService.currentUser.signedIn === true) {
+        		return "Sure you want to leave?";
+        	}
         }
 
         $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error)  {

@@ -27,7 +27,7 @@
 
 		vm.sendMessage = function(reciever) {
 			var message = {};
-			message.from = identityService.currentUser.username;
+			message.from = identityService.getCurrentUser().username;
 
 			modalService.textAreaInput('Enter message to ' + reciever)
 				.then(function(text) {
