@@ -30,20 +30,20 @@
                     <li ng-show="!vm.isSignedIn"><a ui-sref="login"><i class="fa fa-sign-in"></i> Login</a></li>
                     <li ng-show="!vm.isSignedIn"><a ui-sref="signup"><i class="fa fa-chevron-circle-up"></i> Sign Up</a></li>
 
-                    <li class="message-nav" ng-show="!!vm.isSignedIn" uib-dropdown is-open="vm.status.isopen">
-				      <a id="single-button" uib-dropdown-toggle>
+                    <li class="message-nav hover" ng-show="!!vm.isSignedIn" uib-dropdown is-open="vm.status.isopen">
+				      <a id="message-toggler" uib-dropdown-toggle>
 				      	<i class="fa fa-envelope"></i> Messages <span ng-show="!!vm.newMessages.length" class="badge">{{vm.newMessages.length}}</span>
 				      </a>
-				      <ul class="uib-dropdown-menu" role="menu" aria-labelledby="single-button">
+				      <ul class="uib-dropdown-menu" role="menu" aria-labelledby="message-toggler">
 				      	<li ng-show="vm.messages.length === 0"><a>No messages in inbox</a></li>
 				        <li class="message" ng-repeat="m in vm.messages" role="menuitem">
-				        	<a>
-			        			<span class="from">{{ m.from }} </span>
-			        			<span class="content"  ng-click="vm.showMessage(m)">{{ m.content }}</span>
-			        			<span ng-show="!m.hasBeenRead" class="badge new">new</span>
-			        			<span ng-show="m.hasBeenRead" class="remove">
-			        				<i ng-click="vm.deleteMessage(m)" class="fa fa-times pull-right"></i>
-			        			</span>
+				        	<a class="row">
+				        		<span class="col-xs-3 from">{{ m.from }}</span>
+				        		<span class="col-xs-5 content" ng-click="vm.showMessage(m)">{{ m.content }}</span>
+				        		<span class="col-xs-3">
+				        			<span ng-show="!m.hasBeenRead" class="badge new pull-right">new</span>
+				        			<span class="remove" ng-show="!!m.hasBeenRead"><i ng-click="vm.deleteMessage(m)" class="fa fa-times pull-right"></i></span>
+				        		</span>
 				        	</a>
 				        </li>
 				        <li class="divider"></li>
@@ -52,7 +52,7 @@
 				    </li>
 
                     <li ng-show="!!vm.isSignedIn"><a ui-sref="edit"><i class="fa fa-child"></i> Your Profile</a></li>
-                    <li ng-show="vm.isSignedIn"><a ng-click="vm.signout()"><i class="fa fa-sign-in"></i> Sign Out</a></li>
+                    <li ng-show="vm.isSignedIn"><a href="#" ng-click="vm.signout()"><i class="fa fa-sign-in"></i> Sign Out</a></li>
                 </ul>
             </div>
         </nav>

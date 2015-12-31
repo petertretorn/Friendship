@@ -58,8 +58,10 @@
 		}
 
 		function signout() {
-			Socket.emit('member.logout');
-			identityService.clearCurrentUser();
+			if (identityService.currentUser.signedIn) {
+				Socket.emit('member.logout');
+				identityService.clearCurrentUser();	
+			}
 			$location.path('/');
 		}
 

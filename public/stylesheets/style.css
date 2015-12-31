@@ -241,11 +241,7 @@ a:hover {
     padding: 10px;
 }
 
-.message span {
-    display: inline-block;
-}
-
-.message span.from {
+.message .from {
     width: 100px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -255,18 +251,17 @@ a:hover {
     background-color: red;
 }
 
-.message span.content {
-    width: 220px;
+.message .row {
+    width: 420px;
+}
+
+.message .content {
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.message span.content:hover, .message span.remove:hover {
+.message .content:hover, .message .remove:hover {
     cursor: pointer;
-}
-
-.message span.new, .message span.remove {
-    width: 43px;
 }
 
  /* ANIMATIONS
