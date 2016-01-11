@@ -20,7 +20,7 @@
 
 			function onSuccess(response) {
 				identityService.setCurrentUser(response.data);
-				console.log('auth : ' + identityService.currentUser.username);
+				console.log('auth : ' + identityService.getCurrentUser().username);
 				$rootScope.$broadcast('signedin');
 			}
 
@@ -43,7 +43,7 @@
 
 					$rootScope.$broadcast('signedin');
 
-					Socket.emit('member.login');
+					Socket.emit('member.login', { username: loginModel.username });
 
 					deferred.resolve('authentication success!');
 				}
@@ -60,8 +60,9 @@
 		function signout() {
 			$location.path('/');
 			if (identityService.getCurrentUser().signedIn === true) {
-				console.log('signing out');
-				Socket.emit('member.logout');
+				
+				var username = identityService.getCurrentUser().username;
+				Socket.emit('member.logout', { username : username } );
 				identityService.clearCurrentUser();	
 			}
 		}

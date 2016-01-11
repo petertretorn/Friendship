@@ -99,7 +99,7 @@
 
 		function getUserName() {
 			if ( identityService.isAuthenticated() ) {
-				return identityService.currentUser.username;	
+				return identityService.getCurrentUser().username;	
 			}
 			return undefined;
 		}

@@ -26,12 +26,17 @@
 	       	Socket.on('members.count', function(data) {
 				vm.membersOnline = data.count;
 			});
+
+			Socket.on('message.received', function(message) {
+				vm.messages.push(message);
+				_filterMessages();
+				toastr.info('You recieved message from ' + message.from);
+			});
 		}
 
 		vm.signout = function() {
 			authService.signout();
 			vm.isSignedIn = identityService.isAuthenticated();
-			//$rootScope.$broadcast('signedin');
 		}
 
 		vm.showMessage = function(message) {
@@ -59,9 +64,7 @@
 
 		$rootScope.$on("signedin", function() {
 			vm.isSignedIn = identityService.isAuthenticated();
-			console.log('vm.isSignedIn: ' + vm.isSignedIn);
 			vm.messages = identityService.getCurrentUser().profile.messages;
-			console.log('messsage: ' + vm.messages.length);
 			_filterMessages();
 		});
 

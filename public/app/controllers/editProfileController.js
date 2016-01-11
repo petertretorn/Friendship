@@ -116,7 +116,7 @@
 			dataService.updateProfile(profileToUpdate).then(
 					function(profile) {
 						vm.profile = profile;
-						toastr.info('Profile saved!');
+						toastr.info('Profile updated!');
 					}, 
 					function() {
 						toastr.info('Error saving profile!');

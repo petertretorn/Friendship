@@ -1,16 +1,34 @@
 'use strict';
 
-var membersOnline = 0;
+var _ = require('lodash');
 
-exports.membersOnline = function() {
+var membersOnline = [];
+
+exports.membersOnlineCount = function() {
+	return membersOnline.length;
+};
+
+exports.addOnlineMemeber = function(username) {
+	membersOnline.push(username);
+}
+
+exports.removeOnlineMember = function(username) {
+	_.remove(membersOnline, function(member) {
+		return username === member.username;
+	});
+}
+
+exports.getOnlineMembers = function() {
 	return membersOnline;
-};
+}
 
-exports.incrementMembersOnline = function() {
-	membersOnline++;
-	return membersOnline;
-};
+exports.getSocketForUser = function (username) {
+	var socket = undefined,
+		member = _.findWhere(membersOnline, { username : username } );
 
-exports.decrementMembersOnline = function() {
-	membersOnline--;
-};
+	if (member) {
+		socket = member.socket;
+	}
+
+	return socket;
+}

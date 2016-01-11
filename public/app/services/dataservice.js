@@ -30,6 +30,12 @@
 				.then(onSuccess, onFailure);
 		}
 
+
+		function getOnlineProfiles() {
+			return $http.get('/api/profiles/online')
+				.then(onSuccess, onFailure);
+		}
+
 		/* ----------------------- Messages --------------------------------------------- */
 
 		function sendMessage(receiver, message) {
@@ -97,6 +103,7 @@
 			getProfiles: getProfiles,
 			getProfileByUsername: getProfileByUsername,
 			updateProfile: updateProfile,
+			getOnlineProfiles: getOnlineProfiles,
 			
 			//messages
 			sendMessage :sendMessage,

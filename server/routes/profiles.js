@@ -5,9 +5,28 @@ var _ = require('lodash');
 var multiparty = require('connect-multiparty');
 var multipartyMiddleware = multiparty();
 var Profile = require('../models/profiles.js');
+var memberService = require('../services/memberService.js');
 
 router.get('/', function(req, res, next) {
 	Profile.find({}, function(error, profiles) {
+		if (error) return next(err);
+		res.json(profiles);
+	});
+});
+
+router.get('/online', function(req, res, next) {
+
+	var onlineMembers = memberService.getOnlineMembers();
+	
+	var usernames = _.map(onlineMembers, function(member) {
+		return member.username;
+	});
+
+	var queryObj = {
+		username : { $in: usernames }
+	};
+
+	Profile.find(queryObj, function(error, profiles) {
 		if (error) return next(err);
 		res.json(profiles);
 	});
@@ -55,12 +74,23 @@ router.post('/:username/messages', function(req,res, next) {
 			var returnObj = {};
 
 			if (err) returnObj.success = false;
-			else returnObj.success = true;
+			else {
+				message =  _.findWhere(profile.messages, message);
+				_notifyMessageReceived(username, message);
+				returnObj.success = true;
+			}
 
 			return res.json(returnObj);
 	 	});
 	});
 });
+
+function _notifyMessageReceived(username, message) {
+	var socket = memberService.getSocketForUser(username);
+	if (socket) {
+		socket.emit('message.received', message);
+	}
+}
 
 router.put('/:username/messages/:messageId', function(req, res, next) {
 	var username = req.params.username,

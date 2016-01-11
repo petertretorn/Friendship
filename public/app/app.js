@@ -26,6 +26,12 @@
 		  	controller: 'ListController',
 		  	controllerAs: 'vm'
 		  })
+		  .state('online', {
+		  	url: '/online',
+		  	templateUrl: '/app/views/list.html',
+		  	controller: 'OnlineController',
+		  	controllerAs: 'vm'
+		  })
 		  .state('register', {
 		  	url: '/register',
 		  	templateUrl: '/app/views/register.html',
